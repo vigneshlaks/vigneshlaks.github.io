@@ -1,5 +1,5 @@
 ---
-permalink: /projects/
+permalink: /projects
 title: "Blank"
 author_profile: true
 redirect_from: 

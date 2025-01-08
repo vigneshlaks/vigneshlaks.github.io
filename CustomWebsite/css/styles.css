@@ -1,0 +1,101 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-family: sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: black;
+}
+
+/* Top Navigation Bar */
+.top-nav {
+    width: calc(100% - 250px); /* Adjust for sidebar width */
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 250px; /* Align with sidebar */
+    z-index: 1000;
+    border-bottom: 1px solid #ddd;
+}
+.top-nav a {
+    margin: 0 15px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+.top-nav a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    padding: 1rem;
+    position: fixed;
+}
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+}
+.sidebar h2 {
+    text-align: center;
+    color: black;
+}
+.sidebar p {
+    text-align: center;
+    margin: 10px 0;
+}
+.sidebar .social-links {
+    text-align: center;
+}
+.sidebar .social-links a {
+    color: black;
+    text-decoration: none;
+    margin: 5px 0;
+    display: inline-block;
+}
+.sidebar .social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+.content {
+    margin-left: 270px; /* Adjust for sidebar */
+    margin-top: 50px; /* Adjust for fixed top-nav */
+    padding: 2rem;
+}
+.content h2 {
+    color: black;
+    margin-bottom: 1rem;
+}
+.content ul {
+    list-style: none;
+    padding: 0;
+}
+.content ul li {
+    margin-bottom: 10px;
+}
+.content ul li a {
+    color: black;
+    text-decoration: none;
+}
+.content ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Hide element by default */
+.hidden {
+    display: none;
+}

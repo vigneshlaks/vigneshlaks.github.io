@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vignesh Lakshmanan - Profile</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #000;
+    }
+
+    h2, h3 {
+      font-weight: 600;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 0.8rem;
+      border-bottom: 1px solid #ddd;
+      z-index: 999;
+    }
+
+    .nav-link {
+      margin: 0 1.5rem;
+      font-weight: 500;
+      color: #333;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #000;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #333;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: #fff;
+      padding: 6rem 1rem 2rem;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1.2rem;
+      border: 2px solid #333;
+    }
+
+    .sidebar h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar p {
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .social-links a {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    /* Main Content */
+    .content {
+      flex: 1;
+      padding: 6rem 2rem;
+      margin-left: 260px;
+    }
+
+    .content-section {
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .content-section.hidden {
+      display: none;
+    }
+
+    h2 {
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    ul li {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    ul li p {
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    /* Keyframes for Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-nav {
+        flex-wrap: wrap;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 2rem 1rem;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 4rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <a href="#about-me" class="nav-link" data-target="about-me">Bio</a>
+    <a href="#projects" class="nav-link" data-target="projects">Projects</a>
+    <a href="#reading" class="nav-link" data-target="reading">Reading</a>
+    <a href="#writing" class="nav-link" data-target="writing">Writing</a>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <img src="images/profile.png" alt="Your Profile Picture" class="profile-pic" />
+    <h3>Vignesh Lakshmanan</h3>
+    <p>Philadelphia, PA</p>
+    <p>Email: <a href="mailto:vigneshl@seas.upenn.edu">vigneshl@seas.upenn.edu</a></p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a><br />
+      <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <section id="about-me" class="content-section">
+      <h2>Bio</h2>
+      <p>
+        I am currently a junior at the University of Pennsylvania, pursuing a Bachelor of Science in Engineering (BSE) in Computer Science alongside a Master of Science in Engineering (MSE) in Robotics. I’m passionate about exploring creative
+        approaches to technical challenges in backend systems and deep learning.
+      </p>
+    </section>
+
+    <section id="projects" class="content-section hidden">
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <strong><a href="http://lucky-cali.com" target="_blank">Lucky Cali - Strength Training Software</a></strong>
+          <p>
+            A cloud-hosted fitness application with secure authentication, performance optimization, and low-level deployment
+          </p>
+        </li>
+        <li>
+          <strong><a href="https://drive.google.com/file/d/1kCIWxJblfwVdhhuMNb5FzXqhYPZbPb3i/view?usp=sharing" target="_blank">Smoothed Learned Dynamics for Trajectory Optimization</a></strong>
+          <p>
+            Research on optimizing neural dynamics for trajectory optimization, leveraging Monte Carlo smoothing
+            techniques.
+          </p>
+        </li>
+        <li>
+          <strong><a href="https://drive.google.com/file/d/1AkWBE6aMzHQRtWj56NTRty73vnkVL3q7/view?usp=sharing" target="_blank">Natural Language Processing Multi-Bit Watermarking</a></strong>
+          <p>
+            Developed methods for encoding hidden messages in AI-generated text using dynamic token partitioning and
+             decoding.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="reading" class="content-section hidden">
+        <h2>Reading List</h2>
+        <!-- Optional CSS for improved formatting -->
+        <style>
+          .reading-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+          }
+      
+          .book-item {
+            margin-bottom: 2rem;
+          }
+      
+          .book-item h3 {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+          }
+      
+          .book-content {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 1rem;
+          }
+      
+          .book-cover {
+            width: 100px;
+            height: 150px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-right: 1rem;
+            border-radius: 4px;
+            flex-shrink: 0;
+          }
+      
+          .book-thoughts {
+            flex: 1;
+          }
+      
+          .book-thoughts strong {
+            display: block;
+            margin-bottom: 0.25rem;
+          }
+        </style>
+      
+        <ul class="reading-list">
+          <li class="book-item">
+            <h3>Understanding Intuition</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/underestanding intuition.jpg" alt="Understanding Intuition Cover" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+      
+          <li class="book-item">
+            <h3>Mindset - The New Psychology to Success</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/mindset.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+      
+          <li class="book-item">
+            <h3>Overcoming Gravity</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/overcoming gravity.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+      
+          <li class="book-item">
+            <h3>The Cold Start Problem</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/cold start problem.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+      
+          <li class="book-item">
+            <h3>Algorithms to Live By</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/algos to live by.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+      
+          <li class="book-item">
+            <h3>The Psychology of Money</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/psychology of money.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+      
+          <li class="book-item">
+            <h3>Man’s Search for Meaning</h3>
+            <div class="book-content">
+                <div class="book-cover">
+                    <img src="images/reading list/man's search for meaning.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+                </div>
+              <div class="book-thoughts">
+                <strong>Thoughts:</strong>
+                <p>A placeholder for your thoughts about this book. Add your reflections here!</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+    <section id="writing" class="content-section hidden">
+        <h2>Writing</h2>
+        <ul>
+            <li>
+            <p>
+                I used to enjoy writing a lot before college but it has been something I have lost touch with. Recently, I have been trying to pick it back tup to flesh out and reflect
+                on my thoughts and what I am reading.
+            </p>
+            <p>
+                <strong style="display: block; margin-top: 2rem; margin-bottom: 0.5rem;">Mentality</strong>
+              The only way to create something profound is by creating something related to the thing(s) one obsesses over. 
+              Further, one can only really obsess in select specialized skills. 
+              To find things to specialize in, you must pursue the things that are authentically you.
+            </p>
+            <p>
+              In other words, we find: <br>
+              <em>Authentic, obsessive pursuits → profound creations</em>
+            </p>
+            <p>
+                This then emphasizes the importance of creation as a daily habit until creating is as natural as breathing. 
+                Whether the medium is coding, writing, etc. these pursuits will allow for fundamental creative development. 
+                Hard skills do not come easy; persistent effort in creative outlets will eventually yield exceptional results.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong style="display: block; margin-top: 0.5rem;">Scaling Seemingly Disjoint Skill Sets</strong><br>
+              We conjecture that people primarily scale skill sets for which they have a natural affinity for. This suggests an adaptability to a wide range of domains could be a rare skill set; especially orthogonal skills in what could be thought of as the "sample space" of those an individual can possess. Note that I am not referring to any particular domain but quite literally <em>any</em> skill set.
+            </p>
+            <p>
+                Continuing, we consider what skills have the greatest return on investment to learn and more specifically which are congruent with a person's goals . Some combination of skills (based on some multivariate metric composed of "orthogonality", "congruency", etc ) could lead to a truly holistic, rare, hard-earned skill set.
+            </p>
+            <p>
+                Note that, given the average life span, we augment our accumulated bag of skills to fit within these constraints.
+
+Extension to this work could be found through seeing what bundles of skill synergize well and when it's appropriate to build which skill e.g. would it be better to build all skills together or individually delve into lacking skills?
+            </p>
+          </li>
+        </ul>
+    </section>
+  </div>
+
+  <script>
+    // Smooth section toggling
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        document.querySelectorAll('.content-section').forEach(section => {
+          section.classList.add('hidden');
+        });
+        const targetId = link.getAttribute('data-target');
+        document.getElementById(targetId).classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

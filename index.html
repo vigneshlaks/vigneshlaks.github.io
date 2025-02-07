@@ -507,13 +507,13 @@
   Extension to this work could be found through seeing what bundles of skill synergize well and when it's appropriate to build which skill e.g. would it be better to build all skills together or individually delve into lacking skills?
               </p>
               <p>
-                <strong style="display: block; margin-top: 2rem; font-size: 1.5rem;">Technical Writings</strong>
+                <strong style="display: block; margin-top: 2rem; font-size: 2rem;">Technical Writings</strong>
               </p>
               <p>
-                <strong style="display: block; margin-top: 2rem;">Creating an Autograd Engine (Implementation)</strong>
+                <strong style="display: block; margin-top: 1.5rem;">Creating an Autograd Engine (Implementation)</strong>
               </p>
               <p>
-                <strong style="display: block; margin-top: 1rem;">System Simplifying</strong>
+                <strong style="display: block; margin-top: 1rem; color: #666666;">System Simplifying</strong>
                 Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we planning to do → make a guess, check that guess, change our guess.
                 Sharpening things a little, we then think of things in the language of neural networks. The guess is encoded in the forward pass of our algorithm. When we make our check, we compare against a loss function. We correct our guess through back propagation and gradient descent.
               </p>
@@ -525,22 +525,22 @@
               </p>
       
               <p>
-                <strong style="display: block; margin-top: 1rem;">Back Propagation</strong>
+                <strong style="display: block; margin-top: 1rem; color: #666666;">Back Propagation</strong>
                 We first notice that the definition at each time step of our algorithm doesn't change. In other words, the problem remains the same for any node within our graph. This hints to us we can use recursion. For the $nth$ node along our path we recurse from the $n-1th$, further we can store the gradient calculated along our path and proceed in a bottom up dynamic programming fashion across paths, across nodes.
               </p>
       
               <p>
-                <strong style="margin-top: 1rem;">Why Zero out our stored gradient?</strong><br>
+                <strong style="margin-top: 1rem; color: #666666; ">Why Zero out our stored gradient?</strong><br>
                 We don't want information from an earlier iteration of our algorithm to affect how we compute the gradient for the current one.
               </p>
       
               <p>
-                <strong style="margin-top: 1rem;">Why recalculate our gradient at all?</strong><br>
+                <strong style="margin-top: 1rem; color: #666666;">Why recalculate our gradient at all?</strong><br>
                 After taking our gradient step, we can think of ourselves on a different part of our loss landscape. We need to find out the best way to make another step. In the code, this is shown through having a new loss value, which in turn affects our accumulated gradients, affecting the gradient step.
               </p>
       
               <p>
-                <strong style="display: block; margin-top: 1rem;">Class-Based Design and Its Role in Autograd</strong>
+                <strong style="display: block; margin-top: 1rem; color: #666666;">Class-Based Design and Its Role in Autograd</strong>
                 In designing this autograd engine, we structured our code using object-oriented programming principles. Each class in the system has a clear role, mirroring fundamental neural network concepts. This allowed us to map our mental model of a neural network more directly into code and organize our thoughts. This also improved readability of code and allows us extend our implementation to more operations and optimization techniques.
               </p>
             </li>

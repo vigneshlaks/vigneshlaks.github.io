@@ -187,6 +187,22 @@
         padding: 4rem 1rem;
       }
     }
+
+    /* Optional styling for the writing toggle buttons */
+    .writing-toggle-container {
+      margin: 1rem 0;
+    }
+    .writing-toggle {
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .writing-toggle:hover {
+      background: #f0f0f0;
+    }
+
   </style>
 </head>
 <body>
@@ -221,7 +237,7 @@
       </p>
     
       <!-- Projects Section -->
-      <h5 style="font-size: 1.5rem; margin-bottom: 1.5rem; margin-top: 2rem;">Projects</h2>
+      <h5 style="font-size: 1.5rem; margin-bottom: 1.5rem; margin-top: 2rem;">Projects</h5>
       <p style="font-size: 1.2rem; margin-bottom: 2rem;">
         My philosophy when it comes to projects is to work on them towards the "fully realized" form. When I'm building software, I treat it as if it's going to be a real, complete product with actual users. For research, I try to think of novel ideas to implement. This makes the process more rewarding and the learning is improved due to it.
       </p>
@@ -230,330 +246,359 @@
       </p>
     
       <!-- Reading Section -->
-      <h5 style="font-size: 1.5rem; margin-bottom: 1.5rem; margin-top: 2rem;">Reading</h2>
+      <h5 style="font-size: 1.5rem; margin-bottom: 1.5rem; margin-top: 2rem;">Reading</h5>
       <p style="font-size: 1.2rem; margin-bottom: 2rem;">
         I believe the habit of reading is really important and something I try to keep alive even during my busiest times.
       </p>
     
       <!-- Writings Section -->
-      <h5 style="font-size: 1.5rem; margin-bottom: 1.5rem; margin-top: 2rem;">Writings</h2>
+      <h5 style="font-size: 1.5rem; margin-bottom: 1.5rem; margin-top: 2rem;">Writings</h5>
       <p style="font-size: 1.2rem; margin-bottom: 2rem;">
         I used to enjoy writing a lot before college, but it has been something I have lost touch with. Recently, I have been trying to pick it back up to flesh out and reflect on my thoughts and what I am reading and coding.
       </p>
     </section>
     
-    
-    
-    
-    
-
     <section id="projects" class="content-section hidden">
-        <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Projects</h2>
-        <ul style="list-style-type: none; padding: 0; margin: 0;">
-          
-          <!-- Lucky Cali Project -->
-          <li style="margin-bottom: 2rem;">
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-                <img src="images/projects/home page.png" alt="System Dynamics Diagram" 
-                  style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
-                <img src="images/projects/skill tree.png" alt="Trajectory Optimization Simulation" 
-                  style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
-              </div>
-            <strong style="font-size: 1.25rem;">
-              <a href="https://lucky-cali.com" target="_blank" style="text-decoration: underline; color: #000;">
-                Lucky Cali - Strength Training Software
-              </a>
-            </strong>
-            <p style="margin: 0.5rem 0; line-height: 1.5;">
-              A VPS-hosted application with custom authentication, custom built front-end components, and low-level deployment. 
-              Visit the site at 
-              <a href="https://lucky-cali.com" target="_blank" style="text-decoration: underline; color: #007bff;">https://lucky-cali.com</a>. 
-              Implementation details available on 
-              <a href="https://github.com/vigneshlaks/Lucky-Cali" target="_blank" style="text-decoration: underline; color: #007bff;">GitHub</a>. 
-              Explore the site if you get the chance.
-            </p>
-          </li>
-      
-          <!-- Smoothed Learned Dynamics Project -->
-          <li style="margin-bottom: 2rem;">
-            <!-- Images Section -->
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-              <img src="images/projects/systems.png" alt="System Dynamics Diagram" 
+      <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Projects</h2>
+      <ul style="list-style-type: none; padding: 0; margin: 0;">
+        
+        <!-- Lucky Cali Project -->
+        <li style="margin-bottom: 2rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+              <img src="images/projects/home page.png" alt="System Dynamics Diagram" 
                 style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
-              <img src="images/projects/quadrotor gif.gif" alt="Trajectory Optimization Simulation" 
+              <img src="images/projects/skill tree.png" alt="Trajectory Optimization Simulation" 
                 style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
             </div>
-            <!-- Title and Description -->
-            <strong style="font-size: 1.25rem;">
-              <a href="https://drive.google.com/file/d/1kCIWxJblfwVdhhuMNb5FzXqhYPZbPb3i/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #000;">
-                Smoothed Learned Dynamics for Trajectory Optimization
-              </a>
-            </strong>
-            <p style="margin: 0.5rem 0; line-height: 1.5;">
-              Research on optimizing neural dynamics for trajectory optimization using Monte Carlo smoothing techniques. 
-              Theory available in the 
-              <a href="https://drive.google.com/file/d/1kCIWxJblfwVdhhuMNb5FzXqhYPZbPb3i/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #007bff;">
-                [PDF]</a>. 
-              Implementation details available on 
-              <a href="https://github.com/vigneshlaks/Learned-Dynamics-MEAM" target="_blank" style="text-decoration: underline; color: #007bff;">GitHub</a>.
-            </p>
-          </li>
-      
-          <!-- NLP Multi-Bit Watermarking Project -->
-          <li style="margin-bottom: 2rem;">
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-                <img src="images/projects/workflow.png" alt="System Dynamics Diagram" 
-                  style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
-                <img src="images/projects/results.png" alt="Trajectory Optimization Simulation" 
-                  style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
-              </div>
-            <strong style="font-size: 1.25rem;">
-              <a href="https://drive.google.com/file/d/1AkWBE6aMzHQRtWj56NTRty73vnkVL3q7/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #000;">
-                Natural Language Processing Multi-Bit Watermarking
-              </a>
-            </strong>
-            <p style="margin: 0.5rem 0; line-height: 1.5;">
-              Developed methods for encoding hidden messages in AI-generated text using dynamic token partitioning and decoding. 
-              More details in the 
-              <a href="https://drive.google.com/file/d/1AkWBE6aMzHQRtWj56NTRty73vnkVL3q7/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #007bff;">
-                [PDF]</a>.
-            </p>
-          </li>
-        </ul>
-      </section>
-      
-      
+          <strong style="font-size: 1.25rem;">
+            <a href="https://lucky-cali.com" target="_blank" style="text-decoration: underline; color: #000;">
+              Lucky Cali - Strength Training Software
+            </a>
+          </strong>
+          <p style="margin: 0.5rem 0; line-height: 1.5;">
+            A VPS-hosted application with custom authentication, custom built front-end components, and low-level deployment. 
+            Visit the site at 
+            <a href="https://lucky-cali.com" target="_blank" style="text-decoration: underline; color: #007bff;">https://lucky-cali.com</a>. 
+            Implementation details available on 
+            <a href="https://github.com/vigneshlaks/Lucky-Cali" target="_blank" style="text-decoration: underline; color: #007bff;">GitHub</a>. 
+            Explore the site if you get the chance.
+          </p>
+        </li>
+    
+        <!-- Smoothed Learned Dynamics Project -->
+        <li style="margin-bottom: 2rem;">
+          <!-- Images Section -->
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <img src="images/projects/systems.png" alt="System Dynamics Diagram" 
+              style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
+            <img src="images/projects/quadrotor gif.gif" alt="Trajectory Optimization Simulation" 
+              style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
+          </div>
+          <!-- Title and Description -->
+          <strong style="font-size: 1.25rem;">
+            <a href="https://drive.google.com/file/d/1kCIWxJblfwVdhhuMNb5FzXqhYPZbPb3i/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #000;">
+              Smoothed Learned Dynamics for Trajectory Optimization
+            </a>
+          </strong>
+          <p style="margin: 0.5rem 0; line-height: 1.5;">
+            Research on optimizing neural dynamics for trajectory optimization using Monte Carlo smoothing techniques. 
+            Theory available in the 
+            <a href="https://drive.google.com/file/d/1kCIWxJblfwVdhhuMNb5FzXqhYPZbPb3i/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #007bff;">
+              [PDF]</a>. 
+            Implementation details available on 
+            <a href="https://github.com/vigneshlaks/Learned-Dynamics-MEAM" target="_blank" style="text-decoration: underline; color: #007bff;">GitHub</a>.
+          </p>
+        </li>
+    
+        <!-- NLP Multi-Bit Watermarking Project -->
+        <li style="margin-bottom: 2rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+              <img src="images/projects/workflow.png" alt="System Dynamics Diagram" 
+                style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
+              <img src="images/projects/results.png" alt="Trajectory Optimization Simulation" 
+                style="width: calc(50% - 0.5rem); max-width: 300px; border-radius: 8px; border: 1px solid #ddd;" />
+            </div>
+          <strong style="font-size: 1.25rem;">
+            <a href="https://drive.google.com/file/d/1AkWBE6aMzHQRtWj56NTRty73vnkVL3q7/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #000;">
+              Natural Language Processing Multi-Bit Watermarking
+            </a>
+          </strong>
+          <p style="margin: 0.5rem 0; line-height: 1.5;">
+            Developed methods for encoding hidden messages in AI-generated text using dynamic token partitioning and decoding. 
+            More details in the 
+            <a href="https://drive.google.com/file/d/1AkWBE6aMzHQRtWj56NTRty73vnkVL3q7/view?usp=sharing" target="_blank" style="text-decoration: underline; color: #007bff;">
+              [PDF]</a>.
+          </p>
+        </li>
+      </ul>
+    </section>
 
     <section id="reading" class="content-section hidden">
-        <h2>Reading List</h2>
-        <!-- Optional CSS for improved formatting -->
-        <style>
-          .reading-list {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-          }
-      
-          .book-item {
-            margin-bottom: 2rem;
-          }
-      
-          .book-item h3 {
-            font-size: 1rem;
-            font-weight: normal;
-            margin-bottom: 0.5rem;
-          }
-      
-          .book-content {
-            display: flex;
-            align-items: flex-start;
-            margin-top: 1rem;
-          }
-      
-          .book-cover {
-            width: 100px;
-            height: 150px;
-            background-color: #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #666;
-            margin-right: 1rem;
-            border-radius: 4px;
-            flex-shrink: 0;
-          }
-      
-          .book-thoughts {
-            flex: 1;
-          }
-      
-          .book-thoughts strong {
-            display: block;
-            margin-bottom: 0.25rem;
-          }
-        </style>
-      
-        <ul class="reading-list">
-          <li class="book-item">
-            <h3>Understanding Intuition (Currently Reading)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/underestanding intuition.jpg" alt="Understanding Intuition Cover" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Current Thoughts:</strong>
-                <p>Penn has a rigorous introductory theoretical cs sequence. I was curious to know what differentiated top versus average performers. I personally improved by just spending significant amounts of time working on problems and ideas on my own. Reading this book is my attempt to deepen my understanding of what should really be going on in someone's head to improve their problem solving / critical thinking and more importantly what facilitates novel thoughts. </p>
-              </div>
-            </div>
-          </li>
-      
-          <li class="book-item">
-            <h3>Mindset - The New Psychology to Success (Currently Reading)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/mindset.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Current Thoughts:</strong>
-                <p>This is a book I plan to more passively read when I find the time. I recently began to believe it would be good practice to start reading books on ideas that I want "bubbling up" in the back on my head.</p>
-              </div>
-            </div>
-          </li>
-      
-          <li class="book-item">
-            <h3>Overcoming Gravity (Read)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/overcoming gravity.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Thoughts:</strong>
-                <p>Read the chapters on handstands and other skills. Well written book. Probably one of the best advanced resources I could find on body weight training. </p>
-              </div>
-            </div>
-          </li>
-      
-          <li class="book-item">
-            <h3>The Cold Start Problem (Read)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/cold start problem.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Thoughts:</strong>
-                <p>I enjoyed the first section of the book where he speaks specfically on the cold start problem (scaling a networked product to have users before any users on actually on the application). 
-                    It made lead me to think more about how the website I was building could be oriented as a "networked product". I eventually came up with the idea of scaling the product in two verticals. 
-                    Having a competition side where users would compete against eachother and then a LLM centered learning resource. The users would initially be attracted by the learning resource then as the application scales
-                    more users would take advantage of the competition aspect. This idea was directly inspired by what I had been reading in this book. </p>
-              </div>
-            </div>
-          </li>
-      
-          <li class="book-item">
-            <h3>Algorithms to Live By (Read)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/algos to live by.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Thoughts:</strong>
-                Pretty interesting book that lost its charm as I continued to read. I can now, at least, stare off into the distance intellectually and ponder the implications of "exploration versus exploitation" as it applies in the current context while speaking with friends, which is something I take full advantage of.
-              </div>
-            </div>
-          </li>
-      
-          <li class="book-item">
-            <h3>The Psychology of Money (Read)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/psychology of money.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Thoughts:</strong>
-                <p>I wanted to learn key principles when it came to money management, and I think this book does a good job elucidating some. I left feeling like the best use of my time was to primarily invest conventionally and focus on other things as boring as that may sound. At least for now.</p>
-              </div>
-            </div>
-          </li>
-      
-          <li class="book-item">
-            <h3>Man’s Search for Meaning (Read)</h3>
-            <div class="book-content">
-                <div class="book-cover">
-                    <img src="images/reading list/man's search for meaning.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
-                </div>
-              <div class="book-thoughts">
-                <strong>Thoughts:</strong>
-                <p>Read this book a while back. 
-                    I chose to include this book because it really left a marked impact on me. It made me realized just how indomitable the human spirit and deep the rabbit hole of discipline and willpower can be.
-                </p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
+      <h2>Reading List</h2>
+      <!-- Optional CSS for improved formatting -->
+      <style>
+        .reading-list {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
 
+        .book-item {
+          margin-bottom: 2rem;
+        }
+
+        .book-item h3 {
+          font-size: 1rem;
+          font-weight: normal;
+          margin-bottom: 0.5rem;
+        }
+
+        .book-content {
+          display: flex;
+          align-items: flex-start;
+          margin-top: 1rem;
+        }
+
+        .book-cover {
+          width: 100px;
+          height: 150px;
+          background-color: #ddd;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 0.9rem;
+          color: #666;
+          margin-right: 1rem;
+          border-radius: 4px;
+          flex-shrink: 0;
+        }
+
+        .book-thoughts {
+          flex: 1;
+        }
+
+        .book-thoughts strong {
+          display: block;
+          margin-bottom: 0.25rem;
+        }
+      </style>
+
+      <ul class="reading-list">
+        <li class="book-item">
+          <h3>Understanding Intuition (Currently Reading)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/underestanding intuition.jpg" alt="Understanding Intuition Cover" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Current Thoughts:</strong>
+              <p>Penn has a rigorous introductory theoretical cs sequence. I was curious to know what differentiated top versus average performers. I personally improved by just spending significant amounts of time working on problems and ideas on my own. Reading this book is my attempt to deepen my understanding of what should really be going on in someone's head to improve their problem solving / critical thinking and more importantly what facilitates novel thoughts. </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="book-item">
+          <h3>Mindset - The New Psychology to Success (Currently Reading)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/mindset.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Current Thoughts:</strong>
+              <p>This is a book I plan to more passively read when I find the time. I recently began to believe it would be good practice to start reading books on ideas that I want "bubbling up" in the back on my head.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="book-item">
+          <h3>Overcoming Gravity (Read)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/overcoming gravity.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Thoughts:</strong>
+              <p>Read the chapters on handstands and other skills. Well written book. Probably one of the best advanced resources I could find on body weight training. </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="book-item">
+          <h3>The Cold Start Problem (Read)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/cold start problem.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Thoughts:</strong>
+              <p>I enjoyed the first section of the book where he speaks specfically on the cold start problem (scaling a networked product to have users before any users on actually on the application). 
+                It made lead me to think more about how the website I was building could be oriented as a "networked product". I eventually came up with the idea of scaling the product in two verticals. 
+                Having a competition side where users would compete against eachother and then a LLM centered learning resource. The users would initially be attracted by the learning resource then as the application scales
+                more users would take advantage of the competition aspect. This idea was directly inspired by what I had been reading in this book.
+              </p>
+            </div>
+          </div>
+        </li>
+
+        <li class="book-item">
+          <h3>Algorithms to Live By (Read)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/algos to live by.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Thoughts:</strong>
+              Pretty interesting book that lost its charm as I continued to read. I can now, at least, stare off into the distance intellectually and ponder the implications of "exploration versus exploitation" as it applies in the current context while speaking with friends, which is something I take full advantage of.
+            </div>
+          </div>
+        </li>
+
+        <li class="book-item">
+          <h3>The Psychology of Money (Read)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/psychology of money.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Thoughts:</strong>
+              <p>I wanted to learn key principles when it came to money management, and I think this book does a good job elucidating some. I left feeling like the best use of my time was to primarily invest conventionally and focus on other things as boring as that may sound. At least for now.</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="book-item">
+          <h3>Man’s Search for Meaning (Read)</h3>
+          <div class="book-content">
+            <div class="book-cover">
+              <img src="images/reading list/man's search for meaning.jpeg" alt="" style="width: 100px; height: 150px; object-fit: cover; border-radius: 4px;" />
+            </div>
+            <div class="book-thoughts">
+              <strong>Thoughts:</strong>
+              <p>Read this book a while back. 
+                I chose to include this book because it really left a marked impact on me. It made me realized just how indomitable the human spirit and deep the rabbit hole of discipline and willpower can be.
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- WRITING SECTION WITH TOGGLE -->
     <section id="writing" class="content-section hidden">
-        <h2>Writing</h2>
+      <h2>Writing</h2>
+
+      <!-- Toggle Buttons -->
+      <div class="writing-toggle-container">
+        <button class="writing-toggle" id="toggle-nontech">Nontechnical</button>
+        <button class="writing-toggle" id="toggle-tech">Technical</button>
+      </div>
+
+      <!-- Nontechnical Writings -->
+      <div id="nontechnical-writings" style="display: block;">
         <ul>
-            <li>
-              <p>
-                  <strong style="display: block; margin-top: 2rem;">Mentality</strong>
-                The only way to create something profound is by creating something related to the thing(s) one obsesses over. 
-                Further, one can only really obsess in select specialized skills. 
-                To find things to specialize in, you must pursue the things that are authentically you.
-              </p>
-              <p>
-                In other words, we find: <br>
-                <em>Authentic, obsessive pursuits → profound creations</em>
-              </p>
-              <p>
-                  This then emphasizes the importance of creation as a daily habit until creating is as natural as breathing. 
-                  Whether the medium is coding, writing, etc. these pursuits will allow for fundamental creative development. 
-                  Hard skills do not come easy; persistent effort in creative outlets will eventually yield exceptional results.
-              </p>
-            </li>
-            <li>
-              <p>
-                <strong >Scaling Seemingly Disjoint Skill Sets</strong><br>
-                We conjecture that people primarily scale skill sets for which they have a natural affinity for. This suggests an adaptability to a wide range of domains could be a rare skill set; especially orthogonal skills in what could be thought of as the "space" of those an individual can possess. Note that I am not referring to any particular domain but quite literally <em>any</em> skill set.
-              </p>
-              <p>
-                  Continuing, we consider what skills have the greatest return on investment to learn and more specifically which are congruent with a person's goals . Some combination of skills (based on some multivariate metric composed of "orthogonality", "congruency", etc ) could lead to a truly holistic, rare, and hard-earned skill set.
-              </p>
-              <p>
-                  Note that, given the average life span, we augment our accumulated bag of skills to fit within these constraints.
+          <li>
+            <p>
+              <strong style="display: block; margin-top: 2rem;">Mentality</strong>
+              The only way to create something profound is by creating something related to the thing(s) one obsesses over. 
+              Further, one can only really obsess in select specialized skills. 
+              To find things to specialize in, you must pursue the things that are authentically you.
+            </p>
+            <p>
+              In other words, we find: <br>
+              <em>Authentic, obsessive pursuits → profound creations</em>
+            </p>
+            <p>
+              This then emphasizes the importance of creation as a daily habit until creating is as natural as breathing. 
+              Whether the medium is coding, writing, etc. these pursuits will allow for fundamental creative development. 
+              Hard skills do not come easy; persistent effort in creative outlets will eventually yield exceptional results.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Scaling Seemingly Disjoint Skill Sets</strong><br>
+              We conjecture that people primarily scale skill sets for which they have a natural affinity for. This suggests an adaptability to a wide range of domains could be a rare skill set; especially orthogonal skills in what could be thought of as the "space" of those an individual can possess. Note that I am not referring to any particular domain but quite literally <em>any</em> skill set.
+            </p>
+            <p>
+              Continuing, we consider what skills have the greatest return on investment to learn and more specifically which are congruent with a person's goals . Some combination of skills (based on some multivariate metric composed of "orthogonality", "congruency", etc ) could lead to a truly holistic, rare, and hard-earned skill set.
+            </p>
+            <p>
+              Note that, given the average life span, we augment our accumulated bag of skills to fit within these constraints.
 
   Extension to this work could be found through seeing what bundles of skill synergize well and when it's appropriate to build which skill e.g. would it be better to build all skills together or individually delve into lacking skills?
-              </p>
-              <p>
-                <strong style="display: block; margin-top: 2rem; font-size: 2rem;">Technical Writings</strong>
-              </p>
-              <p>
-                <strong style="display: block; margin-top: 1.5rem;">Creating an Autograd Engine (Implementation)</strong>
-              </p>
-              <p>
-                <strong style="display: block; margin-top: 1rem; color: #666666;">System Simplifying</strong>
-                Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we planning to do → make a guess, check that guess, change our guess.
-                Sharpening things a little, we then think of things in the language of neural networks. The guess is encoded in the forward pass of our algorithm. When we make our check, we compare against a loss function. We correct our guess through back propagation and gradient descent.
-              </p>
-              <p>
-                We can encode things through classes of Nodes, Operations (loosely analogous to edges in a canonical neural network depiction), and Optimizer to store and update gradients, propagate changes through back propagation, and define how we go about taking our gradient step respectively.
-              </p>
-              <p>
-                Something to note is there are likely different schools of thought when it comes to defining such a system each with their pros and cons. We can think of things as a balancing act where we are generally working to have thought things through enough such that ideas are "well thought out" but not spending too much time causing stunted progress and falling into the trap of premature optimization.
-              </p>
-      
-              <p>
-                <strong style="display: block; margin-top: 1rem; color: #666666;">Back Propagation</strong>
-                We first notice that the definition at each time step of our algorithm doesn't change. In other words, the problem remains the same for any node within our graph. This hints to us we can use recursion. For the $nth$ node along our path we recurse from the $n-1th$, further we can store the gradient calculated along our path and proceed in a bottom up dynamic programming fashion across paths, across nodes.
-              </p>
-      
-              <p>
-                <strong style="margin-top: 1rem; color: #666666; ">Why Zero out our stored gradient?</strong><br>
-                We don't want information from an earlier iteration of our algorithm to affect how we compute the gradient for the current one.
-              </p>
-      
-              <p>
-                <strong style="margin-top: 1rem; color: #666666;">Why recalculate our gradient at all?</strong><br>
-                After taking our gradient step, we can think of ourselves on a different part of our loss landscape. We need to find out the best way to make another step. In the code, this is shown through having a new loss value, which in turn affects our accumulated gradients, affecting the gradient step.
-              </p>
-      
-              <p>
-                <strong style="display: block; margin-top: 1rem; color: #666666;">Class-Based Design and Its Role in Autograd</strong>
-                In designing this autograd engine, we structured our code using object-oriented programming principles. Each class in the system has a clear role, mirroring fundamental neural network concepts. This allowed us to map our mental model of a neural network more directly into code and organize our thoughts. This also improved readability of code and allows us extend our implementation to more operations and optimization techniques.
-              </p>
-            </li>
+            </p>
+          </li>
         </ul>
-        <li>
-            
+      </div>
 
-        </li>
+      <!-- Technical Writings -->
+      <div id="technical-writings" style="display: none;">
+        <ul>
+          <li>
+            <p>
+              <strong style="display: block; margin-top: 2rem; font-size: 2rem;">Technical Writings</strong>
+            </p>
+            <p>
+              <strong style="display: block; margin-top: 1.5rem;">Creating an Autograd Engine (Implementation)</strong>
+            </p>
+            <p>
+              <strong style="display: block; margin-top: 1rem; color: #666666;">System Simplifying</strong>
+              Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we planning to do → make a guess, check that guess, change our guess.
+              Sharpening things a little, we then think of things in the language of neural networks. The guess is encoded in the forward pass of our algorithm. When we make our check, we compare against a loss function. We correct our guess through back propagation and gradient descent.
+            </p>
+            <p>
+              We can encode things through classes of Nodes, Operations (loosely analogous to edges in a canonical neural network depiction), and Optimizer to store and update gradients, propagate changes through back propagation, and define how we go about taking our gradient step respectively.
+            </p>
+            <p>
+              Something to note is there are likely different schools of thought when it comes to defining such a system each with their pros and cons. We can think of things as a balancing act where we are generally working to have thought things through enough such that ideas are "well thought out" but not spending too much time causing stunted progress and falling into the trap of premature optimization.
+            </p>
+            <p>
+              <strong style="display: block; margin-top: 1rem; color: #666666;">Back Propagation</strong>
+              We first notice that the definition at each time step of our algorithm doesn't change. In other words, the problem remains the same for any node within our graph. This hints to us we can use recursion. For the $nth$ node along our path we recurse from the $n-1th$, further we can store the gradient calculated along our path and proceed in a bottom up dynamic programming fashion across paths, across nodes.
+            </p>
+            <p>
+              <strong style="margin-top: 1rem; color: #666666; ">Why Zero out our stored gradient?</strong><br>
+              We don't want information from an earlier iteration of our algorithm to affect how we compute the gradient for the current one.
+            </p>
+            <p>
+              <strong style="margin-top: 1rem; color: #666666;">Why recalculate our gradient at all?</strong><br>
+              After taking our gradient step, we can think of ourselves on a different part of our loss landscape. We need to find out the best way to make another step. In the code, this is shown through having a new loss value, which in turn affects our accumulated gradients, affecting the gradient step.
+            </p>
+            <p>
+              <strong style="display: block; margin-top: 1rem; color: #666666;">Class-Based Design and Its Role in Autograd</strong>
+              In designing this autograd engine, we structured our code using object-oriented programming principles. Each class in the system has a clear role, mirroring fundamental neural network concepts. This allowed us to map our mental model of a neural network more directly into code and organize our thoughts. This also improved readability of code and allows us extend our implementation to more operations and optimization techniques.
+            </p>
+          </li>
+
+          <!-- NEWLY ADDED PERTINENT THEORY SECTION -->
+          <li>
+            <p>
+              <strong style="display: block; margin-top: 2rem;">Creating an Autograd Engine (Pertinent Theory)</strong>
+            </p>
+            <p>
+              <strong>Backprop</strong>
+            </p>
+            <p>
+              <em>Intuitions for Partial Derivatives and Chain Rule</em>
+            </p>
+            <p>
+              For our simple optimization step we want to move in the direction of steepest descent in an effort to minimize our loss function. This means we calculate the gradient (steepest ascent) and move in the opposite direction. We then just need to accurately calculate the partials across all our nodes using the chain rule across layers so we can plug this gradient into our optimization equation.
+            </p>
+            <p>
+              Stepping away from a simplified mathematical interpretation for gradient descent it might be more valuable to consider what motivates these operations.
+            </p>
+            <p>
+              Take particular node n and consider all paths through our layers leading to our final loss node. Each path signifies an affect n has on our final output. If we can find the affect of the node on the operation and the operation on the loss . By similar logic we can effectively build backwards from our loss node to n. We extend our per path reasoning and sum up this affect across all paths to find the net affect of n. Recall that our edges, within our implementation, represent operations. The notion of "building backwards" is encoded within the chain rule and "finding the affect of the node" is our partial derivative.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <li></li>
     </section>
   </div>
 
   <script>
-    // Smooth section toggling
+    // Smooth section toggling for top nav
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', event => {
         event.preventDefault();
@@ -564,6 +609,22 @@
         document.getElementById(targetId).classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+    });
+
+    // Toggle between nontechnical and technical in the Writing section
+    const nontechBtn = document.getElementById('toggle-nontech');
+    const techBtn = document.getElementById('toggle-tech');
+    const nontechDiv = document.getElementById('nontechnical-writings');
+    const techDiv = document.getElementById('technical-writings');
+
+    nontechBtn.addEventListener('click', () => {
+      nontechDiv.style.display = 'block';
+      techDiv.style.display = 'none';
+    });
+
+    techBtn.addEventListener('click', () => {
+      nontechDiv.style.display = 'none';
+      techDiv.style.display = 'block';
     });
   </script>
 </body>

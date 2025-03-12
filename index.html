@@ -559,14 +559,14 @@
           <li>
             <p>
               <strong style="display: block; margin-top: 1.5rem;">
-                Creating an Autograd Engine 
-                <a href="https://github.com/vigneshlaks/Autograd" target="_blank" style="text-decoration: underline; color: #007bff">
+                Creating a Deep Learning Framework (Implementation)
+                <a href="https://github.com/vigneshlaks/Deep-Learning-Framework" target="_blank" style="text-decoration: underline; color: #007bff">
                   (Implementation)
                 </a>
               </strong>
             </p>            
               <strong style="display: block; margin-top: 1rem; color: #666666;">System Simplifying</strong>
-              Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we planning to do → make a guess, check that guess, change our guess.
+              Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we are planning to do → make a guess, check that guess, change our guess.
               Sharpening things a little, we then think of things in the language of neural networks. The guess is encoded in the forward pass of our algorithm. When we make our check, we compare against a loss function. We correct our guess through back propagation and gradient descent.
             </p>
             <p>
@@ -595,7 +595,7 @@
 
           <li>
             <p>
-              <strong style="display: block; margin-top: 2rem;">Creating an Autograd Engine (Pertinent Theory)</strong>
+              <strong style="display: block; margin-top: 2rem;">Creating a Deep Learning Framework (Pertinent Theory)</strong>
             </p>
             <p>
               <strong>Backprop</strong>
@@ -610,7 +610,7 @@
               Stepping away from a simplified mathematical interpretation for gradient descent it might be more valuable to consider what motivates these operations.
             </p>
             <p>
-              Take particular node n and consider all paths through our layers leading to our final loss node. Each path signifies an affect n has on our final output. If we can find the affect of the node on the operation and the operation on the loss . By similar logic we can effectively build backwards from our loss node to n. We extend our per path reasoning and sum up this affect across all paths to find the net affect of n. Recall that our edges, within our implementation, represent operations. The notion of "building backwards" is encoded within the chain rule and "finding the affect of the node" is our partial derivative.
+              Take particular node n and consider all paths through our layers leading to our final loss node. Each path signifies an effect n has on our final output. If we can find the effect of the node on the operation and the operation on the loss . By similar logic we can effectively build backwards from our loss node to n. We extend our per path reasoning and sum up this effect across all paths to find the net effect of n. Recall that our edges, within our implementation, represent operations. The notion of "building backwards" is encoded within the chain rule and "finding the affect of the node" is our partial derivative.
             </p>
           </li>
         </ul>

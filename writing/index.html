@@ -147,7 +147,7 @@
   </header>
 
   <!-- Writing Section -->
-  <section class="section">
+  <section id="writing" class="section">
     <h2>Writing</h2>
 
     <div class="writing-toggle-container">
@@ -157,39 +157,58 @@
 
     <div id="nontechnical-writings" class="writing-content">
       <div class="writing-item">
-        <strong><a href="/writing/creative-pursuits/">Creative Pursuits</a> - 2024-08-14</strong>
-        <p>The only way to create something profound is by creating something related to the thing(s) one obsesses over...</p>
+        <strong>Creative Pursuits - 2024-08-14</strong>
+        <p>The only way to create something profound is by creating something related to the thing(s) one obsesses over. Further, one can only really obsess in select specialized skills. To find things to specialize in, you must pursue the things that are authentically you.</p>
+        <p>In other words, we find: <em>Authentic, obsessive pursuits → profound creations</em></p>
+        <p>This then emphasizes the importance of creation as a daily habit until creating is as natural as breathing. Whether the medium is coding, writing, etc. these pursuits will allow for fundamental creative development. Hard skills do not come easy; persistent effort in creative outlets will eventually yield exceptional results.</p>
         <p><em>Focus on a few things and create things while learning. Keep doing this and something meaningful will happen.</em></p>
       </div>
 
       <div class="writing-item">
-        <strong><a href="/writing/scaling-skills/">Scaling Seemingly Disjoint Skill Sets</a> - 2024-10-19</strong>
-        <p>We conjecture that people primarily scale skill sets for which they have a natural affinity for...</p>
-        <p><em>A lot of people only develop things that they had a natural knack for and are afraid to stray far from what they know.</em></p>
+        <strong>Scaling Seemingly Disjoint Skill Sets - 2024-10-19 </strong>
+        <p>We conjecture that people primarily scale skill sets for which they have a natural affinity for. This suggests an adaptability to a wide range of domains could be a rare skill set; especially orthogonal skills in what could be thought of as the "space" of those an individual can possess. Note that I am not referring to any particular domain but quite literally <em>any</em> skill set.</p>
+        <p>Continuing, we consider what skills have the greatest return on investment to learn and more specifically which are congruent with a person's goals. Some combination of skills (based on some multivariate metric composed of "orthogonality", "congruency", etc ) could lead to a truly holistic, rare, and hard-earned skill set.</p>
+        <p><em>A lot of people only develop things that they had a natural knack for and are afraid to stray far from what they know. Therefore, a willingness to stray and build deep technical skills for things that someone is not readily adept at gives someone a unique skill set.</em></p>
       </div>
 
       <div class="writing-item">
-        <strong><a href="/writing/unique-footprint/">The urgency and necessity for a unique written footprint</a> - 2025-02-08</strong>
-        <p>Human-human connection → Human-robot connection → Robot-robot connection...</p>
-        <p><em>LLMs are becoming increasingly good at emulating human text. We can combat this by allowing ourselves and the way we write to deviate from the norm.</em></p>
+        <strong>The urgency and necessity for a unique written footprint - 2025-02-08</strong>
+        <p>Human-human connection → Human-robot connection → Robot-robot connection.</p>
+        <p>There is this notion of the "dead internet" theory. Robots infiltrating our online channels, running rampant pushing government agendas. The idea would enrage most people: these are echo chambers but they're <em>our</em> echo chambers.</p>
+        <p>The transformer architecture and internet scale data has placed us a few steps away from this future. But in a turn of events, it does not (readily) appear that there are overarching figures creating large scale tomfoolery, but rather individuals creating local misuse.</p>
+        <p>Reduce quantity, improve quality, and attain a willingness for distinction; as the gap closes and these models become increasingly cogent, we can keep our communication authentically human by allowing ourselves to stray a bit out of distribution.</p>
+        <p><em>LLMs are becoming increasingly good at emulating human text. We can combat this by allowing ourselves and the way we write to deviate from the norm and be far less replicable.</em></p>
       </div>
 
       <div class="writing-item">
-        <strong><a href="/writing/orientations/">Orientations</a> - 2025-06-01</strong>
-        <p>Orientations, the direction of pursuits, are likely one of the most important things to get right in life...</p>
+        <strong>Orientations - 2025-06-01</strong>
+        <p>Orientations, the direction of pursuits, are likely one of the most important things to get right in life. This may seem trivial; obviously orientations matter. They define a career, relationships, etc. They are also quite individualized and context dependent.</p>
+        <p>It appear, however, as if everyone is orienting themselves in fairly close alignment with each other. I conjecture, this stems from an unwillingness to trek into an unknown. Sticking to the conventional path can provide a crippling positive feedback loop. A feedback loop which admittedly leads to a generally positive outcome in expectation.</p>
+        <p>Walking along the conventional path or pursuing an entirely different one is not a binary decision. Sometimes it just takes a willingness to orient oneself in a direction uniquely one's own and take one step and another.</p>
         <p><em>It's easier to do your own thing than you think. It just takes some small step.</em></p>
       </div>
+
     </div>
 
     <div id="technical-writings" class="writing-content" style="display: none;">
       <div class="writing-item">
-        <strong><a href="/writing/deep-learning-implementation/">Creating a Deep Learning Framework (Implementation)</a> - 2025-02-06</strong>
-        <p>Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts...</p>
+        <strong>Creating a Deep Learning Framework (Implementation) - 2025-02-06</strong>
+        System Simplifying
+        <p>Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we are planning to do → make a guess, check that guess, change our guess. Sharpening things a little, we then think of things in the language of neural networks. The guess is encoded in the forward pass of our algorithm. When we make our check, we compare against a loss function. We correct our guess through back propagation and gradient descent.</p>
+        
+        Back Propagation
+        <p>We first notice that the definition at each time step of our algorithm doesn't change. In other words, the problem remains the same for any node within our graph. This hints to us we can use recursion. For the nth node along our path we recurse from the n-1th, further we can store the gradient calculated along our path and proceed in a bottom up dynamic programming fashion across paths, across nodes.</p>
+        
+        Class-Based Design and Its Role in Autograd
+        <p>In designing this autograd engine, we structured our code using object-oriented programming principles. Each class in the system has a clear role, mirroring fundamental neural network concepts. This allowed us to map our mental model of a neural network more directly into code and organize our thoughts.</p>
       </div>
 
       <div class="writing-item">
-        <strong><a href="/writing/deep-learning-theory/">Creating a Deep Learning Framework (Pertinent Theory)</a> - 2025-02-06</strong>
-        <p>For our simple optimization step we want to move in the direction of steepest descent...</p>
+        <strong>Creating a Deep Learning Framework (Pertinent Theory) - 2025-02-06</strong>
+        Backprop
+        <p><em>Intuitions for Partial Derivatives and Chain Rule</em></p>
+        <p>For our simple optimization step we want to move in the direction of steepest descent in an effort to minimize our loss function. This means we calculate the gradient (steepest ascent) and move in the opposite direction. We then just need to accurately calculate the partials across all our nodes using the chain rule across layers so we can plug this gradient into our optimization equation.</p>
+        <p>Take particular node n and consider all paths through our layers leading to our final loss node. Each path signifies an effect n has on our final output. If we can find the effect of the node on the operation and the operation on the loss. By similar logic we can effectively build backwards from our loss node to n.</p>
       </div>
     </div>
   </section>

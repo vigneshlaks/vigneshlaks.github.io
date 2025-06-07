@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing - Vignesh Lakshmanan</title>
+  <style>
+    /* Base styles */
+    body {
+        font-family: 'Palatino', serif;
+        background: #fff;
+        color: #000;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px 10px;
+    }
+
+    /* Header styles */
+    header {
+        background: #fff;
+        border-bottom: 1px solid #000;
+        padding: 20px 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+        font-weight: normal;
+        margin: 0 0 10px 0;
+    }
+
+    header p {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav a {
+        color: #000;
+        text-decoration: none;
+        margin: 0 20px;
+        font-size: 0.9rem;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    nav a.current {
+        text-decoration: underline;
+    }
+
+    /* Main content sections */
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section h2 {
+        font-size: 1.5rem;
+        font-weight: normal;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #000;
+        padding-bottom: 10px;
+    }
+
+    /* Writing styles */
+    .writing-toggle-container {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .writing-toggle {
+        background: #fff;
+        border: 1px solid #000;
+        color: #000;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-family: 'Palatino', serif;
+        margin: 0 5px;
+    }
+
+    .writing-toggle:hover, .writing-toggle.active {
+        background: #000;
+        color: #fff;
+    }
+
+    .writing-content {
+        margin-top: 20px;
+    }
+
+    .writing-item {
+        border: 1px solid #000;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fff;
+    }
+
+    .writing-item strong {
+        font-size: 1rem;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .writing-item em {
+        color: #666;
+        font-style: italic;
+    }
+
+    .writing-item a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .writing-item a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        body { padding: 10px 5px; }
+        header h1 { font-size: 1.5rem; }
+        nav a { margin: 0 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Vignesh Lakshmanan</h1>
+    <p>UPenn CS + Robotics | <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a> | 
+      <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
+    <nav>
+      <a href="/">Bio</a>
+      <a href="/projects/">Projects</a>
+      <a href="/reading/">Reading</a>
+      <a href="/writing/" class="current">Writing</a>
+    </nav>
+  </header>
+
+  <!-- Writing Section -->
+  <section class="section">
+    <h2>Writing</h2>
+
+    <div class="writing-toggle-container">
+      <button class="writing-toggle active" onclick="showWriting('nontechnical')">Nontechnical</button>
+      <button class="writing-toggle" onclick="showWriting('technical')">Technical</button>
+    </div>
+
+    <div id="nontechnical-writings" class="writing-content">
+      <div class="writing-item">
+        <strong><a href="/writing/creative-pursuits/">Creative Pursuits</a> - 2024-08-14</strong>
+        <p>The only way to create something profound is by creating something related to the thing(s) one obsesses over...</p>
+        <p><em>Focus on a few things and create things while learning. Keep doing this and something meaningful will happen.</em></p>
+      </div>
+
+      <div class="writing-item">
+        <strong><a href="/writing/scaling-skills/">Scaling Seemingly Disjoint Skill Sets</a> - 2024-10-19</strong>
+        <p>We conjecture that people primarily scale skill sets for which they have a natural affinity for...</p>
+        <p><em>A lot of people only develop things that they had a natural knack for and are afraid to stray far from what they know.</em></p>
+      </div>
+
+      <div class="writing-item">
+        <strong><a href="/writing/unique-footprint/">The urgency and necessity for a unique written footprint</a> - 2025-02-08</strong>
+        <p>Human-human connection → Human-robot connection → Robot-robot connection...</p>
+        <p><em>LLMs are becoming increasingly good at emulating human text. We can combat this by allowing ourselves and the way we write to deviate from the norm.</em></p>
+      </div>
+
+      <div class="writing-item">
+        <strong><a href="/writing/orientations/">Orientations</a> - 2025-06-01</strong>
+        <p>Orientations, the direction of pursuits, are likely one of the most important things to get right in life...</p>
+        <p><em>It's easier to do your own thing than you think. It just takes some small step.</em></p>
+      </div>
+    </div>
+
+    <div id="technical-writings" class="writing-content" style="display: none;">
+      <div class="writing-item">
+        <strong><a href="/writing/deep-learning-implementation/">Creating a Deep Learning Framework (Implementation)</a> - 2025-02-06</strong>
+        <p>Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts...</p>
+      </div>
+
+      <div class="writing-item">
+        <strong><a href="/writing/deep-learning-theory/">Creating a Deep Learning Framework (Pertinent Theory)</a> - 2025-02-06</strong>
+        <p>For our simple optimization step we want to move in the direction of steepest descent...</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function showWriting(type) {
+      // Toggle writing content
+      const nontechDiv = document.getElementById('nontechnical-writings');
+      const techDiv = document.getElementById('technical-writings');
+      const buttons = document.querySelectorAll('.writing-toggle');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      if (type === 'nontechnical') {
+        nontechDiv.style.display = 'block';
+        techDiv.style.display = 'none';
+        buttons[0].classList.add('active');
+      } else {
+        nontechDiv.style.display = 'none';
+        techDiv.style.display = 'block';
+        buttons[1].classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

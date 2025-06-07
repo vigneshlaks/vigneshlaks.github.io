@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimizing Parallel Reduction</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="parallel-reduction.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <h1>Optimizing Parallel Reduction</h1>
+
+    <h2>Introduction</h2>
+    <p>This is an adaptation of my notes to "Optimizing Parallel Reduction in CUDA" by Mark Harris (found in references).</p>
+    <p>With reduction we move outside the realm of pointwise operations. Our final answer depends on how the array values intermingle with one another. We are posed with the questions, how do we allow the thread blocks to interact?</p>
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title">Reduction Tree Structure</div>
+            <div class="step-description">
+                Each level does a mini-reduction, locally aggregating information
+            </div>
+        </div>
+        
+        <div class="tree-diagram">
+            <div class="tree-level">
+                <div class="tree-node">10</div>
+                <div class="tree-node">1</div>
+                <div class="tree-node">8</div>
+                <div class="tree-node">-4</div>
+                <div class="tree-node">0</div>
+                <div class="tree-node">-2</div>
+                <div class="tree-node">3</div>
+                <div class="tree-node">5</div>
+            </div>
+            <div class="tree-connection"></div>
+            <div class="tree-level">
+                <div class="tree-node">11</div>
+                <div class="tree-node">4</div>
+                <div class="tree-node">-2</div>
+                <div class="tree-node">8</div>
+            </div>
+            <div class="tree-connection"></div>
+            <div class="tree-level">
+                <div class="tree-node">15</div>
+                <div class="tree-node">6</div>
+            </div>
+            <div class="tree-connection"></div>
+            <div class="tree-level">
+                <div class="tree-node active">21</div>
+            </div>
+        </div>
+    </div>
+    <p>As we progress, we need fewer operations as we store more information.</p>
+
+    <h2>Reductions</h2>
+    <p>Below we incrementally optimize a kernel to perform the reduction operation.</p>
+
+    <h3>Reduction 1 - Interleaved Addressing, Divergent Branching</h3>
+    
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title" id="stepTitle1">Step 1: Stride 1</div>
+        </div>
+
+        <div class="memory-row">
+            <div class="label">Values</div>
+            <div class="memory-cells" id="values1"></div>
+        </div>
+        
+        <div class="memory-row">
+            <div class="label">Threads</div>
+            <div class="memory-cells" id="threads1"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="prevStep(1)">Previous</button>
+            <button onclick="nextStep(1)">Next</button>
+            <button onclick="reset(1)">Reset</button>
+        </div>
+    </div>
+
+    <pre><span class="keyword">for</span> (<span class="type">unsigned int</span> <span class="variable">s</span>=<span class="number">1</span>; <span class="variable">s</span> <span class="operator">&lt;</span> <span class="variable">blockDim</span>.<span class="variable">x</span>; <span class="variable">s</span> <span class="operator">*=</span> <span class="number">2</span>) {
+    <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">%</span> (<span class="number">2</span><span class="operator">*</span><span class="variable">s</span>) <span class="operator">==</span> <span class="number">0</span>) {
+        <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="variable">s</span>]; <span class="comment">// one tree aggregation</span>
+    }
+    <span class=>__syncthreads</span>(); <span class="comment">// Allow all threads to write before continuing</span>
+}</pre>
+
+    <p>In the first iteration, the even threads merge with adjacent locations. Allowing 1 thread in every 2 threads to resolve to true then 4 and so forth, building out incrementally as shown.  <code>s</code> refers to our <em>stride</em> here.</p>
+
+    <p>The above algorithm is inefficient primarily due to <em>warp divergence</em>. Conditional statements can cause threads within the same warp to perform different tasks creating overhead as the operations need to be performed in sequence or are <em>serialized</em>.</p>
+
+    <p>What's interesting is each aggregation works as some "mini-reduction" on a subarray. Our <em>strides</em> become larger and larger as we iteratively reduce larger chunks of our array.</p>
+
+    <h3>Reduction 2 - Interleaved Addressing, Reduced Branching</h3>
+    
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title" id="stepTitle2">Step 1: Stride 1</div>
+        </div>
+
+        <div class="memory-row">
+            <div class="label">Values</div>
+            <div class="memory-cells" id="values2"></div>
+        </div>
+        
+        <div class="memory-row">
+            <div class="label">Threads</div>
+            <div class="memory-cells" id="threads2"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="prevStep(2)">Previous</button>
+            <button onclick="nextStep(2)">Next</button>
+            <button onclick="reset(2)">Reset</button>
+        </div>
+    </div>
+
+    <pre><span class="keyword">for</span> (<span class="type">unsigned int</span> <span class="variable">s</span> <span class="operator">=</span> <span class="number">1</span>; <span class="variable">s</span> <span class="operator">&lt;</span> <span class="variable">blockDim</span>.<span class="variable">x</span>; <span class="variable">s</span> <span class="operator">*=</span> <span class="number">2</span>) {
+    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">2</span> <span class="operator">*</span> <span class="variable">s</span> <span class="operator">*</span> <span class="variable">tid</span>;
+    
+    <span class="keyword">if</span> (<span class="variable">index</span> <span class="operator">+</span> <span class="variable">s</span> <span class="operator">&lt;</span> <span class="variable">blockDim</span>.<span class="variable">x</span>) { <span class="comment">// check in bounds</span>
+        <span class="variable">sdata</span>[<span class="variable">index</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">index</span> <span class="operator">+</span> <span class="variable">s</span>]; <span class="comment">// thread takes care of diff. index</span>
+    }
+    <span class="">__syncthreads</span>();
+}</pre>
+
+    <p>It's seen here thread ids can index into differing memory regions (instead of <code>sdata[tid] = x;</code>).</p>
+
+    <p>Consecutive threads now handle the same problem. Warps are grouped in consecutive threads so now they mostly go into the same branch of the if condition and less divergence occurs.</p>
+
+    <p>It is now worth talking about <em>memory bank conflicts</em>. Indices in our shared memory are stored in memory banks on our hardware. For 32 banks, indices 0, 32, 64, etc. may all map to the same bank. Therefore, depending on our stride we can end up accessing indices 0 and 32 with separate threads, causing serialization.</p>
+
+    <p>Consider what happens with stride 16 assuming 32 banks.</p>
+
+    <h3>Reduction 3 - Sequential Addressing</h3>
+    
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title" id="stepTitle3">Step 1: Stride 8</div>
+        </div>
+
+        <div class="memory-row">
+            <div class="label">Values</div>
+            <div class="memory-cells" id="values3"></div>
+        </div>
+        
+        <div class="memory-row">
+            <div class="label">Threads</div>
+            <div class="memory-cells" id="threads3"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="prevStep(3)">Previous</button>
+            <button onclick="nextStep(3)">Next</button>
+            <button onclick="reset(3)">Reset</button>
+        </div>
+    </div>
+
+    <pre><span class="keyword">for</span> (<span class="type">unsigned int</span> <span class="variable">s</span> <span class="operator">=</span> <span class="variable">blockDim</span>.<span class="variable">x</span><span class="operator">/</span><span class="number">2</span>; <span class="variable">s</span><span class="operator">&gt;</span><span class="number">0</span>; <span class="variable">s</span><span class="operator">&gt;&gt;=</span><span class="number">1</span>) { <span class="comment">// right bit shift (divide by 2)</span>
+    <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="variable">s</span>) {
+        <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="variable">s</span>];
+    }
+    <span class="">__syncthreads</span>();
+}</pre>
+
+    <p>We reduce the issue of memory bank conflicts as we're not jumping to different places in memory.</p>
+
+    <h3>Reduction 4 - Global Memory Optimization</h3>
+
+    <pre><span class="type">unsigned int</span> <span class="variable">tid</span> <span class="operator">=</span> <span class="variable">threadIdx</span>.<span class="variable">x</span>;
+<span class="type">unsigned int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="variable">blockIdx</span>.<span class="variable">x</span> <span class="operator">*</span> (<span class="variable">blockDim</span>.<span class="variable">x</span><span class="operator">*</span><span class="number">2</span>) <span class="operator">+</span> <span class="variable">threadIdx</span>.<span class="variable">x</span>;<span class="comment"> // Note the 2</span>
+<span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">=</span> <span class="variable">g_idata</span>[<span class="variable">i</span>] <span class="operator">+</span> <span class="variable">g_idata</span>[<span class="variable">i</span> <span class="operator">+</span> <span class="variable">blockDim</span>.<span class="variable">x</span>];
+<span class="">__syncthreads</span>();</pre>
+
+    <p>In our previous reduction, half our threads are idling from the very beginning. Instead, each thread handles 2 blocks of information during its initial reading (causing <code>blockDim.x * 2</code>). Critically, this happens during the loading process from global memory itself.</p>
+
+    <h3>Reduction 5 - Warp Reduce / Unroll</h3>
+
+    <pre><span class="keyword">__device__</span> <span class="type">void</span> <span class="function">warpReduce</span>(<span class="keyword">volatile</span> <span class="type">int*</span> <span class="variable">sdata</span>, <span class="type">int</span> <span class="variable">tid</span>) { <span class="comment">// Volatile is important here</span>
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">32</span>];
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">16</span>];
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">8</span>];
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">4</span>];
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">2</span>];
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">1</span>];
+}
+
+<span class="comment">// Block Manipulation</span>
+<span class="keyword">for</span> (<span class="type">unsigned int</span> <span class="variable">s</span> <span class="operator">=</span> <span class="variable">blockDim</span>.<span class="variable">x</span><span class="operator">/</span><span class="number">2</span>; <span class="variable">s</span> <span class="operator">&gt;</span> <span class="number">32</span>; <span class="variable">s</span> <span class="operator">&gt;&gt;=</span> <span class="number">1</span>) { <span class="comment">// Note the `s > 32`</span>
+    <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="variable">s</span>)
+        <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="variable">s</span>];
+    <span class="">__syncthreads</span>();
+}
+
+<span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">32</span>) <span class="function">warpReduce</span>(<span class="variable">sdata</span>, <span class="variable">tid</span>);</pre>
+
+    <p>When we have less than 32 threads we often deal with a single warp in our hardware. Warps follow a SIMD Structure and automatically perform synchronization. We remove both the if condition and syncing function call and in some sense "hard-code" the rest of these operations and take advantage of the fact that we're now working on a single warp.</p>
+
+    <h3>Reduction 6 - Templating</h3>
+
+    <pre><span class="keyword">template</span> <span class="operator">&lt;</span><span class="type">unsigned int</span> <span class="variable">blockSize</span><span class="operator">&gt;</span>
+<span class="keyword">__global__</span> <span class="type">void</span> <span class="function">reduce6</span>(<span class="type">int</span> <span class="operator">*</span><span class="variable">g_idata</span>, <span class="type">int</span> <span class="operator">*</span><span class="variable">g_odata</span>) {
+    <span class="comment">// ... initialization code ...</span>
+    <span class="keyword">if</span> (<span class="variable">blockSize</span> <span class="operator">&gt;=</span> <span class="number">512</span>) {
+        <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">256</span>) { <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">256</span>]; }
+        <span class="">__syncthreads</span>();
+    }
+    <span class="keyword">if</span> (<span class="variable">blockSize</span> <span class="operator">&gt;=</span> <span class="number">256</span>) {
+        <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">128</span>) { <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">128</span>]; }
+        <span class="">__syncthreads</span>();
+    }
+    <span class="keyword">if</span> (<span class="variable">blockSize</span> <span class="operator">&gt;=</span> <span class="number">128</span>) {
+        <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">64</span>) { <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">64</span>]; }
+        <span class="">__syncthreads</span>();
+    }
+    <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">32</span>) <span class="function">warpReduce</span><span class="operator">&lt;</span><span class="variable">blockSize</span><span class="operator">&gt;</span>(<span class="variable">sdata</span>, <span class="variable">tid</span>);
+}</pre>
+
+    <pre><span class="keyword">switch</span> (<span class="variable">threads</span>) {
+    <span class="keyword">case</span> <span class="number">512</span>:
+        <span class="function">reduce6</span><span class="operator">&lt;</span><span class="number">512</span><span class="operator">&gt;&lt;&lt;&lt;</span><span class="variable">dimGrid</span>, <span class="variable">dimBlock</span>, <span class="variable">smemSize</span><span class="operator">&gt;&gt;&gt;</span>(<span class="variable">d_idata</span>, <span class="variable">d_odata</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">256</span>:
+        <span class="function">reduce6</span><span class="operator">&lt;</span><span class="number">256</span><span class="operator">&gt;&lt;&lt;&lt;</span><span class="variable">dimGrid</span>, <span class="variable">dimBlock</span>, <span class="variable">smemSize</span><span class="operator">&gt;&gt;&gt;</span>(<span class="variable">d_idata</span>, <span class="variable">d_odata</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">128</span>:
+        <span class="function">reduce6</span><span class="operator">&lt;</span><span class="number">128</span><span class="operator">&gt;&lt;&lt;&lt;</span><span class="variable">dimGrid</span>, <span class="variable">dimBlock</span>, <span class="variable">smemSize</span><span class="operator">&gt;&gt;&gt;</span>(<span class="variable">d_idata</span>, <span class="variable">d_odata</span>);
+        <span class="keyword">break</span>;
+    <span class="comment">// ... additional cases for other block sizes ...</span>
+}</pre>
+
+    <p>The block size is explicitly enumerated allowing us to completely remove the loop and operations that were done related to it, namely <code>loop increment (s > 0)</code> and <code>loop check (s >>= 1)</code>.</p>
+        
+    <p>Templating turns the <code>blockSize</code> variable into a compile time constant. We now know all our statements at compile time and get rid of statements that we do not need (referred to as <em>Dead Code Elimination</em>).</p>
+
+    <h3>Reduction 7 - Algorithm Cascading</h3>
+
+    <pre><span class="keyword">template</span> <span class="operator">&lt;</span><span class="type">unsigned int</span> <span class="variable">blockSize</span><span class="operator">&gt;</span>
+<span class="keyword">__global__</span> <span class="type">void</span> <span class="function">reduce7</span>(<span class="type">int</span> <span class="operator">*</span><span class="variable">g_idata</span>, <span class="type">int</span> <span class="operator">*</span><span class="variable">g_odata</span>, <span class="type">unsigned int</span> <span class="variable">n</span>) {
+    <span class="keyword">extern</span> <span class="keyword">__shared__</span> <span class="type">int</span> <span class="variable">sdata</span>[];
+    <span class="type">unsigned int</span> <span class="variable">tid</span> <span class="operator">=</span> <span class="variable">threadIdx</span>.<span class="variable">x</span>;
+    <span class="type">unsigned int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="variable">blockIdx</span>.<span class="variable">x</span> <span class="operator">*</span> (<span class="variable">blockSize</span><span class="operator">*</span><span class="number">2</span>) <span class="operator">+</span> <span class="variable">tid</span>;
+    <span class="type">unsigned int</span> <span class="variable">gridSize</span> <span class="operator">=</span> <span class="variable">blockSize</span> <span class="operator">*</span> <span class="number">2</span> <span class="operator">*</span> <span class="variable">gridDim</span>.<span class="variable">x</span>; <span class="comment">// Note the 2 here</span>
+
+    <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">=</span> <span class="number">0</span>;
+
+    <span class="keyword">while</span> (<span class="variable">i</span> <span class="operator">&lt;</span> <span class="variable">n</span>) {
+        <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">g_idata</span>[<span class="variable">i</span>] <span class="operator">+</span> <span class="variable">g_idata</span>[<span class="variable">i</span> <span class="operator">+</span> <span class="variable">blockSize</span>]; <span class="comment">// This block and next</span>
+        <span class="variable">i</span> <span class="operator">+=</span> <span class="variable">gridSize</span>;  
+    }
+    <span class="">__syncthreads</span>();
+
+    <span class="comment">// Standard parallel reduction in shared memory</span>
+    <span class="keyword">if</span> (<span class="variable">blockSize</span> <span class="operator">&gt;=</span> <span class="number">512</span>) {
+        <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">256</span>) { <span class="variable">sdata</span>[<span class="variable">tid</span>] <span class="operator">+=</span> <span class="variable">sdata</span>[<span class="variable">tid</span> <span class="operator">+</span> <span class="number">256</span>]; }
+        <span class="">__syncthreads</span>();
+    }
+    <span class="comment">// ... remaining reduction steps ...</span>
+
+    <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">32</span>) <span class="function">warpReduce</span><span class="operator">&lt;</span><span class="variable">blockSize</span><span class="operator">&gt;</span>(<span class="variable">sdata</span>, <span class="variable">tid</span>);
+    <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">==</span> <span class="number">0</span>) <span class="variable">g_odata</span>[<span class="variable">blockIdx</span>.<span class="variable">x</span>] <span class="operator">=</span> <span class="variable">sdata</span>[<span class="number">0</span>];
+}</pre>
+
+    <p>Conceptually the hardest to completely unwrap(!) so I had to refer to it by its coolest name.</p>
+        
+    <p>So far we've been looking at kernels with arrays up to two times larger than our shared memory. Before, if we couldn't store an entire array within shared memory, we would have to launch multiple reduction kernels and further reduce the outcome of these kernels. With this reduction, on a single kernel we can now perform a reduction on indefinitely sized arrays.</p>
+
+    <p>As shown in reduction 7, we can instead iterate through our global memory and do a sequential additive operation using each thread ID at our disposal then do our traditional reduction operation we have been discussing. <p>
+
+    <p>The motivation for doing this is stated within <em>Brent's Theorem.</em> Put simply moving right (sequential steps) then moving down (traditional reduction) is algorithmically favorable.</p>
+
+    <p> <em>Memory Coalescing</em> refers to querying for data in our global memory in an efficient way. Data is fetched from global memory in sequential chunks. If we index information sequentially, then we won't need to make multiple reads from our global memory (an expensive operation).</p>
+
+    <p>We see the recurring theme of accessing information sequentially.</p>
+
+    <h2>Analysis</h2>
+        
+        <div class="visualization">
+    <div class="step-info">
+        <div class="step-title">Performance Comparison</div>
+        <div class="step-description">
+            Relative performance - 30x speedup
+        </div>
+    </div>
+    
+    <div class="performance-chart">
+        <div class="performance-bar" style="height: 100%;"></div>
+        <div class="performance-bar" style="height: 43%;"></div>
+        <div class="performance-bar" style="height: 21%;"></div>
+        <div class="performance-bar" style="height: 12%;"></div>
+        <div class="performance-bar" style="height: 8%;"></div>
+        <div class="performance-bar" style="height: 5%;"></div>
+        <div class="performance-bar" style="height: 3%;"></div>
+    </div>
+    
+    <table class="complexity-table">
+        <tr>
+            <th>Main Issue</th>
+            <th>Optimization</th>
+            <th>Time (ms)</th>
+        </tr>
+        <tr>
+            <td>Warp Divergence</td>
+            <td>Interleaved Addressing</td>
+            <td>8.054</td>
+        </tr>
+        <tr>
+            <td>Memory Bank Conflicts</td>
+            <td>Reduced Branching</td>
+            <td>3.456</td>
+        </tr>
+        <tr>
+            <td>Thread Underutilization</td>
+            <td>Sequential Addressing</td>
+            <td>1.722</td>
+        </tr>
+        <tr>
+            <td>Global Memory Bottleneck</td>
+            <td>Global Loading</td>
+            <td>0.965</td>
+        </tr>
+        <tr>
+            <td>Unnecessary Synchronization</td>
+            <td>Warp-Level Primitives</td>
+            <td>0.606</td>
+        </tr>
+        <tr>
+            <td>Runtime Overhead</td>
+            <td>Compile-Time Constants</td>
+            <td>0.381</td>
+        </tr>
+        <tr>
+            <td>Large Array Handling</td>
+            <td>Sequential + Parallel</td>
+            <td>0.268</td>
+        </tr>
+    </table>
+</div>
+
+    <p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #000; font-size: 0.8rem; text-align: center;">
+        <strong>References</strong><br>
+        https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf
+    </p>

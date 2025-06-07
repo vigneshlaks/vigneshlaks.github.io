@@ -1,0 +1,243 @@
+/* Base styles */
+body {
+    font-family: 'Palatino', serif;
+    background: #fff;
+    color: #000;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+header {
+    background: #fff;
+    border-bottom: 1px solid #000;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: normal;
+    margin: 0 0 10px 0;
+}
+
+nav a {
+    color: #000;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 0.9rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Landing page specific header styles */
+.landing-header {
+    border-bottom: none;
+    padding: 60px 20px 40px 20px;
+}
+
+.landing-header p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.note {
+    max-width: 500px;
+    margin: 20px auto 0 auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+.note p {
+    margin: 0;
+    color: #333;
+}
+
+/* Main content - default for post pages */
+main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+/* Landing page main layout */
+.landing-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 220px);
+    max-width: none;
+    padding: 0 20px;
+}
+
+body.landing {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Landing page vertical list */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.post-item {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.post-item:hover {
+    transform: translateY(-4px);
+}
+
+.post-item.locked {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.post-title {
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0 0 4px 0;
+    color: #000;
+}
+
+.post-item.locked .post-title {
+    color: #999;
+}
+
+.post-item.available:hover .post-title {
+    text-decoration: underline;
+}
+
+/* Landing page post meta */
+.post-item .post-meta {
+    font-size: 0.8rem;
+    color: #888;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.post-item:hover .post-meta {
+    opacity: 1;
+}
+
+/* Footer */
+footer {
+    background: #fff;
+    border-top: 1px solid #000;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 0.8rem;
+}
+
+/* Landing page footer */
+.landing-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-top: 0;
+    color: #999;
+    border-top: none;
+}
+
+/* Shared post content styles */
+.post-content {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+.post-content h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.post-content h2 {
+    font-size: 1.1rem;
+    margin: 20px 0 10px 0;
+    font-weight: normal;
+}
+
+.post-content h3 {
+    font-size: 1rem;
+    margin: 15px 0 10px 0;
+    font-weight: normal;
+}
+
+.post-content p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+/* Shared post meta styles */
+.post-meta {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+    margin: 0 0 10px 0;
+}
+
+/* Code styles */
+pre {
+    background: #fff;
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 15px 0;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+}
+
+/* Syntax highlighting */
+.keyword { color: #000; font-weight: bold; }
+.type { color: #666; font-style: italic; }
+.function { color: #333; text-decoration: underline; }
+.comment { color: #888; font-style: italic; }
+.number { color: #444; }
+.operator { color: #000; }
+.variable { color: #222; }
+
+/* Navigation breadcrumb */
+.breadcrumb {
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    color: #000;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    main { padding: 10px 5px; }
+    header h1 { font-size: 1.5rem; }
+    
+    /* Landing page responsive */
+    .post-list { max-width: 90%; }
+    .post-item { padding: 18px 20px; }
+}

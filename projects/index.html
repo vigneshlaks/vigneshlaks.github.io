@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - Vignesh Lakshmanan</title>
+  <style>
+    /* Base styles */
+    body {
+        font-family: 'Palatino', serif;
+        background: #fff;
+        color: #000;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px 10px;
+    }
+
+    /* Header styles */
+    header {
+        background: #fff;
+        border-bottom: 1px solid #000;
+        padding: 20px 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+        font-weight: normal;
+        margin: 0 0 10px 0;
+    }
+
+    header p {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav a {
+        color: #000;
+        text-decoration: none;
+        margin: 0 20px;
+        font-size: 0.9rem;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    nav a.current {
+        text-decoration: underline;
+    }
+
+    /* Main content sections */
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section h2 {
+        font-size: 1.5rem;
+        font-weight: normal;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #000;
+        padding-bottom: 10px;
+    }
+
+    .section h3 {
+        font-size: 1.1rem;
+        margin: 20px 0 10px 0;
+        font-weight: normal;
+    }
+
+    /* Project styles */
+    .project-item {
+        border: 1px solid #000;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fff;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    .project-title a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .project-title a:hover {
+        text-decoration: underline;
+    }
+
+    .project-images {
+        display: flex;
+        gap: 10px;
+        margin: 15px 0;
+        flex-wrap: wrap;
+    }
+
+    .project-images img {
+        max-width: calc(50% - 5px);
+        height: auto;
+        border: 1px solid #000;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        body { padding: 10px 5px; }
+        header h1 { font-size: 1.5rem; }
+        nav a { margin: 0 10px; }
+        .project-images img { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Vignesh Lakshmanan</h1>
+    <p>UPenn CS + Robotics | <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a> | 
+      <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
+    <nav>
+      <a href="/">Bio</a>
+      <a href="/projects/" class="current">Projects</a>
+      <a href="/reading/">Reading</a>
+      <a href="/writing/">Writing</a>
+    </nav>
+  </header>
+
+  <!-- Projects Section -->
+  <section class="section">
+    <h2>Projects</h2>
+
+    <h3>Current</h3>
+    <div class="project-item">
+      <div class="project-title">
+        <a href="/projects/gpu-opt/">GPU</a>
+      </div>
+      <p>GPU programming and optimization.</p>
+    </div>
+
+    <h3>Previous</h3>
+    <div class="project-item">
+      <div class="project-title">
+        <a href="/projects/deep-learning-framework/">Deep Learning Framework from Scratch</a>
+      </div>
+      <p>Built a deep learning framework. Implemented autodifferentiation, tensors, and neural network primitives from first principles.</p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-title">
+        <a href="/projects/trajectory-optimization/">Learned Dynamics for Trajectory Optimization</a>
+      </div>
+      <p>Project optimizing dynamics for trajectory optimization using smoothing techniques. Intuition stemmed from the role that smoothing has played in optimizing loss landscapes in other contexts. <a href="https://drive.google.com/file/d/1kCIWxJblfwVdhhuMNb5FzXqhYPZbPb3i/view?usp=sharing" target="_blank">[PDF]</a>.</p>
+    </div>
+
+    <div class="project-item">
+      <div class="project-title">
+        <a href="/projects/secret-message-embeddings/">Multi-Bit Secret Message Embeddings</a>
+      </div>
+      <p>Token partitioning and decoding for LLM text. <a href="https://github.com/liamdugan/watermark-steganography" target="_blank">GitHub</a>.</p>
+    </div>
+  </section>
+</body>
+</html>

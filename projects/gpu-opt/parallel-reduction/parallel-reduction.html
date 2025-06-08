@@ -289,8 +289,6 @@
     <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">&lt;</span> <span class="number">32</span>) <span class="function">warpReduce</span><span class="operator">&lt;</span><span class="variable">blockSize</span><span class="operator">&gt;</span>(<span class="variable">sdata</span>, <span class="variable">tid</span>);
     <span class="keyword">if</span> (<span class="variable">tid</span> <span class="operator">==</span> <span class="number">0</span>) <span class="variable">g_odata</span>[<span class="variable">blockIdx</span>.<span class="variable">x</span>] <span class="operator">=</span> <span class="variable">sdata</span>[<span class="number">0</span>];
 }</pre>
-
-    <p>Conceptually the hardest to completely unwrap(!) so I had to refer to it by its coolest name.</p>
         
     <p>So far we've been looking at kernels with arrays up to two times larger than our shared memory. Before, if we couldn't store an entire array within shared memory, we would have to launch multiple reduction kernels and further reduce the outcome of these kernels. With this reduction, on a single kernel we can now perform a reduction on indefinitely sized arrays.</p>
 

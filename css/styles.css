@@ -43,6 +43,14 @@ nav a {
     font-size: 0.9rem;
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+
 nav a:hover {
     text-decoration: underline;
 }

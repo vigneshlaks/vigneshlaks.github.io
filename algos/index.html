@@ -3,41 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPU Optimization Series</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Algorithms Series</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Palatino', serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            background: #fff;
+            border-bottom: 1px solid #000;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin: 0 0 10px 0;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Landing page specific header styles */
+        .landing-header {
+            border-bottom: none;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .landing-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .landing-header p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .note {
+            max-width: 500px;
+            margin: 15px auto 0 auto;
+            padding: 12px;
+            border: 1px solid #ddd;
+            background: #fafafa;
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .note p {
+            margin: 0;
+            color: #333;
+        }
+
+        /* Main content - default for post pages */
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 10px;
+        }
+
+        /* Landing page main layout */
+        .landing-main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 160px);
+            max-width: none;
+            padding: 0 20px;
+            overflow-y: auto;
+        }
+
+        body.landing {
+            min-height: 100vh;
+        }
+
+        /* Landing page vertical list - now more compact */
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .post-item {
+            border: 1px solid #ddd;
+            background: #fff;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .post-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .post-item.locked {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .post-title {
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin: 0 0 3px 0;
+            color: #000;
+        }
+
+        .post-item.locked .post-title {
+            color: #999;
+        }
+
+        .post-item.available:hover .post-title {
+            text-decoration: underline;
+        }
+
+        /* Landing page post meta - smaller and more subtle */
+        .post-item .post-meta {
+            font-size: 0.72rem;
+            color: #888;
+            margin: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .post-item:hover .post-meta {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            border-top: 1px solid #000;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.8rem;
+        }
+
+        /* Landing page footer */
+        .landing-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            margin-top: 0;
+            color: #999;
+            border-top: none;
+        }
+
+        /* Shared post content styles */
+        .post-content {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px 10px;
+        }
+
+        .post-content h1 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-content h2 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            font-weight: normal;
+        }
+
+        .post-content h3 {
+            font-size: 1rem;
+            margin: 15px 0 10px 0;
+            font-weight: normal;
+        }
+
+        .post-content p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Shared post meta styles */
+        .post-meta {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+            margin: 0 0 10px 0;
+        }
+
+        /* Code styles */
+        pre {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+        }
+
+        /* Syntax highlighting */
+        .keyword { color: #000; font-weight: bold; }
+        .type { color: #666; font-style: italic; }
+        .function { color: #333; text-decoration: underline; }
+        .comment { color: #888; font-style: italic; }
+        .number { color: #444; }
+        .operator { color: #000; }
+        .variable { color: #222; }
+
+        /* Navigation breadcrumb */
+        .breadcrumb {
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            main { padding: 10px 5px; }
+            header h1 { font-size: 1.5rem; }
+            
+            /* Landing page responsive */
+            .post-list { max-width: 95%; }
+            .post-item { padding: 10px 15px; }
+            .post-title { font-size: 0.85rem; }
+            .post-item .post-meta { font-size: 0.7rem; }
+        }
+    </style>
 </head>
 <body class="landing">
     <header class="landing-header">
-        <h1>GPU Optimization</h1>
+        <h1>Algorithms</h1>
         <p>High signal writings with slight opinionation</p>
     </header>
 
     <main class="landing-main">
         <div class="post-list">
-            <article class="post-item available" onclick="window.location.href='problems/kth-smallest-lexical'">
-                <h3 class="post-title">Optimizing Parallel Reduction</h3>
-                <p class="post-meta">Interactive exploration of GPU reduction algorithms</p>
-            </article>
-            
-            <article class="post-item locked">
-                <h3 class="post-title">Matrix Multiplication Optimization</h3>
-                <p class="post-meta">Advanced memory hierarchy techniques</p>
-            </article>
-            
-            <article class="post-item locked">
-                <h3 class="post-title">Warp-Level Primitives</h3>
-                <p class="post-meta">SIMD execution and synchronization</p>
-            </article>
-
-            <article class="post-item locked">
-                <h3 class="post-title">Memory Coalescing Patterns</h3>
-                <p class="post-meta">Global memory access optimization</p>
+            <article class="post-item available" onclick="window.location.href='problems/kth-smallest-lexical.html'">
+                <h3 class="post-title">Kth smallest in lexicographical order </h3>
             </article>
         <div class="note">
-        <p><strong>Note:</strong> The writings are stated in a minimal way, a distilled version of my own notes. The intention is to state the concepts and allow readers to sit with them until they are clear. Can be read in one sitting but absorbed over multiple.</p>
-    </div>
+            <p><strong>Note:</strong> The writings are stated in a minimal way, a distilled version of my own notes. The intention is to state the concepts and allow readers to sit with them until they are clear. Can be read in one sitting but absorbed over multiple.</p>
+        </div>
     </main>
-    
 
     <footer class="landing-footer">
         <p>Made by Vignesh</p>

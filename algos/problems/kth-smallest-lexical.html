@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Basic page info -->
+    <title>K-th Smallest in Lexicographical Order - LeetCode Solution</title>
+    <meta name="description" content="High signal writings on algorithm optimization techniques, focusing on DFS and lexicographical ordering.">
+    
+    <!-- Open Graph meta tags for social media previews -->
+    <meta property="og:title" content="K-th Smallest in Lexicographical Order">
+    <meta property="og:description" content="Learn DFS optimization techniques for lexicographical ordering problems.">
+    <meta property="og:type" content="article">
+    
+    <!-- Article-specific meta tags -->
+    <meta property="article:author" content="Vignesh">
+    <meta property="article:published_time" content="2025-06-09">
+    <meta property="article:section" content="Algorithms">
+    <meta property="article:tag" content="LeetCode">
+    <meta property="article:tag" content="DFS">
+    <meta property="article:tag" content="Tree Traversal">
+    
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Palatino', serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            background: #fff;
+            border-bottom: 1px solid #000;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin: 0 0 10px 0;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content */
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 10px;
+        }
+
+        /* Post content styles */
+        .post-content {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px 10px;
+        }
+
+        .post-content h1 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-content h2 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            font-weight: normal;
+        }
+
+        .post-content h3 {
+            font-size: 1rem;
+            margin: 15px 0 10px 0;
+            font-weight: normal;
+        }
+
+        .post-content p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .post-content ul {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            padding-left: 20px;
+        }
+
+        .post-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Override for direct h1, h2, h3 elements */
+        h1 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            font-weight: normal;
+        }
+
+        h3 {
+            font-size: 1rem;
+            margin: 15px 0 10px 0;
+            font-weight: normal;
+        }
+
+        p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Post meta styles */
+        .post-meta {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+
+        /* Code styles */
+        pre {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+        }
+
+        /* Syntax highlighting */
+        .keyword { color: #000; font-weight: bold; }
+        .type { color: #666; font-style: italic; }
+        .function { color: #333; text-decoration: underline; }
+        .comment { color: #888; font-style: italic; }
+        .number { color: #444; }
+        .operator { color: #000; }
+        .variable { color: #222; }
+
+        code {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 2px 4px;
+            font-size: 0.85em;
+        }
+
+        /* Navigation breadcrumb */
+        .breadcrumb {
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            border-top: 1px solid #000;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.8rem;
+        }
+
+        /* Mathematical tree diagram styles */
+        .tree-diagram {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+            background: #fafafa;
+            overflow-x: auto;
+        }
+
+        .tree-math {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            min-width: 500px;
+        }
+
+        .tree-math .level {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .tree-math .level-1 { 
+            gap: 40px;
+        }
+
+        .tree-math .level-2 { 
+            gap: 8px;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+
+        .child-group {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            margin: 0 3px;
+        }
+
+        .tree-node {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f5e7;
+    font-size: 11px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.tree-connection {
+    width: 2px;
+    height: 20px;
+    background: #ccc;
+    margin: 0 auto;
+}
+
+
+        /* Example array styling */
+        .example-array {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* References styling */
+        .references {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #000;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .references a {
+            color: #000;
+            text-decoration: none;
+        }
+
+
+        .references a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            main { padding: 10px 5px; }
+            .post-content { padding: 10px 5px; }
+            header h1 { font-size: 1.5rem; }
+            .tree-node { width: 28px; height: 28px; font-size: 9px; }
+            .tree-math .level-1 { gap: 20px; }
+            .child-group { gap: 2px; margin: 0 1px; }
+        }
+
+        @media (max-width: 480px) {
+            .tree-node { width: 24px; height: 24px; font-size: 8px; }
+            .tree-math .level-1 { gap: 15px; }
+            .child-group { gap: 1px; margin: 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="post-content">
+            <h1>K-th Smallest in Lexicographical Order</h1>
+            
+            <div class="post-meta">2025-06-09</div>
+
+    <h2>Intuition</h2>
+    
+    <ul>
+        <li>We consider a small example <code>n = 20</code> to find patterns.</li>
+    <div class="example-array">
+        [1, 11, 12, 13, 14, 15, 16, 17, 18, 19, 2, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 3, 30]
+    </div>
+        <li>11 takes precedence over 2 and 20 takes precedence over 3.</li>
+        <li>Generalizing, it appears we multiply by 10 greedily and attempt to fill in the "lowest level" before backtracking.</li>
+        <li>This notion of backtracking clues us into using DFS.</li>
+        <li>A TLE solution emerges here with DFS while decrementing k until we hit the correct value.</li>
+        <li>In our depiction, we notice each level follows sequentially from the following. For the 10s, 1 handles 10 through 19, 2 handles 20 through 29, etc.</li>
+        <li>The stopping point is dictated by the node in the following call's leftmost node .</li>
+        <li>Instead of having to iterate through all the nodes we can find the difference between these values.</li>
+
+    </ul>
+
+
+    <h2>Flow</h2>
+
+    <p>Small example → tle dfs → optimized dfs by jumping over calls.</p>
+
+    <h2>Code</h2>
+
+    <pre>class Solution:
+    def findKthNumber(self, n: int, k: int) -> int:
+        curr, k = 1, k - 1  # note k - 1
+        
+        def countSteps(n, prefix1, prefix2):
+            steps = 0
+            while prefix1 <= n:
+                # get steps at this level
+                # n + 1 for inclusivity
+                steps += min(n + 1, prefix2) - prefix1  
+                # move to next level of the tree
+                prefix1 *= 10
+                prefix2 *= 10
+            return steps
+        
+        while k > 0:
+            steps = countSteps(n, curr, curr + 1)
+            # steps between current and following
+            if steps <= k:
+                curr += 1
+                k -= steps
+            else:
+                curr *= 10
+                k -= 1
+        
+        return curr</pre>
+
+    <p>Editorial code above.</p>
+
+            <div class="references">
+                <strong>References</strong><br>
+                <a href="https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/">K-th Smallest in Lexicographical Order</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -241,3 +241,12 @@ pre {
     .post-list { max-width: 90%; }
     .post-item { padding: 18px 20px; }
 }
+
+.landing-footer a {
+    color: #999;
+    text-decoration: none;
+}
+
+.landing-footer a:hover {
+    text-decoration: underline;
+}

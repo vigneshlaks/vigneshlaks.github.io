@@ -458,6 +458,16 @@ button:hover {
     background: #f0f0f0;
 }
 
+.references a {
+    color: #000;
+    text-decoration: none;
+}
+
+
+.references a:hover {
+    text-decoration: underline;
+}
+
 /* Responsive design for visualizations */
 @media (max-width: 768px) {
     .memory-cell { width: 20px; height: 20px; font-size: 7px; }

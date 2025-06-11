@@ -30,16 +30,18 @@
     <meta property="article:tag" content="Parallel Computing">
     <meta property="article:tag" content="Performance Optimization">
     
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="parallel-reduction.css">
+    
     <script src="./script.js"></script>
+    <link rel="stylesheet" href="parallel-reduction.css">
+    <link rel="stylesheet" href="../../css/styles2.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 
 <body>
     <h1>Optimizing Parallel Reduction</h1>
 
     <h2>Introduction</h2>
-    <p>This is an adaptation of my notes to "Optimizing Parallel Reduction in CUDA" by Mark Harris (found in references).</p>
+    <p>This is an adaptation of my notes to "Optimizing Parallel Reduction in CUDA" by Mark Harris<sup><a href="#ref1" id="note1">1</a></sup>.</p>
     <p>With reduction we move outside the realm of pointwise operations. Our final answer depends on how the array values intermingle with one another. We are posed with the questions, how do we allow the thread blocks to interact?</p>
     <div class="visualization">
         <div class="step-info">
@@ -300,6 +302,8 @@
 
     <p>We see the recurring theme of accessing information sequentially.</p>
 
+    <p>Addendum: Optimizing GPU kernels are often <em>memory-bound</em> problems. Mark's solution is nearly optimal in terms of throughput, which roughly translates to being nearly optimal period. It's worth noting, there are more recent parallel algorithm advancements offering incremental improvements<sup><a href="#ref2" id="note2">2</a></sup>.</p>
+
     <h2>Analysis</h2>
         
         <div class="visualization">
@@ -366,5 +370,6 @@
 
     <p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #000; font-size: 0.8rem; text-align: center;">
         <strong>References</strong><br>
-        https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf
+        <a href="#note1" id="ref1">[1] - </a>  <a href="https://developer.download.nvidia.com/assets/cuda/files/reduction.pdf" target="_blank">Harris, Mark. "Optimizing Parallel Reduction in CUDA." </a><br>
+        <a href="#note2" id="ref2">[2] - </a>  <a href="https://gist.github.com/troelsy/fff6aac2226e080dcebf05531a11d44e" target="_blank">Warp Shuffle Comparison</a>
     </p>

@@ -1,0 +1,76 @@
+/* Tesla Architecture Diagram */
+.tesla-diagram {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 0;
+    font-family: 'Palatino', serif;
+    max-width: 320px;
+    margin: 20px auto;
+}
+
+.tesla-diagram .scheduler-section {
+    background: #f0f0f0;
+    border-bottom: 2px solid #000;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+.tesla-diagram .register-section {
+    background: #f5f5f5;
+    border-bottom: 2px solid #000;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+.tesla-diagram .processing-section {
+    display: flex;
+    border-bottom: 2px solid #000;
+    min-height: 160px;
+}
+
+.tesla-diagram .cores-section {
+    background: #f8f8f8;
+    flex: 2;
+    border-right: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.tesla-diagram .cores-label {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: normal;
+    background: #f8f8f8;
+    color: #000;
+}
+
+.tesla-diagram .sfu-section {
+    background: #f6f6f6;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.tesla-diagram .sfu-label {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: normal;
+    background: #f6f6f6;
+    color: #000;
+}
+
+.tesla-diagram .memory-section {
+    background: #f2f2f2;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: normal;
+}

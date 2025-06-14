@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Basic page info -->
+    <title>Contextualizing GPU Programming</title>
+    <meta name="description" content="High signal writings on GPU programming concepts, focusing on hardware evolution and CUDA programming fundamentals.">
+    
+    <!-- Open Graph meta tags for social media previews -->
+    <meta property="og:title" content="Contextualizing GPU Programming">
+    <meta property="og:description" content="Learn GPU programming concepts through hardware evolution and CUDA fundamentals.">
+    <meta property="og:image" content="https://vigneshlaksh.com/images/gpu-context-preview.png">
+    <meta property="og:url" content="https://vigneshlaksh.com/gpu-context">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="GPU Programming">
+    
+    <!-- Twitter Card meta tags (optional but recommended) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contextualizing GPU Programming">
+    <meta name="twitter:description" content="Learn GPU programming concepts through hardware evolution and CUDA fundamentals.">
+    <meta name="twitter:image" content="https://vigneshlaksh.com/images/gpu-context-preview.png">
+    
+    <!-- Article-specific meta tags -->
+    <meta property="article:author" content="Vignesh">
+    <meta property="article:published_time" content="2025-06-08">
+    <meta property="article:section" content="GPU Programming">
+    <meta property="article:tag" content="CUDA">
+    <meta property="article:tag" content="Hardware Architecture">
+    <meta property="article:tag" content="GPU History">
+    
+    <link rel="stylesheet" href="gpu-context.css">
+    <link rel="stylesheet" href="../../css/styles2.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+</head>
+
+<body>
+    <h1>Contextualizing GPU Programming</h1>
+
+    <h2>Introduction</h2>
+    <p>The terms defined during the onset of the GPU programming journey are a bit dull. Instead of throwing term after term at you, we'll define the terms as they come up naturally during our breakneck history lesson of the heart of GPUs, Streaming Multiprocessors (SMs).</p>
+
+    <p>Much of the traditional machinery of these diagrams are thrown out. Our motivation for peering at the hardware is to continuously reinforce the core concepts by revisiting them in different ways. For a more comprehensive understanding, see the references.</p>
+
+    <h2>Context</h2>
+    <p>Up to 2006, the graphics card design separated tasks into hardware sections representing disjoint parts of the video rendering process. Nvidia engineers would have to guess how much of a GPU die to allocate to each section. This meant predicting what developers would create with software and in turn the demand placed on each section of the hardware.</p>
+
+    <p>This inflexibility alongside the guesswork lead to the overhaul of the design.</p>
+
+    
+
+    <h3>Tesla - 2006</h3>
+    <div class="tesla-diagram">
+        <div class="scheduler-section">
+            Warp Scheduler
+        </div>
+        <div class="register-section">
+            Register File
+        </div>
+        <div class="processing-section">
+            <div class="cores-section">
+                <div class="cores-label">Core x8</div>
+            </div>
+            <div class="sfu-section">
+                <div class="sfu-label">SFU x2</div>
+            </div>
+        </div>
+        <div class="memory-section">
+            Shared Memory
+        </div>
+    </div>
+    <p>Streaming Multiprocessors replaced all these units and with its advent brought:</p>
+    <ul>
+        <li><i>Cores</i> - Basic processing units of the GPU.</li>
+        <li><i>Warps</i> - groups of 32 threads.</li>
+        <li><i>Warp Scheduler</i> - mechanism making requests amongst other things and implementing <i>SIMT</i>. More later.</li>
+        <li><i>Special function units (SFUs)</i> are designed to handle complex calculations like sin, cos, etc. They won't be referenced in diagrams moving forward.</li>
+        <li><i>Register files</i> are a specific thread's storage.</li>
+    </ul>
+
+    <p>Contrasting CPUs, GPUs elect to improve computation speed and incur memory overhead, as a tradeoff. In other words, the bottleneck is usually moving information around more than it is working with that information. Cleverly, threads in need of memory make requests in parallel to greatly reduce the overhead, known as "saturating the memory bus".</p>
+
+    <h3>Fermi, Kepler, Maxwell, Pascal - 2010 - 2016</h3>
+    <p>In 2010, Moore's Law allowed the compression of more cores onto the same hardware. This allowed for 4x throughput moving from 4 cores to 16 cores.</p>
+
+    <p>Fermi SMs used dual warp schedulers, allowing us to request for data and "saturate" faster.</p>
+
+    <p>In 2012, Kepler prioritized energy efficiency. The speed of the core clocks is lowered (meaning less cycles are performed). Transistors became smaller once more, helping compensate. 4 warp schedulers keep our threads even busier.</p>
+
+    <p>In 2014, Maxwell kept energy efficiency the focus. In a dramatic turn of events, the number of cores were reduced and simplifying design became the focus primarily for energy savings.</p>
+
+    <p>In 2016, Pascal introduced even smaller transistors. More Gflops and more cores equals more throughput.</p>
+
+    <p>As we've seen (and continue to see), GPUs improved as these numbers got bigger alongside core density increasing. Intuitively, the faster you can cycle/iterate (clock frequency) and the more things are cycling (cores) the more computations you can perform.</p>
+
+    <p>Gflops (Giga floating-point operations per second) encapsulates this idea well.</p>
+
+    <h3>Volta, Turing - 2017, 2018</h3>
+    <p>Instruction Pointers within warps could now also be individually assigned leading to less issues in throughput.</p>
+
+    <p>Specialization emerged once more in the form of tensor cores, motivated by the increasing demands from ml workloads.</p>
+
+    <h3>Ampere - 2020</h3>
+    <ul>
+        <li><strong>Warp Scheduler</strong> - mechanism making requests amongst other things and implementing SIMT. More later.</li>
+        <li><strong>Special function units (SFUs)</strong> are designed to handle complex calculations like sin, cos, etc. They won't be referenced in diagrams moving forward.</li>
+        <li><strong>Register files</strong> are a specific thread's storage.</li>
+    </ul>
+
+    <p>Ampere introduced third generation tensor cores with fine-grained structured sparsity support. TensorFloat-32 (TF32) enabled automatic acceleration without code changes. An emphasis was placed on the improved performance of sparse matrices and offers a nice bridge between deep learning and gpu programming concepts*.</p>
+
+    <h3>Thoughts</h3>
+    <p>Loosely, reductions in transistor size caused more cores per SM while bouncing between optimizing for compute and energy usage. As this hit a stagnation point and the computation driven by ml/deep learning workloads continued to grow, specialization emerged once more.</p>
+
+    <p>Tensor cores remain quite general however and can perform....</p>
+    <p><em>ELABORATE WITH INSIGHT HERE.</em></p>
+
+    <h2>Bringing Things Together</h2>
+    <p>We'll now begin bridging ourselves to software through the CUDA programming model<sup><a href="#ref1" id="note1">1</a></sup>.</p>
+
+    <p>Blocks are specified in such a way that communication is limited. These blocks are hardware agnostic and can fit depending on the amount of SMs at our disposal to use.</p>
+
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title">CUDA Block Mapping Placeholder</div>
+            <div class="step-description">
+                Mappings between CUDA software and hardware like one below. Make a minimal version.
+            </div>
+        </div>
+    </div>
+
+    <p>CUDA is used through languages like C++, this is compiled to ptx and eventually the hardware assembly language, SASS. If you were to burn any image into your head from this writing it'd be the following:</p>
+
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title">CUDA Software-Hardware Mapping Placeholder</div>
+            <div class="step-description">
+                Mappings between CUDA software and hardware like one below. Make a minimal version.
+            </div>
+        </div>
+    </div>
+
+    <p>In hardware terms, we iteratively send our information from CPU to GPU to be handled in parallel by our cores. In software terms, we allocate memory on our <em>host</em> and <em>device</em>, launch kernel instances to be run in parallel on our threads.</p>
+
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title">Multiple Blocks on SMs</div>
+            <div class="step-description">
+                Multiple blocks running on each SM
+            </div>
+        </div>
+        <!-- Placeholder for SM diagram showing multiple blocks -->
+    </div>
+
+    <p>Each SM computes one kernel instance and if too many instances are launched information is placed in a queue.</p>
+
+    <h2>Concreting Everything</h2>
+    <p><code>kernel&lt;&lt;&lt;gridDim, blockDim&gt;&gt;&gt;(args)</code> represents our simplest syntax for a kernel launch where <code>gridDim</code> represents the number of kernel instances referenced earlier and <code>blockDim</code> represents the number of blocks per kernel.</p>
+
+    <p>Kernel functions are written from the point of view of a thread as this is the action that will be handled by every thread. Within our kernel function we get access to a number of terms encapsulating where we are within our kernel grid.</p>
+
+    <h2>Code</h2>
+
+    <div class="visualization">
+        <div class="step-info">
+            <div class="step-title">Host Code Example</div>
+        </div>
+    </div>
+
+    <pre><span class="type">int</span> <span class="function">main</span>(<span class="type">int</span> <span class="variable">argc</span>, <span class="type">char</span> <span class="operator">**</span><span class="variable">argv</span>) {
+    <span class="type">float</span> <span class="operator">*</span><span class="variable">h_x</span>, <span class="operator">*</span><span class="variable">d_x</span>;        <span class="comment">// h=host, d=device</span>
+    <span class="type">int</span>   <span class="variable">nblocks</span><span class="operator">=</span><span class="number">2</span>, <span class="variable">nthreads</span><span class="operator">=</span><span class="number">8</span>, <span class="variable">nsize</span><span class="operator">=</span><span class="number">2</span><span class="operator">*</span><span class="number">8</span>;
+
+    <span class="variable">h_x</span> <span class="operator">=</span> (<span class="type">float</span> <span class="operator">*</span>)<span class="function">malloc</span>(<span class="variable">nsize</span><span class="operator">*</span><span class="function">sizeof</span>(<span class="type">float</span>));
+    <span class="function">cudaMalloc</span>((<span class="type">void</span> <span class="operator">**</span>)<span class="operator">&</span><span class="variable">d_x</span>, <span class="variable">nsize</span><span class="operator">*</span><span class="function">sizeof</span>(<span class="type">float</span>));
+
+    <span class="variable">my_first_kernel</span><span class="operator">&lt;&lt;&lt;</span><span class="variable">nblocks</span>, <span class="variable">nthreads</span><span class="operator">&gt;&gt;&gt;</span>(<span class="variable">d_x</span>);
+
+    <span class="function">cudaMemcpy</span>(<span class="variable">h_x</span>, <span class="variable">d_x</span>, <span class="variable">nsize</span><span class="operator">*</span><span class="function">sizeof</span>(<span class="type">float</span>),
+                <span class="variable">cudaMemcpyDeviceToHost</span>);
+
+    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">n</span><span class="operator">=</span><span class="number">0</span>; <span class="variable">n</span><span class="operator">&lt;</span><span class="variable">nsize</span>; <span class="variable">n</span><span class="operator">++</span>)
+        <span class="function">printf</span>(<span class="string">" n, x = %d %f \n"</span>, <span class="variable">n</span>, <span class="variable">h_x</span>[<span class="variable">n</span>]);
+
+    <span class="function">cudaFree</span>(<span class="variable">d_x</span>); <span class="function">free</span>(<span class="variable">h_x</span>);
+}</pre>
+
+    <h2>Use</h2>
+    <p>*The unique information of 2020 onwards related to deep learning and matrix computations will be saved for another writing</p>
+
+    <h2>Info to integrate</h2>
+    <ul>
+        <li><a href="https://www.nvidia.com/en-us/data-center/ampere-architecture/" target="_blank">https://www.nvidia.com/en-us/data-center/ampere-architecture/</a></li>
+        <li><a href="https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/" target="_blank">https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/</a></li>
+        <li><a href="https://nvdam.widen.net/s/xqt56dflgh/nvidia-blackwell-architecture-technical-brief" target="_blank">https://nvdam.widen.net/s/xqt56dflgh/nvidia-blackwell-architecture-technical-brief</a></li>
+    </ul>
+
+    <p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #000; font-size: 0.8rem; text-align: center;">
+        <strong>References</strong><br>
+        <a href="#note1" id="ref1">[1]</a> - <a href="https://fabiensanglard.net/cuda/" target="_blank">https://fabiensanglard.net/cuda/</a><br>
+        [2] - <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf</a><br>
+        [3] - <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf</a> page 11<br>
+        <a href="https://modal.com/gpu-glossary" target="_blank">https://modal.com/gpu-glossary</a><br>
+        <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf</a>
+    </p>
+</body>
+</html>

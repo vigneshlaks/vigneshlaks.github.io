@@ -1,3 +1,97 @@
+/* Base styles */
+body {
+    font-family: 'Palatino', serif;
+    background: #fff;
+    color: #000;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+/* Header styles */
+h1 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.1rem;
+    margin: 20px 0 10px 0;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 1rem;
+    margin: 15px 0 10px 0;
+    font-weight: normal;
+}
+
+p {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+ul {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Links */
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+sup {
+    font-size: 0.65em;
+    vertical-align: super;
+    line-height: 0;
+    font-weight: normal;
+}
+
+/* Code styles */
+pre {
+    background: #fff;
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 15px 0;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    background: #f5f5f5;
+    padding: 2px 4px;
+    font-size: 0.85em;
+}
+
+/* Syntax highlighting */
+.keyword { color: #000; font-weight: bold; }
+.type { color: #666; font-style: italic; }
+.function { color: #333; text-decoration: underline; }
+.comment { color: #888; font-style: italic; }
+.number { color: #444; }
+.operator { color: #000; }
+.variable { color: #222; }
+.string { color: #555; }
+
 /* Tesla Architecture Diagram */
 .tesla-diagram {
     border: 2px solid #000;
@@ -73,4 +167,485 @@
     text-align: center;
     font-size: 0.75rem;
     font-weight: normal;
+}
+
+/* Timeline Layout */
+.timeline-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.generation {
+    flex: 1;
+    border: 1px solid #000;
+    background: #fff;
+    padding: 0;
+}
+
+.gen-header {
+    background: #f0f0f0;
+    padding: 6px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: normal;
+    border-bottom: 1px solid #000;
+}
+
+.gen-scheduler {
+    background: #f3f3f3;
+    padding: 4px;
+    text-align: center;
+    font-size: 0.6rem;
+    border-bottom: 1px solid #000;
+}
+
+.gen-cores {
+    background: #f5f5f5;
+    padding: 4px;
+    text-align: center;
+    font-size: 0.55rem;
+    font-style: italic;
+}
+
+/* Volta/Turing Stacked Architecture Diagram */
+.volta-diagram {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 0;
+    font-family: 'Palatino', serif;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.volta-diagram .scheduler-section {
+    background: #f0f0f0;
+    border-bottom: 2px solid #000;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+.volta-diagram .register-section {
+    background: #f5f5f5;
+    border-bottom: 2px solid #000;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+.volta-diagram .specialized-cores {
+    border-bottom: 2px solid #000;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: normal;
+}
+
+.volta-diagram .cuda-cores {
+    background: #f8f8f8;
+    margin: 4px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.volta-diagram .tensor-cores {
+    background: #f3f3f3;
+    margin: 4px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.volta-diagram .rt-cores {
+    background: #f6f6f6;
+    margin: 4px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.volta-diagram .memory-section {
+    background: #f2f2f2;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+/* CUDA Minimal Execution Flow */
+.cuda-minimal {
+    max-width: 500px;
+    margin: 20px auto;
+    font-family: 'Palatino', serif;
+}
+
+.execution-flow {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 0;
+}
+
+.program-blocks {
+    background: #f8f8f8;
+    border-bottom: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+
+.blocks-grid {
+    display: inline-block;
+    border: 1px dashed #666;
+    padding: 8px;
+    background: #fff;
+    text-align: center;
+}
+
+.blocks-row {
+    display: flex;
+    gap: 4px;
+    margin: 2px 0;
+    justify-content: center;
+}
+
+.mini-block {
+    background: #ccc;
+    border: 1px solid #000;
+    width: 20px;
+    height: 15px;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.distribution-arrow {
+    text-align: center;
+    padding: 8px;
+    font-size: 0.7rem;
+    background: #f0f0f0;
+    border-bottom: 1px solid #000;
+}
+
+.gpu-configs {
+    display: flex;
+}
+
+.config {
+    flex: 1;
+    border-right: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+
+.config:last-child {
+    border-right: none;
+}
+
+.config-title {
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+.mini-assigned {
+    background: #aaa;
+    border: 1px solid #000;
+    width: 15px;
+    height: 12px;
+    font-size: 0.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sm-detailed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.sm-container {
+    border: 1px solid #000;
+    background: #f5f5f5;
+    padding: 6px;
+    text-align: center;
+    min-width: 80px;
+}
+
+.sm-header {
+    font-size: 0.6rem;
+    font-weight: normal;
+    background: #ddd;
+    border: 1px solid #000;
+    padding: 2px 4px;
+    margin-bottom: 4px;
+}
+
+.sm-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    justify-content: center;
+}
+
+/* Fixed Mapping Diagram */
+.fixed-mapping {
+    display: flex;
+    border: 2px solid #000;
+    background: #fff;
+    margin: 20px 0;
+    height: 500px;
+    font-family: 'Palatino', serif;
+}
+
+.software-side, .hardware-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.software-side {
+    border-right: 2px solid #000;
+    background: #f8f8f8;
+}
+
+.hardware-side {
+    background: #f5f5f5;
+}
+
+.side-title {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #000;
+}
+
+.aligned-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.level-title {
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.visual-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Thread and Core visuals */
+.thread-visual {
+    width: 12px;
+    height: 30px;
+    background: #ccc;
+    border: 1px solid #000;
+}
+
+.core-visual {
+    width: 15px;
+    height: 30px;
+    background: #b8b8b8;
+    border: 1px solid #000;
+}
+
+/* Block and SM visuals */
+.block-container {
+    border: 1px solid #000;
+    background: #e0e0e0;
+    padding: 8px;
+    text-align: center;
+    width: 120px;
+}
+
+.sm-container {
+    border: 1px solid #000;
+    background: #e8e8e8;
+    padding: 8px;
+    text-align: center;
+    width: 120px;
+}
+
+.memory-bar {
+    background: #d5d5d5;
+    border: 1px solid #000;
+    padding: 4px;
+    margin: 4px 0;
+    font-size: 0.6rem;
+    text-align: center;
+    width: 100px;
+}
+
+.cache-bar {
+    background: #d8d8d8;
+    border: 1px solid #000;
+    padding: 4px;
+    margin: 4px 0;
+    font-size: 0.6rem;
+    text-align: center;
+    width: 100px;
+}
+
+.units-row {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    margin: 4px 0;
+}
+
+.mini-unit {
+    width: 12px;
+    height: 16px;
+    background: #aaa;
+    border: 1px solid #000;
+}
+
+/* Grid and GPU visuals */
+.grid-container {
+    border: 1px dashed #666;
+    background: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    width: 140px;
+}
+
+.gpu-container {
+    border: 1px dashed #666;
+    background: #f3f3f3;
+    padding: 10px;
+    text-align: center;
+    width: 140px;
+}
+
+.blocks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin: 6px 0;
+}
+
+.sms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin: 6px 0;
+}
+
+.mini-sm {
+    width: 20px;
+    height: 16px;
+    background: #c0c0c0;
+    border: 1px solid #000;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-memory {
+    background: #c8c8c8;
+    border: 1px solid #000;
+    padding: 6px;
+    margin: 6px 0;
+    font-size: 0.65rem;
+    text-align: center;
+    width: 120px;
+}
+
+/* Visualization section */
+.visualization {
+    margin: 20px 0;
+}
+
+.step-info {
+    background: #f5f5f5;
+    border: 1px solid #000;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.step-title {
+    font-size: 0.8rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body { 
+        padding: 10px 5px; 
+    }
+    
+    .timeline-layout {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .fixed-mapping {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .software-side {
+        border-right: none;
+        border-bottom: 2px solid #000;
+    }
+    
+    .cuda-minimal {
+        max-width: 100%;
+    }
+    
+    .gpu-configs {
+        flex-direction: column;
+    }
+    
+    .config {
+        border-right: none;
+        border-bottom: 1px solid #000;
+    }
+    
+    .config:last-child {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { 
+        font-size: 1.2rem; 
+    }
+    
+    .tesla-diagram,
+    .volta-diagram {
+        max-width: 100%;
+    }
+    
+    .generation {
+        min-width: 80px;
+    }
+    
+    .gen-header {
+        font-size: 0.6rem;
+    }
+    
+    .gen-scheduler,
+    .gen-cores {
+        font-size: 0.5rem;
+    }
 }

@@ -1,4 +1,4 @@
-/* Base styles */
+/* GPU context - Minimal Monochrome */
 body {
     font-family: 'Palatino', serif;
     background: #fff;
@@ -77,20 +77,21 @@ pre {
 
 code {
     font-family: 'Courier New', monospace;
-    background: #f5f5f5;
+    background: #fff;
+    border: 1px solid #000;
     padding: 2px 4px;
     font-size: 0.85em;
 }
 
 /* Syntax highlighting */
 .keyword { color: #000; font-weight: bold; }
-.type { color: #666; font-style: italic; }
-.function { color: #333; text-decoration: underline; }
-.comment { color: #888; font-style: italic; }
-.number { color: #444; }
+.type { color: #000; font-style: italic; }
+.function { color: #000; text-decoration: underline; }
+.comment { color: #000; font-style: italic; }
+.number { color: #000; }
 .operator { color: #000; }
-.variable { color: #222; }
-.string { color: #555; }
+.variable { color: #000; }
+.string { color: #000; }
 
 /* Tesla Architecture Diagram */
 .tesla-diagram {
@@ -103,8 +104,8 @@ code {
 }
 
 .tesla-diagram .scheduler-section {
-    background: #f0f0f0;
-    border-bottom: 2px solid #000;
+    background: #fff;
+    border-bottom: 1px solid #000;
     padding: 8px;
     text-align: center;
     font-size: 0.75rem;
@@ -112,8 +113,8 @@ code {
 }
 
 .tesla-diagram .register-section {
-    background: #f5f5f5;
-    border-bottom: 2px solid #000;
+    background: #fff;
+    border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
     font-size: 0.75rem;
@@ -122,14 +123,14 @@ code {
 
 .tesla-diagram .processing-section {
     display: flex;
-    border-bottom: 2px solid #000;
+    border-bottom: 1px solid #000;
     min-height: 160px;
 }
 
 .tesla-diagram .cores-section {
-    background: #f8f8f8;
+    background: #fff;
     flex: 2;
-    border-right: 2px solid #000;
+    border-right: 1px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,12 +141,12 @@ code {
     text-align: center;
     font-size: 0.7rem;
     font-weight: normal;
-    background: #f8f8f8;
+    background: #fff;
     color: #000;
 }
 
 .tesla-diagram .sfu-section {
-    background: #f6f6f6;
+    background: #fff;
     flex: 1;
     display: flex;
     align-items: center;
@@ -157,12 +158,12 @@ code {
     text-align: center;
     font-size: 0.7rem;
     font-weight: normal;
-    background: #f6f6f6;
+    background: #fff;
     color: #000;
 }
 
 .tesla-diagram .memory-section {
-    background: #f2f2f2;
+    background: #fff;
     padding: 8px;
     text-align: center;
     font-size: 0.75rem;
@@ -186,7 +187,7 @@ code {
 }
 
 .gen-header {
-    background: #f0f0f0;
+    background: #fff;
     padding: 6px;
     text-align: center;
     font-size: 0.7rem;
@@ -195,7 +196,7 @@ code {
 }
 
 .gen-scheduler {
-    background: #f3f3f3;
+    background: #fff;
     padding: 4px;
     text-align: center;
     font-size: 0.6rem;
@@ -203,7 +204,7 @@ code {
 }
 
 .gen-cores {
-    background: #f5f5f5;
+    background: #fff;
     padding: 4px;
     text-align: center;
     font-size: 0.55rem;
@@ -221,8 +222,8 @@ code {
 }
 
 .volta-diagram .scheduler-section {
-    background: #f0f0f0;
-    border-bottom: 2px solid #000;
+    background: #fff;
+    border-bottom: 1px solid #000;
     padding: 8px;
     text-align: center;
     font-size: 0.75rem;
@@ -230,8 +231,8 @@ code {
 }
 
 .volta-diagram .register-section {
-    background: #f5f5f5;
-    border-bottom: 2px solid #000;
+    background: #fff;
+    border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
     font-size: 0.75rem;
@@ -239,7 +240,7 @@ code {
 }
 
 .volta-diagram .specialized-cores {
-    border-bottom: 2px solid #000;
+    border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
     font-size: 0.7rem;
@@ -247,28 +248,28 @@ code {
 }
 
 .volta-diagram .cuda-cores {
-    background: #f8f8f8;
+    background: #fff;
     margin: 4px 0;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
 }
 
 .volta-diagram .tensor-cores {
-    background: #f3f3f3;
+    background: #fff;
     margin: 4px 0;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
 }
 
 .volta-diagram .rt-cores {
-    background: #f6f6f6;
+    background: #fff;
     margin: 4px 0;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
 }
 
 .volta-diagram .memory-section {
-    background: #f2f2f2;
+    background: #fff;
     padding: 8px;
     text-align: center;
     font-size: 0.75rem;
@@ -289,7 +290,7 @@ code {
 }
 
 .program-blocks {
-    background: #f8f8f8;
+    background: #fff;
     border-bottom: 1px solid #000;
     padding: 10px;
     text-align: center;
@@ -297,7 +298,7 @@ code {
 
 .blocks-grid {
     display: inline-block;
-    border: 1px dashed #666;
+    border: 1px dashed #000;
     padding: 8px;
     background: #fff;
     text-align: center;
@@ -311,7 +312,7 @@ code {
 }
 
 .mini-block {
-    background: #ccc;
+    background: #fff;
     border: 1px solid #000;
     width: 20px;
     height: 15px;
@@ -325,7 +326,7 @@ code {
     text-align: center;
     padding: 8px;
     font-size: 0.7rem;
-    background: #f0f0f0;
+    background: #fff;
     border-bottom: 1px solid #000;
 }
 
@@ -351,7 +352,7 @@ code {
 }
 
 .mini-assigned {
-    background: #aaa;
+    background: #fff;
     border: 1px solid #000;
     width: 15px;
     height: 12px;
@@ -370,7 +371,7 @@ code {
 
 .sm-container {
     border: 1px solid #000;
-    background: #f5f5f5;
+    background: #fff;
     padding: 6px;
     text-align: center;
     min-width: 80px;
@@ -379,7 +380,7 @@ code {
 .sm-header {
     font-size: 0.6rem;
     font-weight: normal;
-    background: #ddd;
+    background: #fff;
     border: 1px solid #000;
     padding: 2px 4px;
     margin-bottom: 4px;
@@ -412,11 +413,11 @@ code {
 
 .software-side {
     border-right: 2px solid #000;
-    background: #f8f8f8;
+    background: #fff;
 }
 
 .hardware-side {
-    background: #f5f5f5;
+    background: #fff;
 }
 
 .side-title {
@@ -455,21 +456,21 @@ code {
 .thread-visual {
     width: 12px;
     height: 30px;
-    background: #ccc;
+    background: #fff;
     border: 1px solid #000;
 }
 
 .core-visual {
     width: 15px;
     height: 30px;
-    background: #b8b8b8;
+    background: #fff;
     border: 1px solid #000;
 }
 
 /* Block and SM visuals */
 .block-container {
     border: 1px solid #000;
-    background: #e0e0e0;
+    background: #fff;
     padding: 8px;
     text-align: center;
     width: 120px;
@@ -477,14 +478,14 @@ code {
 
 .sm-container {
     border: 1px solid #000;
-    background: #e8e8e8;
+    background: #fff;
     padding: 8px;
     text-align: center;
     width: 120px;
 }
 
 .memory-bar {
-    background: #d5d5d5;
+    background: #fff;
     border: 1px solid #000;
     padding: 4px;
     margin: 4px 0;
@@ -494,7 +495,7 @@ code {
 }
 
 .cache-bar {
-    background: #d8d8d8;
+    background: #fff;
     border: 1px solid #000;
     padding: 4px;
     margin: 4px 0;
@@ -513,22 +514,22 @@ code {
 .mini-unit {
     width: 12px;
     height: 16px;
-    background: #aaa;
+    background: #fff;
     border: 1px solid #000;
 }
 
 /* Grid and GPU visuals */
 .grid-container {
-    border: 1px dashed #666;
-    background: #f0f0f0;
+    border: 1px dashed #000;
+    background: #fff;
     padding: 10px;
     text-align: center;
     width: 140px;
 }
 
 .gpu-container {
-    border: 1px dashed #666;
-    background: #f3f3f3;
+    border: 1px dashed #000;
+    background: #fff;
     padding: 10px;
     text-align: center;
     width: 140px;
@@ -551,7 +552,7 @@ code {
 .mini-sm {
     width: 20px;
     height: 16px;
-    background: #c0c0c0;
+    background: #fff;
     border: 1px solid #000;
     font-size: 0.5rem;
     display: flex;
@@ -560,7 +561,7 @@ code {
 }
 
 .bottom-memory {
-    background: #c8c8c8;
+    background: #fff;
     border: 1px solid #000;
     padding: 6px;
     margin: 6px 0;
@@ -575,7 +576,7 @@ code {
 }
 
 .step-info {
-    background: #f5f5f5;
+    background: #fff;
     border: 1px solid #000;
     padding: 10px;
     margin-bottom: 10px;

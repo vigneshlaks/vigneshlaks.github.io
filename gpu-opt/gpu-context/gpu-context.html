@@ -31,8 +31,6 @@
     <meta property="article:tag" content="GPU History">
     
     <link rel="stylesheet" href="gpu-context.css">
-    <link rel="stylesheet" href="../../css/styles2.css">
-    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 
 <body>
@@ -44,13 +42,11 @@
     <p>We will ground ourselves on the main pieces of hardware and how they change during our breakneck history recap of the heart of GPUs, Streaming Multiprocessors (SMs). Much of the traditional machinery of these <em>die</em>agrams are thrown out. For a more comprehensive understanding, see the references.</p>
 
     <h2>Context</h2>
-    <p>Up to 2006, the graphics card design separated tasks into hardware sections representing disjoint parts of the video rendering process. Nvidia engineers would have to guess how much of a <em>GPU die</em> to allocate to each section. </p>
+    <p>Up to 2006, the graphics card design separated tasks into hardware sections representing disjoint parts of the video rendering process. Nvidia engineers would have to guess how much of a <em>GPU die</em> to allocate to each section.</p>
         
     <p>This meant predicting what developers would create with software and in turn the demand placed on each section of the hardware.</p>
 
     <p>This inflexibility alongside the guesswork lead to the overhaul of the design.</p>
-
-    
 
     <h3>Tesla - 2006</h3>
     <div class="tesla-diagram">
@@ -85,27 +81,27 @@
 
     <h3>Fermi, Kepler, Maxwell, Pascal - 2010 - 2016</h3>
     <div class="timeline-layout">
-    <div class="generation">
-        <div class="gen-header">Fermi<br>2010</div>
-        <div class="gen-scheduler">2 Warp Schedulers</div>
-        <div class="gen-cores">Core x32</div>
+        <div class="generation">
+            <div class="gen-header">Fermi<br>2010</div>
+            <div class="gen-scheduler">2 Warp Schedulers</div>
+            <div class="gen-cores">Core x32</div>
+        </div>
+        <div class="generation">
+            <div class="gen-header">Kepler<br>2012</div>
+            <div class="gen-scheduler">4 Warp Schedulers</div>
+            <div class="gen-cores">Core x192</div>
+        </div>
+        <div class="generation">
+            <div class="gen-header">Maxwell<br>2014</div>
+            <div class="gen-scheduler">4 Warp Schedulers</div>
+            <div class="gen-cores">Core x128</div>
+        </div>
+        <div class="generation">
+            <div class="gen-header">Pascal<br>2016</div>
+            <div class="gen-scheduler">4 Warp Schedulers</div>
+            <div class="gen-cores">Core x128</div>
+        </div>
     </div>
-    <div class="generation">
-        <div class="gen-header">Kepler<br>2012</div>
-        <div class="gen-scheduler">4 Warp Schedulers</div>
-        <div class="gen-cores">Core x192</div>
-    </div>
-    <div class="generation">
-        <div class="gen-header">Maxwell<br>2014</div>
-        <div class="gen-scheduler">4 Warp Schedulers</div>
-        <div class="gen-cores">Core x128</div>
-    </div>
-    <div class="generation">
-        <div class="gen-header">Pascal<br>2016</div>
-        <div class="gen-scheduler">4 Warp Schedulers</div>
-        <div class="gen-cores">Core x128</div>
-    </div>
-</div>
     
     <p>In 2010, <em>Moore's Law</em> allowed the compression of more cores onto Fermi. The SMs dual warp schedulers, allowing us to request and "saturate" faster.</p>
 
@@ -121,20 +117,20 @@
 
     <h3>Volta, Turing - 2017, 2018</h3>
     <div class="volta-diagram">
-    <div class="scheduler-section">
-        Warp Schedulers x4
+        <div class="scheduler-section">
+            Warp Schedulers x4
+        </div>
+        <div class="register-section">
+            Register File
+        </div>
+        <div class="specialized-cores">
+            <div class="cuda-cores">CUDA Cores x64</div>
+            <div class="tensor-cores">Tensor Cores x8</div>
+        </div>
+        <div class="memory-section">
+            Shared Memory
+        </div>
     </div>
-    <div class="register-section">
-        Register File
-    </div>
-    <div class="specialized-cores">
-        <div class="cuda-cores">CUDA Cores x64</div>
-        <div class="tensor-cores">Tensor Cores x8</div>
-    </div>
-    <div class="memory-section">
-        Shared Memory
-    </div>
-</div>
 
     <p>Specialization emerged once more in the form of tensor cores, motivated by the increasing demands from ml workloads.</p>
 
@@ -150,183 +146,174 @@
     <p>CUDA is compiled to <em>PTX</em> and eventually the hardware assembly language, <em>SASS</em>.</p>
     <p>Blocks are specified in such a way that communication is limited, allowing them to be hardware agnostic and fit differently depending on the amount of SMs at our disposal.</p>
     
-<body>
-    <div style="font-family: 'Palatino', serif; background: #fff; color: #000; line-height: 1.4; margin: 0; padding: 20px; max-width: 500px; margin: 0 auto;">
-        <div style="border: 2px solid #000; background: #fff; padding: 0;">
-            <div style="background: #fff; border-bottom: 1px solid #000; padding: 10px; text-align: center;">
-                <div style="font-size: 0.7rem; margin-bottom: 5px;">Program</div>
-                <div style="display: inline-block; border: 1px dashed #000; padding: 8px; background: #fff; text-align: center;">
-                    <div style="display: flex; gap: 4px; margin: 2px 0; justify-content: center;">
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">0</div>
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">1</div>
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">2</div>
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">3</div>
+    <div class="block-distribution">
+        <div class="program-section">
+            <div class="program-title">Program</div>
+            <div class="blocks-grid">
+                <div class="blocks-row">
+                    <div class="mini-block">0</div>
+                    <div class="mini-block">1</div>
+                    <div class="mini-block">2</div>
+                    <div class="mini-block">3</div>
+                </div>
+                <div class="blocks-row">
+                    <div class="mini-block">4</div>
+                    <div class="mini-block">5</div>
+                    <div class="mini-block">6</div>
+                    <div class="mini-block">7</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="arrow-section">↓ Different Hardwares ↓</div>
+        
+        <div class="gpu-comparison">
+            <div class="gpu-config">
+                <div class="config-title">GPU with 2 SMs</div>
+                <div class="sm-layout">
+                    <div class="sm-unit">
+                        <div class="sm-label">SM 0</div>
+                        <div class="sm-blocks">
+                            <div class="assigned-block">0</div>
+                            <div class="assigned-block">1</div>
+                            <div class="assigned-block">4</div>
+                            <div class="assigned-block">5</div>
+                        </div>
                     </div>
-                    <div style="display: flex; gap: 4px; margin: 2px 0; justify-content: center;">
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">4</div>
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">5</div>
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">6</div>
-                        <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">7</div>
+                    <div class="sm-unit">
+                        <div class="sm-label">SM 1</div>
+                        <div class="sm-blocks">
+                            <div class="assigned-block">2</div>
+                            <div class="assigned-block">3</div>
+                            <div class="assigned-block">6</div>
+                            <div class="assigned-block">7</div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center; padding: 8px; font-size: 0.7rem; background: #fff; border-bottom: 1px solid #000;">↓ Different Hardwares ↓</div>
-            
-            <div style="display: flex;">
-                <div style="flex: 1; border-right: 1px solid #000; padding: 10px; text-align: center;">
-                    <div style="font-size: 0.7rem; margin-bottom: 8px; font-weight: normal;">GPU with 2 SMs</div>
-                    <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
-                        <div style="border: 1px solid #000; background: #fff; padding: 6px; text-align: center; min-width: 80px;">
-                            <div style="font-size: 0.6rem; font-weight: normal; background: #fff; border: 1px solid #000; padding: 2px 4px; margin-bottom: 4px;">SM 0</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;">
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">0</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">1</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">4</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">5</div>
-                            </div>
-                        </div>
-                        <div style="border: 1px solid #000; background: #fff; padding: 6px; text-align: center; min-width: 80px;">
-                            <div style="font-size: 0.6rem; font-weight: normal; background: #fff; border: 1px solid #000; padding: 2px 4px; margin-bottom: 4px;">SM 1</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;">
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">2</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">3</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">6</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">7</div>
-                            </div>
+            <div class="gpu-config">
+                <div class="config-title">GPU with 4 SMs</div>
+                <div class="sm-layout">
+                    <div class="sm-unit">
+                        <div class="sm-label">SM 0</div>
+                        <div class="sm-blocks">
+                            <div class="assigned-block">0</div>
+                            <div class="assigned-block">4</div>
                         </div>
                     </div>
-                </div>
-                
-                <div style="flex: 1; padding: 10px; text-align: center;">
-                    <div style="font-size: 0.7rem; margin-bottom: 8px; font-weight: normal;">GPU with 4 SMs</div>
-                    <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
-                        <div style="border: 1px solid #000; background: #fff; padding: 6px; text-align: center; min-width: 80px;">
-                            <div style="font-size: 0.6rem; font-weight: normal; background: #fff; border: 1px solid #000; padding: 2px 4px; margin-bottom: 4px;">SM 0</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;">
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">0</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">4</div>
-                            </div>
+                    <div class="sm-unit">
+                        <div class="sm-label">SM 1</div>
+                        <div class="sm-blocks">
+                            <div class="assigned-block">1</div>
+                            <div class="assigned-block">5</div>
                         </div>
-                        <div style="border: 1px solid #000; background: #fff; padding: 6px; text-align: center; min-width: 80px;">
-                            <div style="font-size: 0.6rem; font-weight: normal; background: #fff; border: 1px solid #000; padding: 2px 4px; margin-bottom: 4px;">SM 1</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;">
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">1</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">5</div>
-                            </div>
+                    </div>
+                    <div class="sm-unit">
+                        <div class="sm-label">SM 2</div>
+                        <div class="sm-blocks">
+                            <div class="assigned-block">2</div>
+                            <div class="assigned-block">6</div>
                         </div>
-                        <div style="border: 1px solid #000; background: #fff; padding: 6px; text-align: center; min-width: 80px;">
-                            <div style="font-size: 0.6rem; font-weight: normal; background: #fff; border: 1px solid #000; padding: 2px 4px; margin-bottom: 4px;">SM 2</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;">
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">2</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">6</div>
-                            </div>
-                        </div>
-                        <div style="border: 1px solid #000; background: #fff; padding: 6px; text-align: center; min-width: 80px;">
-                            <div style="font-size: 0.6rem; font-weight: normal; background: #fff; border: 1px solid #000; padding: 2px 4px; margin-bottom: 4px;">SM 3</div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 2px; justify-content: center;">
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">3</div>
-                                <div style="background: #fff; border: 1px solid #000; width: 15px; height: 12px; font-size: 0.45rem; display: flex; align-items: center; justify-content: center;">7</div>
-                            </div>
+                    </div>
+                    <div class="sm-unit">
+                        <div class="sm-label">SM 3</div>
+                        <div class="sm-blocks">
+                            <div class="assigned-block">3</div>
+                            <div class="assigned-block">7</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
-    
-    <p> If you were to burn any image into your head from this writing it'd be the following: </p>
+    <p>If you were to burn any image into your head from this writing it'd be the following:</p>
 
-<div style="font-family: 'Palatino', serif; background: #fff; color: #000; line-height: 1.4; margin: 0; padding: 20px; max-width: 800px; margin: 0 auto;">
-        <div style="display: flex; border: 2px solid #000; background: #fff; margin: 20px 0; height: 500px; font-family: 'Palatino', serif;">
-            <div style="flex: 1; display: flex; flex-direction: column; padding: 20px; border-right: 2px solid #000; background: #fff;">
-                <div style="text-align: center; font-size: 0.9rem; font-weight: normal; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #000;">Software</div>
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-evenly;">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-size: 0.8rem; margin-bottom: 8px; font-weight: normal; text-align: center;">Thread</div>
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <div style="width: 12px; height: 30px; background: #fff; border: 1px solid #000;"></div>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-size: 0.8rem; margin-bottom: 8px; font-weight: normal; text-align: center;">Thread Block</div>
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <div style="border: 1px solid #000; background: #fff; padding: 8px; text-align: center; width: 120px;">
-                                <div style="background: #fff; border: 1px solid #000; padding: 4px; margin: 4px 0; font-size: 0.6rem; text-align: center; width: 100px;">Shared Memory</div>
-                                <div style="display: flex; gap: 2px; justify-content: center; margin: 4px 0;">
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-size: 0.8rem; margin-bottom: 8px; font-weight: normal; text-align: center;">Kernel Grid</div>
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <div style="border: 1px dashed #000; background: #fff; padding: 10px; text-align: center; width: 140px;">
-                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin: 6px 0;">
-                                    <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">B</div>
-                                    <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">B</div>
-                                    <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">B</div>
-                                    <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">B</div>
-                                    <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">B</div>
-                                    <div style="background: #fff; border: 1px solid #000; width: 20px; height: 15px; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">B</div>
-                                </div>
-                                <div style="background: #fff; border: 1px solid #000; padding: 6px; margin: 6px 0; font-size: 0.65rem; text-align: center; width: 120px;">Global Memory</div>
-                            </div>
+    <div class="sw-hw-mapping">
+        <div class="mapping-section">
+            <div class="section-title">Software</div>
+            
+            <div class="mapping-level">
+                <div class="level-title">Thread</div>
+                <div class="level-visual">
+                    <div class="thread-visual"></div>
+                </div>
+            </div>
+            
+            <div class="mapping-level">
+                <div class="level-title">Thread Block</div>
+                <div class="level-visual">
+                    <div class="block-visual">
+                        <div class="memory-bar">Shared Memory</div>
+                        <div class="thread-units">
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div style="flex: 1; display: flex; flex-direction: column; padding: 20px; background: #fff;">
-                <div style="text-align: center; font-size: 0.9rem; font-weight: normal; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #000;">Hardware</div>
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-evenly;">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-size: 0.8rem; margin-bottom: 8px; font-weight: normal; text-align: center;">Core</div>
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <div style="width: 15px; height: 30px; background: #fff; border: 1px solid #000;"></div>
+            <div class="mapping-level">
+                <div class="level-title">Kernel Grid</div>
+                <div class="level-visual">
+                    <div class="grid-visual">
+                        <div class="grid-blocks">
+                            <div class="grid-block">B</div>
+                            <div class="grid-block">B</div>
+                            <div class="grid-block">B</div>
+                            <div class="grid-block">B</div>
+                            <div class="grid-block">B</div>
+                            <div class="grid-block">B</div>
+                        </div>
+                        <div class="global-memory">Global Memory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mapping-section">
+            <div class="section-title">Hardware</div>
+            
+            <div class="mapping-level">
+                <div class="level-title">Core</div>
+                <div class="level-visual">
+                    <div class="thread-visual"></div>
+                </div>
+            </div>
+            
+            <div class="mapping-level">
+                <div class="level-title">Streaming Multiprocessor</div>
+                <div class="level-visual">
+                    <div class="block-visual">
+                        <div class="memory-bar">L1 Cache</div>
+                        <div class="thread-units">
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
+                            <div class="mini-thread"></div>
                         </div>
                     </div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-size: 0.8rem; margin-bottom: 8px; font-weight: normal; text-align: center;">Streaming Multiprocessor</div>
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <div style="border: 1px solid #000; background: #fff; padding: 8px; text-align: center; width: 120px;">
-                                <div style="background: #fff; border: 1px solid #000; padding: 4px; margin: 4px 0; font-size: 0.6rem; text-align: center; width: 100px;">L1 Cache</div>
-                                <div style="display: flex; gap: 2px; justify-content: center; margin: 4px 0;">
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                    <div style="width: 12px; height: 16px; background: #fff; border: 1px solid #000;"></div>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            
+            <div class="mapping-level">
+                <div class="level-title">GPU</div>
+                <div class="level-visual">
+                    <div class="grid-visual">
+                        <div class="grid-blocks">
+                            <div class="grid-block">SM</div>
+                            <div class="grid-block">SM</div>
+                            <div class="grid-block">SM</div>
+                            <div class="grid-block">SM</div>
+                            <div class="grid-block">SM</div>
+                            <div class="grid-block">SM</div>
                         </div>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-size: 0.8rem; margin-bottom: 8px; font-weight: normal; text-align: center;">GPU</div>
-                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                            <div style="border: 1px dashed #000; background: #fff; padding: 10px; text-align: center; width: 140px;">
-                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin: 6px 0;">
-                                    <div style="width: 20px; height: 16px; background: #fff; border: 1px solid #000; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">SM</div>
-                                    <div style="width: 20px; height: 16px; background: #fff; border: 1px solid #000; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">SM</div>
-                                    <div style="width: 20px; height: 16px; background: #fff; border: 1px solid #000; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">SM</div>
-                                    <div style="width: 20px; height: 16px; background: #fff; border: 1px solid #000; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">SM</div>
-                                    <div style="width: 20px; height: 16px; background: #fff; border: 1px solid #000; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">SM</div>
-                                    <div style="width: 20px; height: 16px; background: #fff; border: 1px solid #000; font-size: 0.5rem; display: flex; align-items: center; justify-content: center;">SM</div>
-                                </div>
-                                <div style="background: #fff; border: 1px solid #000; padding: 6px; margin: 6px 0; font-size: 0.65rem; text-align: center; width: 120px;">GPU RAM</div>
-                            </div>
-                        </div>
+                        <div class="global-memory">GPU RAM</div>
                     </div>
                 </div>
             </div>
@@ -342,13 +329,9 @@
 
     <p>Kernel functions are written from the point of view of a thread as this is the action that will be handled by every thread. Within our kernel function we get access to a number of terms encapsulating where we are within our kernel grid.</p>
 
-    <div class="visualization">
-        <div class="step-info">
-            <div class="step-title">Host Code</div>
-        </div>
-    </div>
-
-    <pre><span class="type">int</span> <span class="function">main</span>(<span class="type">int</span> <span class="variable">argc</span>, <span class="type">char</span> <span class="operator">**</span><span class="variable">argv</span>) {
+    <div class="code-section">
+        <div class="code-title">Host Code</div>
+        <pre><span class="type">int</span> <span class="function">main</span>(<span class="type">int</span> <span class="variable">argc</span>, <span class="type">char</span> <span class="operator">**</span><span class="variable">argv</span>) {
     <span class="type">float</span> <span class="operator">*</span><span class="variable">h_x</span>, <span class="operator">*</span><span class="variable">d_x</span>;        
     <span class="type">int</span>   <span class="variable">nblocks</span><span class="operator">=</span><span class="number">2</span>, <span class="variable">nthreads</span><span class="operator">=</span><span class="number">8</span>, <span class="variable">nsize</span><span class="operator">=</span><span class="number">2</span><span class="operator">*</span><span class="number">8</span>;
 
@@ -365,15 +348,12 @@
     
     <span class="comment">// Clean up</span>
     <span class="function">cudaFree</span>(<span class="variable">d_x</span>); <span class="function">free</span>(<span class="variable">h_x</span>);
-    }</pre>
-
-    <div class="visualization">
-        <div class="step-info">
-            <div class="step-title">Kernel/Device Code</div>
-        </div>
+}</pre>
     </div>
 
-<pre><span class="comment">#include &lt;helper_cuda.h&gt;   </span>
+    <div class="code-section">
+        <div class="code-title">Kernel/Device Code</div>
+        <pre><span class="comment">#include &lt;helper_cuda.h&gt;</span>
 <span class="keyword">__global__</span> <span class="type">void</span> <span class="function">kernel</span>(<span class="type">float</span> <span class="operator">*</span><span class="variable">x</span>) {
     <span class="comment">// Find "where we are"</span>
     <span class="type">int</span> <span class="variable">tid</span> <span class="operator">=</span> <span class="variable">threadIdx</span>.<span class="variable">x</span> <span class="operator">+</span> <span class="variable">blockDim</span>.<span class="variable">x</span><span class="operator">*</span><span class="variable">blockIdx</span>.<span class="variable">x</span>;
@@ -381,17 +361,15 @@
     <span class="comment">// Perform thread's operation</span>
     <span class="variable">x</span>[<span class="variable">tid</span>] <span class="operator">=</span> (<span class="type">float</span>) <span class="variable">threadIdx</span>.<span class="variable">x</span>;
 }</pre>
+    </div>
 
-
-    
-    <p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #000; font-size: 0.8rem; text-align: center;">
+    <div class="references">
         Information from 2020 onwards related to deep learning and tensors will be saved for another time
-        <br>
-        <br>
+        <br><br>
         <strong>References</strong><br>
         <a href="#note1" id="ref1">[1]</a> - <a href="https://fabiensanglard.net/cuda/" target="_blank">History of SM</a><br>
-        <a href="#note2" id="ref2" >[2]</a> - <a href="https://modal.com/gpu-glossary" target="_blank">Modal GPU Glossary</a><br>
-        <a href="#note3" id="ref3" >[3]</a> - <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">Oxford Lecture Notes 1</a><br>
-    </p>
+        <a href="#note2" id="ref2">[2]</a> - <a href="https://modal.com/gpu-glossary" target="_blank">Modal GPU Glossary</a><br>
+        <a href="#note3" id="ref3">[3]</a> - <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">Oxford Lecture Notes 1</a><br>
+    </div>
 </body>
 </html>

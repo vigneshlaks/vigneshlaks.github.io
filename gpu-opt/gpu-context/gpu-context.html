@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Basic page info -->
-    <title>Contextualizing and Concreting</title>
+    <title>Contextualizing and Concreting GPU Programming</title>
     <meta name="description" content="High signal writings on GPU programming concepts, focusing on hardware evolution and CUDA programming fundamentals.">
     
     <!-- Open Graph meta tags for social media previews -->
-    <meta property="og:title" content="Contextualizing GPU Programming">
+    <meta property="og:title" content="Contextualizing and Concreting GPU Programming">
     <meta property="og:description" content="Learn GPU programming concepts through hardware evolution and CUDA fundamentals.">
     <meta property="og:image" content="https://vigneshlaksh.com/images/gpu-context-preview.png">
     <meta property="og:url" content="https://vigneshlaksh.com/gpu-context">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="GPU Programming">
+    <meta property="og:site_name" content="Vignesh Lakshman">
     
     <!-- Twitter Card meta tags (optional but recommended) -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contextualizing GPU Programming">
+    <meta name="twitter:title" content="Contextualizing and Concreting GPU Programming">
     <meta name="twitter:description" content="Learn GPU programming concepts through hardware evolution and CUDA fundamentals.">
     <meta name="twitter:image" content="https://vigneshlaksh.com/images/gpu-context-preview.png">
     
@@ -342,8 +342,6 @@
 
     <p>Kernel functions are written from the point of view of a thread as this is the action that will be handled by every thread. Within our kernel function we get access to a number of terms encapsulating where we are within our kernel grid.</p>
 
-    <h2>Code</h2>
-
     <div class="visualization">
         <div class="step-info">
             <div class="step-title">Host Code</div>
@@ -375,9 +373,9 @@
         </div>
     </div>
 
-    <pre><span class="comment">#include &lt;helper_cuda.h&gt;   </span>
-    <span class="keyword">__global__</span> <span class="type">void</span> <span class="function">kernel</span>(<span class="type">float</span> <span class="operator">*</span><span class="variable">x</span>) {
-    <span class="comment">// Find where we are</span>
+<pre><span class="comment">#include &lt;helper_cuda.h&gt;   </span>
+<span class="keyword">__global__</span> <span class="type">void</span> <span class="function">kernel</span>(<span class="type">float</span> <span class="operator">*</span><span class="variable">x</span>) {
+    <span class="comment">// Find "where we are"</span>
     <span class="type">int</span> <span class="variable">tid</span> <span class="operator">=</span> <span class="variable">threadIdx</span>.<span class="variable">x</span> <span class="operator">+</span> <span class="variable">blockDim</span>.<span class="variable">x</span><span class="operator">*</span><span class="variable">blockIdx</span>.<span class="variable">x</span>;
     
     <span class="comment">// Perform thread's operation</span>

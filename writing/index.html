@@ -131,12 +131,7 @@
   <!-- Writing Section -->
   <section id="writing" class="section">
     <h2>Writing</h2>
-
-    <div class="writing-toggle-container">
-      <button class="writing-toggle active" onclick="showWriting('nontechnical')">Nontechnical</button>
-      <button class="writing-toggle" onclick="showWriting('technical')">Technical</button>
-    </div>
-
+    
     <div id="nontechnical-writings" class="writing-content">
       <div class="writing-item">
         <strong>Creative Pursuits - 2024-08-14</strong>
@@ -171,49 +166,6 @@
       </div>
 
     </div>
-
-    <div id="technical-writings" class="writing-content" style="display: none;">
-      <div class="writing-item">
-        <strong>Creating a Deep Learning Framework (Implementation) - 2025-02-06</strong>
-        System Simplifying
-        <p>Structuring your code at a high level can be intimidating but we can break it down into its simplest anatomical parts. At the highest level we are planning to do → make a guess, check that guess, change our guess. Sharpening things a little, we then think of things in the language of neural networks. The guess is encoded in the forward pass of our algorithm. When we make our check, we compare against a loss function. We correct our guess through back propagation and gradient descent.</p>
-        
-        Back Propagation
-        <p>We first notice that the definition at each time step of our algorithm doesn't change. In other words, the problem remains the same for any node within our graph. This hints to us we can use recursion. For the nth node along our path we recurse from the n-1th, further we can store the gradient calculated along our path and proceed in a bottom up dynamic programming fashion across paths, across nodes.</p>
-        
-        Class-Based Design and Its Role in Autograd
-        <p>In designing this autograd engine, we structured our code using object-oriented programming principles. Each class in the system has a clear role, mirroring fundamental neural network concepts. This allowed us to map our mental model of a neural network more directly into code and organize our thoughts.</p>
-      </div>
-
-      <div class="writing-item">
-        <strong>Creating a Deep Learning Framework (Pertinent Theory) - 2025-02-06</strong>
-        Backprop
-        <p><em>Intuitions for Partial Derivatives and Chain Rule</em></p>
-        <p>For our simple optimization step we want to move in the direction of steepest descent in an effort to minimize our loss function. This means we calculate the gradient (steepest ascent) and move in the opposite direction. We then just need to accurately calculate the partials across all our nodes using the chain rule across layers so we can plug this gradient into our optimization equation.</p>
-        <p>Take particular node n and consider all paths through our layers leading to our final loss node. Each path signifies an effect n has on our final output. If we can find the effect of the node on the operation and the operation on the loss. By similar logic we can effectively build backwards from our loss node to n.</p>
-      </div>
-    </div>
   </section>
-
-  <script>
-    function showWriting(type) {
-      // Toggle writing content
-      const nontechDiv = document.getElementById('nontechnical-writings');
-      const techDiv = document.getElementById('technical-writings');
-      const buttons = document.querySelectorAll('.writing-toggle');
-      
-      buttons.forEach(btn => btn.classList.remove('active'));
-      
-      if (type === 'nontechnical') {
-        nontechDiv.style.display = 'block';
-        techDiv.style.display = 'none';
-        buttons[0].classList.add('active');
-      } else {
-        nontechDiv.style.display = 'none';
-        techDiv.style.display = 'block';
-        buttons[1].classList.add('active');
-      }
-    }
-  </script>
 </body>
 </html>

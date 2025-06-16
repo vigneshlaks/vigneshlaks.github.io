@@ -363,7 +363,7 @@
     <span class="function">cudaMemcpy</span>(<span class="variable">h_x</span>, <span class="variable">d_x</span>, <span class="variable">nsize</span><span class="operator">*</span><span class="function">sizeof</span>(<span class="type">float</span>),
                 <span class="variable">cudaMemcpyDeviceToHost</span>);
     
-    <span class="comment">// Clean up memory</span>
+    <span class="comment">// Clean up</span>
     <span class="function">cudaFree</span>(<span class="variable">d_x</span>); <span class="function">free</span>(<span class="variable">h_x</span>);
     }</pre>
 

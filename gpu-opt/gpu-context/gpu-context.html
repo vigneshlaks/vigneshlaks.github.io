@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Basic page info -->
-    <title>Contextualizing then Concreting</title>
+    <title>Contextualizing and Concreting</title>
     <meta name="description" content="High signal writings on GPU programming concepts, focusing on hardware evolution and CUDA programming fundamentals.">
     
     <!-- Open Graph meta tags for social media previews -->
@@ -36,15 +36,15 @@
 </head>
 
 <body>
-    <h1>Contextualizing then Concreting</h1>
+    <h1>Contextualizing and Concreting</h1>
 
     <h2>Introduction</h2>
     <p>The onslaught of terms defined during the beginning of the GPU programming journey can get a bit dull.</p>
 
-    <p>Instead of throwing term after term at you, we'll define the terms as they come up naturally during our breakneck history recap of the heart of GPUs, Streaming Multiprocessors (SMs). Much of the traditional machinery of these diagrams are thrown out. For a more comprehensive understanding, see the references.</p>
+    <p>We will ground ourselves on the main pieces of hardware and how they change during our breakneck history recap of the heart of GPUs, Streaming Multiprocessors (SMs). Much of the traditional machinery of these <em>die</em>agrams are thrown out. For a more comprehensive understanding, see the references.</p>
 
     <h2>Context</h2>
-    <p>Up to 2006, the graphics card design separated tasks into hardware sections representing disjoint parts of the video rendering process. Nvidia engineers would have to guess how much of a GPU die to allocate to each section. </p>
+    <p>Up to 2006, the graphics card design separated tasks into hardware sections representing disjoint parts of the video rendering process. Nvidia engineers would have to guess how much of a <em>GPU die</em> to allocate to each section. </p>
         
     <p>This meant predicting what developers would create with software and in turn the demand placed on each section of the hardware.</p>
 
@@ -77,8 +77,8 @@
         <li><i>Cores</i> - Basic processing units of the GPU.</li>
         <li><i>Warps</i> - groups of 32 threads.</li>
         <li><i>Warp Scheduler</i> - mechanism making requests amongst other things and implementing <i>SIMT</i>. More later.</li>
-        <li><i>Special function units (SFUs)</i> are designed to handle complex calculations like sin, cos, etc. They won't be referenced in diagrams moving forward.</li>
-        <li><i>Register files</i> are a specific thread's storage.</li>
+        <li><i>Special function units (SFUs)</i> - designed to handle complex calculations like sin, cos, etc. They won't be referenced in diagrams moving forward.</li>
+        <li><i>Register files</i> - a specific thread's storage.</li>
     </ul>
 
     <p>Contrasting CPUs, GPUs elect to improve computation speed and incur memory overhead, as a tradeoff. In other words, the bottleneck is usually moving information around more than it is working with that information. Cleverly, threads in need of memory make requests in parallel to greatly reduce the overhead, known as "saturating the memory bus".</p>
@@ -122,7 +122,7 @@
     <h3>Volta, Turing - 2017, 2018</h3>
     <div class="volta-diagram">
     <div class="scheduler-section">
-        4 Warp Schedulers 
+        Warp Schedulers x4
     </div>
     <div class="register-section">
         Register File
@@ -146,9 +146,9 @@
     <p>Loosely, reductions in transistor size caused more cores per SM while bouncing between optimizing for compute and energy usage. As this hit a stagnation point and the computation driven by ml/deep learning workloads continued to grow, specialization emerged once more. Recent advents continue to push the frontier on improving compute tuned to particular uses, such as the transformer architecture.</p>
 
     <h2>Bringing Things Together</h2>
-    <p>We'll now begin bridging ourselves to software through the CUDA programming model<sup><a href="#ref1" id="note1">1</a></sup>.</p>
+    <p>We'll now begin bridging ourselves to software through the CUDA programming model<sup><a href="#ref2" id="note2">2</a></sup>.</p>
     <p>CUDA is compiled to <em>PTX</em> and eventually the hardware assembly language, <em>SASS</em>.</p>
-    <p>Blocks are specified in such a way that communication is limited, allowing them to be hardware agnostic and fitting differently depending on the amount of SMs at our disposal.</p>
+    <p>Blocks are specified in such a way that communication is limited, allowing them to be hardware agnostic and fit differently depending on the amount of SMs at our disposal.</p>
     
 <body>
     <div style="font-family: 'Palatino', serif; background: #fff; color: #000; line-height: 1.4; margin: 0; padding: 20px; max-width: 500px; margin: 0 auto;">
@@ -335,10 +335,10 @@
 
     <p>In hardware terms, we iteratively send our information from CPU to GPU to be handled in parallel by our cores. In software terms, we allocate memory on our <em>host</em> and <em>device</em>, launch kernel instances to be run in parallel on our threads.</p>
 
-    <p>Each SM computes one kernel instance and if too many instances are launched information is placed in a queue.</p>
+    <p>Each SM computes one thread block and if too many instances are launched information is placed in a queue.</p>
 
     <h2>Concreting Things</h2>
-    <p><code>kernel&lt;&lt;&lt;gridDim, blockDim&gt;&gt;&gt;(args)</code> represents the simplest syntax for a kernel launch where <code>gridDim</code> represents the number of kernel instances referenced earlier and <code>blockDim</code> represents the number of blocks per kernel.</p>
+    <p><code>kernel&lt;&lt;&lt;gridDim, blockDim&gt;&gt;&gt;(args)</code> represents the simplest syntax for a kernel launch where <code>gridDim</code> represents the number of blocks referenced earlier and <code>blockDim</code> represents the number of threads per block<sup><a href="#ref3" id="note3">3</a></sup>.</p>
 
     <p>Kernel functions are written from the point of view of a thread as this is the action that will be handled by every thread. Within our kernel function we get access to a number of terms encapsulating where we are within our kernel grid.</p>
 
@@ -359,12 +359,13 @@
     <span class="function">cudaMalloc</span>((<span class="type">void</span> <span class="operator">**</span>)<span class="operator">&</span><span class="variable">d_x</span>, <span class="variable">nsize</span><span class="operator">*</span><span class="function">sizeof</span>(<span class="type">float</span>));
 
     <span class="comment">// Kernel Launch</span>
-    <span class="variable">my_first_kernel</span><span class="operator">&lt;&lt;&lt;</span><span class="variable">nblocks</span>, <span class="variable">nthreads</span><span class="operator">&gt;&gt;&gt;</span>(<span class="variable">d_x</span>);
+    <span class="variable">kernel</span><span class="operator">&lt;&lt;&lt;</span><span class="variable">nblocks</span>, <span class="variable">nthreads</span><span class="operator">&gt;&gt;&gt;</span>(<span class="variable">d_x</span>);
 
-    <span class="comment">// Kernel Launch</span>
+    <span class="comment">// Copy results back from device to host</span>
     <span class="function">cudaMemcpy</span>(<span class="variable">h_x</span>, <span class="variable">d_x</span>, <span class="variable">nsize</span><span class="operator">*</span><span class="function">sizeof</span>(<span class="type">float</span>),
                 <span class="variable">cudaMemcpyDeviceToHost</span>);
-
+    
+    <span class="comment">// Clean up memory</span>
     <span class="function">cudaFree</span>(<span class="variable">d_x</span>); <span class="function">free</span>(<span class="variable">h_x</span>);
     }</pre>
 
@@ -375,7 +376,7 @@
     </div>
 
     <pre><span class="comment">#include &lt;helper_cuda.h&gt;   </span>
-    <span class="keyword">__global__</span> <span class="type">void</span> <span class="function">my_first_kernel</span>(<span class="type">float</span> <span class="operator">*</span><span class="variable">x</span>) {
+    <span class="keyword">__global__</span> <span class="type">void</span> <span class="function">kernel</span>(<span class="type">float</span> <span class="operator">*</span><span class="variable">x</span>) {
     <span class="comment">// Find where we are</span>
     <span class="type">int</span> <span class="variable">tid</span> <span class="operator">=</span> <span class="variable">threadIdx</span>.<span class="variable">x</span> <span class="operator">+</span> <span class="variable">blockDim</span>.<span class="variable">x</span><span class="operator">*</span><span class="variable">blockIdx</span>.<span class="variable">x</span>;
     
@@ -386,14 +387,13 @@
 
     
     <p style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #000; font-size: 0.8rem; text-align: center;">
-        Information from 2020 onwards related to deep learning and tensors will be saved for another writing
+        Information from 2020 onwards related to deep learning and tensors will be saved for another time
         <br>
         <br>
         <strong>References</strong><br>
-        <a href="#note1" id="ref1">[1]</a> - <a href="https://fabiensanglard.net/cuda/" target="_blank">https://fabiensanglard.net/cuda/</a><br>
-        [2] - <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf</a> page 11<br>
-        <a href="https://modal.com/gpu-glossary" target="_blank">https://modal.com/gpu-glossary</a><br>
-        <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf</a>
+        <a href="#note1" id="ref1">[1]</a> - <a href="https://fabiensanglard.net/cuda/" target="_blank">History of SM</a><br>
+        <a href="#note2" id="ref2" >[2]</a> - <a href="https://modal.com/gpu-glossary" target="_blank">Modal GPU Glossary</a><br>
+        <a href="#note3" id="ref3" >[3]</a> - <a href="https://people.maths.ox.ac.uk/~gilesm/cuda/lecs/lec1.pdf" target="_blank">Oxford Lecture Notes 1</a><br>
     </p>
 </body>
 </html>

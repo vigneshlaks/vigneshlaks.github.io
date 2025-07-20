@@ -3,9 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <link rel="stylesheet" href="../neural-nets.css">
-    <link rel="stylesheet" href="../.css">
+    <link rel="stylesheet" href="../neural-nets/neural-nets.html">
+    <link rel="stylesheet" href="../../css/styles2.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
-    hi
+<body>
+    <div class="document-info">
+
+    <h1>Neural Nets</h1>
+    <h2>Theory</h2>
+    
+    <h3>Intuition</h3>
+    <p>We are given a graph with nodes set to $x_1$ and $x_2$ with the goal of hitting some output $\hat{y}$. We choose values to multiply these nodes, depicted by edge weights. For a more specific example consider $x_1 = 5$, $x_2 = 6$, and $\hat{y} = 12$ .</p>
+    
+    <p><strong>Insert photo of 3 nodes specifically two nodes followed by another (representing their sum) with a multiplier value attached as a weight. Show some output node with a question mark representing the value we're trying to get.</strong></p>
+    
+    <p>$5 * w_1  + 6 * w_2 = y$</p>
+    <p>$\hat{y} - y = 0$</p>
+    <p>$\hat{y} - 5 * w_1  + 6 * w_2 = 0$</p>
+    
+    <p>We solve with 2 and 7/6.</p>
+    
+    <p>Suppose we now have multiple outputs to hit.</p>
+    
+    <p><strong>Two nodes followed by another (representing their sum) with a multiplier value attached as a weight. Create all 6 edge weights this time without labeling them. Then add another node representing the target value. Show the labels on the output nodes like below. Then show several target nodes with question marks.</strong></p>
+    
+    <p>We get to decide several values now and use $w$ to denote edge weights.</p>
+    
+    <p>$o_1 = x_1w_{11} + x_2w_{12}$</p>
+    <p>$o_2 = x_1w_{21} + x_2w_{22}$</p>
+    <p>$o_3 = x_1w_{31} + x_2w_{32}$</p>
+    
+    <p>$t_1 - o_1 = 0$</p>
+    <p>$t_2 - o_2 = 0$</p>
+    <p>$t_3 - o_3 = 0$</p>
+    
+    <p>Or equivalently</p>
+    
+    <p><strong>Show the matrix form of the equations here.</strong></p>
+    
+    <p>Recall the only values we do not know are the weights. We can solve this equation similar to before. There are only certain series of outputs we're able to express from the weights.</p>
+    
+    <p>In hopes of solving this issue, we now go from one layer to multiple.</p>
+    
+    <p><strong>Convey the ideas I want here. Give minimally viable explanation / drawing.</strong></p>
+    
+    <p>For simplicity we choose 3.</p>
+    
+    <p><strong>Create several drawings for this with a button I can use to select the right one</strong></p>
+    
+    <p><strong>Include the series of matrices here like before</strong></p>
+    
+    <p>Though at a glance, it may appear this is a sensible thing to do, our matrices can all be collapsed into a single matrix, the product of the chain. This is an issue because we've now added complexity and gotten nothing extra in return.</p>
+    
+    <p>Potentially oversimplistic, suppose wedged between these layers we add a nonlinear function. Before we could reduce multiple linear operations to a single linear operation. If we inject nonlinear operators, we wouldn't be able to represent this with linear one(s) by definition.</p>
+    
+    <p>To test if we are able to hit more values.....</p>
+    
+    <p>--<em>how do we do this?</em>--</p>
+    
+    <h3>Connecting to Math and Deep Learning Concepts</h3>
+    <p>The graph construction we were given initially loosely depicts the problem deep learning aims to solve. Specifically given inputs and outputs, we want to map those inputs to outputs by configuring parameters.</p>
+    
+    <p>Mapping inputs to outputs is the training process. The hope is when we get a new input, we'll be able to infer the right output using our set parameters.</p>
+    
+    <h3>Tensorizing</h3>
+    
+    <h4>Basic Math</h4>
+    <p>Here we define a series of instructions specifically forward, backward, matrix bullshit</p>
+    
+    <p>Below we apply these math tools to scale up our toy example.</p>
+    
+    <h4>Forward</h4>
+    
+    <h4>Backward</h4>
+    
+    <h2>Connections to Code</h2>
+    <p>How does this set how we code things.</p>
+    
+    <h2>Code</h2>
+    <p>We now understand the math of neural networks. We'll now see how this translates in code. Here we will find out how this translates in Pytorch.</p>
+    
+    <h3>References</h3>
+    <p>[[Math Neural Net Vid]]</p>
+    <p>[[Matrix Calculus For Deep Learning]]</p>
+    <p>[[The Matrix Calculus You Need for Deep Learning]]</p>
 </body>
 </html>

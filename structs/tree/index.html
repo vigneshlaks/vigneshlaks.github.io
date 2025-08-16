@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/base.css">
+    <style>
+        /* Tree container */
+        .tree-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        /* Writing card styles */
+        .writing-item {
+            border: 1px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fff;
+            text-align: left;
+        }
+
+        .writing-header {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .writing-thoughts {
+            flex: 1;
+        }
+
+        .writing-thoughts p {
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .writing-thoughts p:last-child {
+            margin-bottom: 0;
+        }
+
+        .writing-item em {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .tree-canvas {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vignesh Lakshmanan</h1>
+        <p>UPenn CS + Robotics</p>
+        <p><a href="https://x.com/va_laksh" target="_blank">X</a> - <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a> | <a href="https://www.reddit.com/user/lucky_va/" target="_blank">Reddit</a> - <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
+        
+        <nav style="position: relative; text-align: center;">
+            <a href="/" style="position: absolute; left: 0;">←</a>
+            <a href="/structs/">Kernel</a>
+            <a href="/structs/tree/" class="current">Tree</a>
+            <a href="/structs/dict/">Dict</a>
+        </nav>
+    </header>
+
+    <div class="tree-container">
+        <div class="container">
+            <canvas id="tree" class="tree-canvas" width="450" height="200"></canvas>
+        </div>
+        <section id="card-content" style="display: none; margin-top: 30px;">
+            <div class="writing-item">
+                <div class="writing-header" id="card-header">Node Content</div>
+                <div class="writing-thoughts">
+                    <div id="card-text"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        class TreeRenderer {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.nodes = [];
+                this.edges = [];
+                this.nodeContent = {};
+                
+                this.canvas.addEventListener('click', (e) => this.handleClick(e));
+                this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+            }
+
+            addNode(x, y, content = null, state = 'structure') {
+                const index = this.nodes.length;
+                this.nodes.push({ x, y, state });
+                this.nodeContent[index] = content;
+                return index;
+            }
+
+            addEdge(from, to) {
+                this.edges.push({ from, to });
+            }
+
+            handleClick(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                this.nodes.forEach((node, index) => {
+                    const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
+                    
+                    if (distance <= 8 && node.state === 'writing') {
+                        this.onNodeClick(node, index);
+                    }
+                });
+            }
+
+            handleMouseMove(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                
+                let overWritingNode = false;
+                
+                this.nodes.forEach((node, index) => {
+                    const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
+                    
+                    if (distance <= 8 && node.state === 'writing') {
+                        overWritingNode = true;
+                    }
+                });
+                
+                this.canvas.style.cursor = overWritingNode ? 'pointer' : 'default';
+            }
+
+            onNodeClick(node, index) {
+                const contentDiv = document.getElementById('card-content');
+                const headerDiv = document.getElementById('card-header');
+                const textDiv = document.getElementById('card-text');
+                
+                // Set card content based on node
+                const content = this.nodeContent[index];
+                if (content) {
+                    headerDiv.textContent = content.title;
+                    textDiv.innerHTML = content.content;
+                    contentDiv.style.display = 'block';
+                }
+                
+                this.draw();
+            }
+
+            drawNode(node, index) {
+                const radius = 4;
+                
+                this.ctx.beginPath();
+                this.ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
+                
+                if (node.state === 'writing') {
+                    this.ctx.fillStyle = '#555';
+                } else {
+                    this.ctx.fillStyle = '#ccc';
+                }
+                this.ctx.fill();
+            }
+
+            drawEdge(edge) {
+                const fromNode = this.nodes[edge.from];
+                const toNode = this.nodes[edge.to];
+                
+                this.ctx.strokeStyle = '#ccc';
+                this.ctx.lineWidth = 1;
+                this.ctx.beginPath();
+                this.ctx.moveTo(fromNode.x, fromNode.y);
+                this.ctx.lineTo(toNode.x, toNode.y);
+                this.ctx.stroke();
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.edges.forEach(edge => this.drawEdge(edge));
+                
+                this.nodes.forEach((node, index) => this.drawNode(node, index));
+            }
+
+            clear() {
+                this.nodes = [];
+                this.edges = [];
+                this.nodeContent = {};
+            }
+        }
+
+        const renderer = new TreeRenderer('tree');
+
+        function Tree() {
+            renderer.clear();
+    
+            // Root node (hidden/structural)
+            const root = renderer.addNode(225, 30);
+            
+            // Main category nodes (hidden/structural)
+            const irl = renderer.addNode(90, 60);
+            const knowledge_acquisition = renderer.addNode(135, 60);
+            const orientation = renderer.addNode(225, 60);
+            const systems = renderer.addNode(315, 60);
+            const implementation = renderer.addNode(360, 60);
+            
+            // Writing nodes - very compact
+            const palo_alto = renderer.addNode(60, 100, {
+                title: "Palo Alto",
+                content: `
+        <p>I wanted to act as more of an onlooker during my time in Palo Alto. It was different world than the one I was used to on the east coast. I didn't think it would be conducive to development to submerge myself.</p>
+
+        –
+
+        <p>I always felt I would more naturally fit into the culture I fixed onto New York.</p>
+
+        <p>Bustling horns, quick walking, skyscrapers, suits; places to be and things to do. I didn't like the informality, amongst other things, I had associated with California.</p>
+
+        <p>But I never expected the joy I would derive from taking a bike ride and the positive effects it would have on my work. Or the wonder I would feel while passing the houses, each one disjoint. Not disjoint in the local area surrounding the house but disjoint period.</p>
+
+        –
+
+        <p>A roommate of mine was growing bread and the other growing oats.</p>
+
+        <p>I was curious if the bread could grow indefinitely. But then apparently the bread eventually dies when you put it into the oven. With this line of reasoning, what remains is a carcass.</p>
+
+        <p>I wonder if we'll create heat resistant yeast in the future and have indefinite growing bread.</p>
+
+        –
+
+        <p>I suspect even a strict interpretation of ghost races would map to the environment as even the weather never changed.</p>
+
+        –
+
+        <p>I've realized how much I've gained a reliance on technology.</p>
+
+        <p>I attempted to put this a bit to one side by not using a gps for the bike ride to the office.</p>
+
+        <p>Not from a place of strong distaste. It's a beautiful thing to have the ability to construct a path from point a to point b with ease, but rather to see what might come of it.</p>
+
+        <p>I realized the specific path given by the gps was unnecessarily constrained. There were a series of roads and I just needed to move generally in one direction for quite a while. The decision of which of those roads was chosen by the gps was a bit arbitrary.</p>
+
+        <p>If I moved too far in one direction then I could just recorrect by moving over one street. During my trip, the arbitrary paths converged when I reached an underpass. As long as I hit the underpass, the road selection was more open ended than I would have perceived if I wasn't willing to experiment.</p>
+
+        <p>After a few trips, I was completing the entire sequence quickly with greater freedom.</p>
+
+        –
+
+        <p>We can make a lot of meals with a few ingredients.</p>
+
+        <p>There's a more verbose argument with conditioning, combinations, orthogonality, steps as to why cooking with only a few ingredients is reasonable.</p>
+
+        <p>But it's pretty unnecessary. Essentially, if we carefully choose base ingredients and get a really good feel for these base ingredients we can combine them in different ways and make varying meals. We can also do this quite quickly because of our understanding of each ingredient.</p>
+
+        <p>The process of incorporating new ingredients is done organically. If our decision for the base set of ingredients is unopinionated, there will be a lot of interplay with the new ingredient. Incorporating new ingredients in this way have implied utility as it's only been incorporated because it has something to offer.</p>
+
+        <p>Half way through the summer, I got bored of my meals and incorporated a new ingredient to see what would happen. The food had renewed vitality.</p>
+                `
+            }, 'writing');
+            
+            const utilitarian_meditation = renderer.addNode(90, 100, {
+                title: "Utilitarian Meditation", 
+                content: `<p>A purpose for meditating is to promote greater general clarity and more readily and deeply absorb works.</p>
+
+        <p>There's also literature associating meditation with reducing stress amongst other benefits.</p>
+
+        <p>Meditation can be something difficult to turn into a baseline habit; instead more readily lending itself to be spoken about than consistently practiced.</p>
+
+        <p>It can be hard to slow down enough to reap the benefits though and introducing tactile, short term benefits can help accommodate this shortcoming.</p>
+
+        <p>Taking a loose definition of meditation as building the capacity to be in the present moment then it doesn't need to be associated with a specific seating position or breathing technique.</p>
+
+        <p>Taking some task which can be done absent mindedly but instead fighting this natural tendency still fits within the definition.</p>
+
+        <p>We are both practicing mindfulness while also completing a task. I've found most tasks can be done more efficiently and with higher quality when we simply pay attention to them. Depending on the natural tendency to be unmindful, the mind may slip into a shallower focus muddying our ability to complete what should be a trivial task.</p>
+
+        <p>All of this to say when doing an absentmindable task; don't be absent minded instead attempt to be present. This both promotes task quality and upstream development.</p>`
+            }, 'writing');
+
+            const potemkin_village = renderer.addNode(135, 100, {
+                title: "Potemkin Village",
+                content: `<p>Presentation leads to increased serendipity and is widely applicable.</p>
+
+        <p>However, it should only exist as a mechanism for either implying an internal mechanism or enfolding into an ecosystem. If a shiny exterior becomes the goal in it of itself or fit onto very hard as a metric for either parties, issues arise.</p>
+
+        <p>Reminiscent of, "when a method becomes a target, it ceases to be a good measure".</p>
+
+        <p>With that being said, investing into presentation is worthwhile. Any application of presentation helps build upstream presentation skills aiding in creation. It's interesting to see at least in this sector the trivialization of implementation with even somewhat refined taste.</p>
+
+        <p>I wonder where else this will permeate to in the future.</p>
+
+        —
+
+        <p>If a picture is a thousand words then an action is a thousand pictures.</p>`
+            }, 'writing');
+
+            const automaton = renderer.addNode(150, 100, {
+                title: "Automaton",
+                content: `<p>Pursuing many disjoint directions creates a sense of pseudo productivity.</p>
+
+        <p>Not only is learning diminished but so is the ability to look at the world through one's own eyes instead of an aggregation of surrounding ones.</p>
+
+        <p>Individually orienting in a unique direction and moving implies confidence. Even if one musters the confidence, the inertia of the initial movement is difficult to overtake and only trivial ideas surface. Past this impasse, a differentiated position is found. Reasoning properly allows the position to be a leveraged one.</p>`
+            }, 'writing');
+
+            const self_inflicted_boxes = renderer.addNode(200, 100, {
+                title: "Self Inflicted Boxes",
+                content: `<p>I had a friend refer to the transition out of college into the workforce as leaving one matrix and entering another.</p>
+
+        —
+
+        <p>I suspect for many their actions are only a consequence of worry regarding some external factor. Action derived in this way is unsustainable and notions of "breaks" arise naturally.</p>
+
+        <p>A reframing of work and learning is in order – from stress and anxiety to curiosity and enjoyment.</p>
+
+        <p>This deviates from the mindset of an undisciplined person in a critical way. Sticking to the canonical path with all their might, the approach suggested references the traditional path while ultimately deviating from this path towards an individualized goal, the undisciplined student relaxes themselves from the traditional path without any real motivation for doing so.</p>`
+            }, 'writing');
+
+            const individualized_shortest_paths = renderer.addNode(200, 140, {
+                title: "Individualized Shortest Path",
+                content: `<p>It's easy to be fixated on the output of a thing instead of learning to enjoy the journey.</p>
+
+        <p>Along the path, there are an abundance of pragmatic, leveraged skills for the reasoned individual.</p>
+
+        <p>Shifting the focus away from impact output has on the individual but instead on creation itself and others reduces the (burden/strain placed/associated on/with) output naturally.</p>
+
+        <p>Moving away from local signal and anxiety and towards individualized truth.</p>
+
+        –
+
+        <p>Referencing a path while ultimately deviating towards an individualized goal though time intensive is wrought with benefits.</p>`
+            }, 'writing');
+
+            const affinity_for_technicality = renderer.addNode(250, 100, {
+                title: "Affinity For Technicality",
+                content: `<p>It's interesting how many people have dropped the paradigm of programming entirely despite its value proposition.</p>
+
+        <p>Coding can be used as an aid to knowledge acquisition. Coding a thing out and doing so precisely correctly is not an easy thing to do and implies a meaningful depth of understanding.</p>
+
+        <p>It's not just about the act of typing out code. If the code today can be automated tomorrow or today or the day after, shouldn't dictate whether to write the code.</p>
+
+        <p>This can take a moment to capitulate to. It's very enticing to get rewards especially if those rewards are usually hard fought, misinterpreting it as value. However, if those fights are not actually difficult then the implied value disappears as well. The difficulty of attainment is what prescribes value in the context of knowledge acquisition.</p>
+
+        <p>Less commoditized, programming as a language remains a useful one to speak.</p>
+
+        <p>Fighting for something hard fought is the meaningful thing especially in the context of learning. It's an unfortunate reality people never have the opportunity to revel in this mentality and potentially cease deriving enjoyment from the learning process entirely if it was ever there to begin with.</p>`
+            }, 'writing');
+
+            const consumption = renderer.addNode(290, 100, {
+                title: "Consumption",
+                content: `<p>Our brains are constantly fed a lot information. Forgetting information becomes easier as our brain becomes conditioned into forgetting and glossing over information.</p>
+
+        <p>We can mitigate the effects by reducing the amount of information we consume and make small efforts to remember the information we're interested in learning.</p>
+
+        <p>Rewinding the dilution.</p>`
+            }, 'writing');
+
+            const hatch = renderer.addNode(320, 100, {
+                title: "Hatch",
+                content: `<p>Future growth is aided by a reduced regard for the temporary. Tasks done for maintenance or habit expends energy unnecessarily.</p>
+
+        <p>Instead: allow each moment to promote upstream growth; move towards minimizing energy on tasks associated with temporary growth.</p>
+
+        <p>Push the envelope for what this means and how it affects life. Streamlining processes as a core habit; removing what's not promoting growth and allowing greater cocooning.</p>
+
+        <p>Don't be afraid to unravel though that's the entire point.</p>`
+            }, 'writing');
+
+            const ghost_races = renderer.addNode(350, 100, {
+                title: "Ghost Races",
+                content: `<p>"Ghosts appear as semi-transparent characters and behave as players who used them."</p>
+
+        <p>See what was done when at a certain time yesterday and see if the timings can be match or improved.</p>
+
+        <p>Everyday is a series of steps stacked upon one another. Atomic habits or some other book speaks to this notion of "habit stacking". Taken to the extreme then, the entire day a complete series of steps. We do each protocol with greater ease and refinement.</p>
+
+        <p>There is an extreme rigidity imposed and should only be done over short time frames of great exploitation.</p>
+
+        <p>Each day a perturbed reimagining.</p>`
+            }, 'writing');
+
+            const more_is_more = renderer.addNode(340, 100, {
+                title: "More is more",
+                content: `<p>Consume, build, and speak more; consume, build, and speak louder. Fighting the onslaught of noise with louder noise. To not be lost in a crowd and with no end in sight.</p>
+
+        <p>Ironically, doing less may be a viable avenue as well. Using fewer words to convey complicated ideas. Letting what is said carry weight instead of how it's said.</p>
+
+        <p>More than presentation, simplifications situates concepts more sturdily. Tearing something apart to its constituent limbs and sowing them back together helps understand the motivation for ideas and relationship between them. The audience readily has something to orient themselves with.</p>
+
+        <p>I wonder how many people are genuinely interested in being understood though. There's vulnerability in clearly stating ideas.</p>`
+            }, 'writing');
+
+            const lulls = renderer.addNode(360, 140, {
+                title: "Lulls",
+                content: `<p>Attention spans are shot.</p>
+
+        <p>Everyone vies for our attention; those adept at grabbing it are those who most readily take it. Suddenly, energies shift focus. Attention shifts to attention itself instead of value proposition.</p>
+
+        <p>There's another path. In one moment, attention is piqued. Accommodating one sentence, maybe two. From their, a paragraph. With careful construction, we're able to hold on long enough to convey a story.</p>
+
+        <p>It remains to actualize in full a compelling one.</p>`
+            }, 'writing');
+
+            const matryoshka = renderer.addNode(390, 140, {
+                title: "Matryoshka",
+                content: `<p>Works and ideas can be seamlessly nestled on one another. One figure subsumes multiple and builds upon them. Naively appearing disjoint but stackable nonetheless. Compositions and recompositions. The process can be repeated indefinitely. Loosely Recursive.</p>
+
+        <p>There's an artisan beauty in the attention to the granular. The number of hands the work falls into, the extent of impact are not entirely out of mind but during implementation attention is on sowing and threading.</p>`
+            }, 'writing');
+
+            // Build the tree structure
+            renderer.addEdge(root, irl);
+            renderer.addEdge(root, knowledge_acquisition);
+            renderer.addEdge(root, orientation);
+            renderer.addEdge(root, systems);
+            renderer.addEdge(root, implementation);
+            
+            renderer.addEdge(irl, palo_alto);
+            renderer.addEdge(irl, utilitarian_meditation);
+            
+            renderer.addEdge(knowledge_acquisition, potemkin_village);
+            renderer.addEdge(knowledge_acquisition, automaton);
+            
+            renderer.addEdge(orientation, self_inflicted_boxes);
+            renderer.addEdge(self_inflicted_boxes, individualized_shortest_paths);
+            renderer.addEdge(orientation, affinity_for_technicality);
+            
+            renderer.addEdge(systems, consumption);
+            renderer.addEdge(systems, hatch);
+            renderer.addEdge(systems, ghost_races);
+            
+            renderer.addEdge(implementation, more_is_more);
+            renderer.addEdge(implementation, lulls);
+            renderer.addEdge(implementation, matryoshka);
+
+            renderer.draw();
+        }
+
+        Tree();
+        
+        // Set Palo Alto as default selection
+        setTimeout(() => {
+            const contentDiv = document.getElementById('card-content');
+            const headerDiv = document.getElementById('card-header');
+            const textDiv = document.getElementById('card-text');
+            
+            // Find Palo Alto node (it's the first writing node, index 6)
+            const paloAltoContent = renderer.nodeContent[6];
+            if (paloAltoContent) {
+                headerDiv.textContent = paloAltoContent.title;
+                textDiv.innerHTML = paloAltoContent.content;
+                contentDiv.style.display = 'block';
+            }
+        }, 100);
+    </script>
+</body>
+</html>

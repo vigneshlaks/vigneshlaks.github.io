@@ -32,12 +32,16 @@ header p {
     margin: 0;
 }
 
+header p a {
+    color: #000 !important;
+}
+
 nav {
     margin-top: 15px;
 }
 
 nav a {
-    color: #000;
+    color: #000 !important;
     text-decoration: none;
     margin: 0 20px;
     font-size: 0.9rem;

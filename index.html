@@ -12,12 +12,13 @@
     <p>UPenn CS + Robotics</p>
     <p><a href="https://x.com/va_laksh" target="_blank">X</a> - <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a> | <a href="https://www.reddit.com/user/lucky_va/" target="_blank">Reddit</a> - <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
     <nav>
-      <a href="#">Bio</a>
+      <a href="#" onclick="showSection('bio')">Bio</a>
+      <a href="#" onclick="showSection('experiences')">Experiences</a>
       <a href="/structs/">Structures</a>
     </nav>
   </header>
 
-  <section class="section">
+  <section id="bio-content" class="section">
     <p>I am focusing on natural language processing initiatives and <a href="tc/index.html">peering</a> into <a href="gpu-opt/index.html"> gpu</a> and compiler optimization.</p>
     <p>—</p>
     <p>I suspect there's a reasoned way to beat cold start without long term sacrifices.</p>
@@ -32,4 +33,37 @@
     <p>Learning to become a good writer is a good idea.</p>
     <p>It can be developed pretty quickly even as a background task.</p>
   </section>
+
+  <section id="experiences-content" class="section" style="display: none;">
+    <p><a href="steganography/index.html">Steganography</a> Research at UPenn — August 2024 – Present</p>
+    <p style="margin-left: 2em;">Learnings across algorithms, encodings, tokenization</p>
+    <p>—</p>
+    <p>Algorithms TA — December 2024 – Present</p>
+    <p style="margin-left: 2em;">Used to improve articulation, mental imagery, intuition</p>
+    <p style="margin-left: 2em;">Personally create minimal drawings to depict algorithms</p>
+    <p>—</p>
+    <p>Machine Learning at <a href="https://www.suki.ai/news/suki-expands-executive-leadership-team-to-accelerate-the-future-of-ambient-ai-in-healthcare/" target="_blank">Suki</a> — May 2025 – August 2025</p>
+    <p style="margin-left: 2em;">Top 3 Meditech Player</p>
+    <p style="margin-left: 2em;"><a href="https://www.suki.ai/news/suki-secures-70m-series-d-funding-as-demand-surges-expands-strategic-partnership-with-medstar-health/" target="_blank">Raised</a> $70 M Series D at $500 M evaluation in October 2024</p>
+    <p style="margin-left: 2em;">Invisible, pragmatic support for doctors</p>
+    <p style="margin-left: 2em;">Personally assisted with dictation efforts</p>
+    <p style="margin-left: 4em;">Wrote a dialogue discretization algorithm, filed for a patent</p>
+    <p>—</p>
+    <p>Software at <a href="https://www.prnewswire.com/news-releases/hometown-ticketing-and-schoolfundr-join-forces-to-empower-schools-and-drive-student-success-beyond-the-classroom-302328261.html" target="_blank">Hometown</a> — May 2024 – August 2024</p>
+    <p style="margin-left: 2em;">Learnings across Software and Devops</p>
+    <p style="margin-left: 4em;">Wrote a nontrivial recursive algorithm to automate documentation</p>
+    <p style="margin-left: 4em;">Built Docker Internal Tooling to support developer environment</p>
+    <p style="margin-left: 4em;">Contributed to PHP production code efforts</p>
+  </section>
+
+  <script>
+    function showSection(section) {
+      // Hide all sections
+      document.getElementById('bio-content').style.display = 'none';
+      document.getElementById('experiences-content').style.display = 'none';
+      
+      // Show selected section
+      document.getElementById(section + '-content').style.display = 'block';
+    }
+  </script>
 </body>

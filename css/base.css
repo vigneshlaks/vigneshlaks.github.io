@@ -48,7 +48,7 @@ li {
 
 /* Links */
 a {
-    color: #000;
+    color: #666;
     text-decoration: none;
 }
 
@@ -83,6 +83,10 @@ header p {
     font-size: 0.9rem;
     color: #666;
     margin: 0;
+}
+
+header p a {
+    color: #000;
 }
 
 nav {

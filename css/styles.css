@@ -1,6 +1,6 @@
 /* Base styles */
 body {
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     background: #fff;
     color: #000;
     line-height: 1.4;
@@ -21,13 +21,13 @@ header {
 }
 
 header h1 {
-    font-size: 2rem;
+    font-size: 2.1rem;
     font-weight: normal;
     margin: 0 0 10px 0;
 }
 
 header p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #666;
     margin: 0;
 }
@@ -44,13 +44,13 @@ nav a {
     color: #000 !important;
     text-decoration: none;
     margin: 0 20px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 a {
     color: #555;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-decoration: underline;
 }
 
@@ -65,7 +65,7 @@ nav a:hover {
 }
 
 .section h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: normal;
     margin-bottom: 20px;
     border-bottom: 1px solid #000;
@@ -74,7 +74,7 @@ nav a:hover {
 
 .section p {
     margin-bottom: 15px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 /* Contact info */
@@ -84,7 +84,7 @@ nav a:hover {
     padding: 15px;
     border: 1px solid #ddd;
     background: #fafafa;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .contact-info a {
@@ -99,7 +99,7 @@ nav a:hover {
 /* Responsive design */
 @media (max-width: 768px) {
     body { padding: 10px 5px; }
-    header h1 { font-size: 1.5rem; }
+    header h1 { font-size: 1.6rem; }
     nav a { margin: 0 10px; }
 }
 
@@ -147,7 +147,7 @@ sup {
 }
 
 .experience-item p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 5px 0;
     color: #333;
 }

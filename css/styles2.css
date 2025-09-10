@@ -1,6 +1,6 @@
 /* Base styles */
 body {
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     background: #fff;
     color: #000;
     line-height: 1.4;
@@ -17,7 +17,7 @@ header {
 }
 
 header h1 {
-    font-size: 2rem;
+    font-size: 2.1rem;
     font-weight: normal;
     margin: 0 0 10px 0;
 }
@@ -26,7 +26,7 @@ nav a {
     color: #000;
     text-decoration: none;
     margin: 0 20px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 nav a:hover {
@@ -48,14 +48,14 @@ main {
 }
 
 .post-content h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: normal;
     margin-bottom: 20px;
     text-align: center;
 }
 
 .post-content h2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 20px 0 10px 0;
     font-weight: normal;
 }
@@ -68,12 +68,12 @@ main {
 
 .post-content p {
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .post-content ul {
     margin-bottom: 15px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding-left: 20px;
 }
 
@@ -83,14 +83,14 @@ main {
 
 /* Override for direct h1, h2, h3 elements */
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: normal;
     margin-bottom: 20px;
     text-align: center;
 }
 
 h2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 20px 0 10px 0;
     font-weight: normal;
 }
@@ -103,12 +103,12 @@ h3 {
 
 p {
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 /* Post meta styles */
 .post-meta {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #666;
     font-style: italic;
     margin: 0 0 10px 0;
@@ -122,8 +122,8 @@ pre {
     padding: 10px;
     margin: 15px 0;
     overflow-x: auto;
-    font-size: 0.8rem;
-    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-family: 'Alliance No. 2', monospace;
     line-height: 1.4;
 }
 
@@ -137,7 +137,7 @@ pre {
 .variable { color: #222; }
 
 code {
-    font-family: 'Courier New', monospace;
+    font-family: 'Alliance No. 2', monospace;
     background: #f5f5f5;
     padding: 2px 4px;
     font-size: 0.85em;
@@ -145,7 +145,7 @@ code {
 
 /* Navigation breadcrumb */
 .breadcrumb {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-bottom: 20px;
 }
 
@@ -165,7 +165,7 @@ footer {
     text-align: center;
     padding: 20px;
     margin-top: 40px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 
@@ -175,7 +175,7 @@ footer {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px 0;
-    font-family: 'Courier New', monospace;
+    font-family: 'Alliance No. 2', monospace;
     font-size: 0.85rem;
     text-align: center;
 }
@@ -185,7 +185,7 @@ footer {
     margin-top: 30px;
     padding-top: 15px;
     border-top: 1px solid #000;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     text-align: center;
 }
 

@@ -1,6 +1,6 @@
 /* GPU context - Mobile Optimized with Desktop Constraint */
 body {
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     background: #fff;
     color: #000;
     line-height: 1.5;
@@ -12,14 +12,14 @@ body {
 
 /* Header styles */
 h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: normal;
     margin-bottom: 20px;
     text-align: center;
 }
 
 h2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 25px 0 15px 0;
     font-weight: normal;
 }
@@ -32,12 +32,12 @@ h3 {
 
 p {
     margin-bottom: 15px;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 ul {
     margin-bottom: 15px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding-left: 20px;
 }
 
@@ -69,13 +69,13 @@ pre {
     padding: 10px;
     margin: 15px 0;
     overflow-x: auto;
-    font-size: 0.8rem;
-    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-family: 'Alliance No. 2', monospace;
     line-height: 1.4;
 }
 
 code {
-    font-family: 'Courier New', monospace;
+    font-family: 'Alliance No. 2', monospace;
     background: #fff;
     border: 1px solid #000;
     padding: 2px 4px;
@@ -97,7 +97,7 @@ code {
     border: 2px solid #000;
     background: #fff;
     padding: 0;
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     max-width: 320px;
     margin: 20px auto;
 }
@@ -107,7 +107,7 @@ code {
     border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -116,7 +116,7 @@ code {
     border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -138,7 +138,7 @@ code {
 
 .tesla-diagram .cores-label {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
     background: #fff;
     color: #000;
@@ -155,7 +155,7 @@ code {
 
 .tesla-diagram .sfu-label {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
     background: #fff;
     color: #000;
@@ -165,7 +165,7 @@ code {
     background: #fff;
     padding: 12px 8px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -214,7 +214,7 @@ code {
     border: 2px solid #000;
     background: #fff;
     padding: 0;
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     max-width: 400px;
     margin: 20px auto;
 }
@@ -224,7 +224,7 @@ code {
     border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -233,7 +233,7 @@ code {
     border-bottom: 1px solid #000;
     padding: 12px 8px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -263,7 +263,7 @@ code {
     background: #fff;
     padding: 12px 8px;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -272,7 +272,7 @@ code {
     border: 2px solid #000;
     background: #fff;
     margin: 20px 0;
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     padding: 0;
 }
 
@@ -284,7 +284,7 @@ code {
 }
 
 .program-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-bottom: 10px;
 }
 
@@ -337,7 +337,7 @@ code {
 }
 
 .config-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-bottom: 12px;
     font-weight: normal;
 }
@@ -389,7 +389,7 @@ code {
     border: 2px solid #000;
     background: #fff;
     margin: 20px 0;
-    font-family: 'Palatino', serif;
+    font-family: 'Alliance No. 1', serif;
     display: flex;
     height: 500px;
 }
@@ -407,7 +407,7 @@ code {
 
 .section-title {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: normal;
     margin-bottom: 15px;
     padding-bottom: 8px;
@@ -423,7 +423,7 @@ code {
 }
 
 .level-title {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-bottom: 10px;
     font-weight: normal;
     text-align: center;
@@ -521,7 +521,7 @@ code {
     padding: 10px;
     margin-bottom: 0;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: normal;
 }
 
@@ -530,7 +530,7 @@ code {
     margin-top: 30px;
     padding-top: 15px;
     border-top: 1px solid #000;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     text-align: center;
 }
 

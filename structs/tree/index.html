@@ -577,7 +577,6 @@
         <p>There's an artisan beauty in the attention to the granular. The number of hands the work falls into, the extent of impact are not entirely out of mind but during implementation attention is on sowing and threading.</p>`
             }, 'writing');
             
-            // New writings from Step 2 Tree
             const stones_birds_dominoes = renderer.addNode(positions.stones_birds_dominoes[0], positions.stones_birds_dominoes[1], {
                 title: "Stones, Birds, Dominoes",
                 content: `<p>I disagree with the eggs in basket paradigm for decision making.</p>
@@ -602,13 +601,13 @@
                 title: "Diet Stack",
                 content: `<p>base — bread – milk – olive oil</p>
 
-        <p>breakfast — eggs – cold brew – avocado</p>
+                <p>breakfast — eggs – cold brew – avocado</p>
 
-        <p>lunch — chicken breast or salmon</p>
+                <p>lunch — chicken breast or salmon</p>
 
-        <p>supplementals</p>
-        <p style="margin-left: 2em;">fruit — blackberries – bananas – naval oranges – strawberries</p>
-        <p style="margin-left: 2em;">vegetables — kale – arugula</p>`
+                <p>supplementals</p>
+                <p style="margin-left: 2em;">fruit — blackberries – bananas – naval oranges – strawberries</p>
+                <p style="margin-left: 2em;">vegetables — kale – arugula</p>`
             }, 'writing');
             
             const evolution = renderer.addNode(positions.evolution[0], positions.evolution[1], {
@@ -718,7 +717,6 @@
                 <p>Think and then iterate. Iterate with signal. Iterate on iteration itself.</p>`
             }, 'writing');
 
-            // Build the tree structure
             renderer.addEdge(root, irl);
             renderer.addEdge(root, knowledge_acquisition);
             renderer.addEdge(root, orientation);
@@ -761,13 +759,11 @@
         Tree();
         
         
-        // Set Palo Alto as default selection
         setTimeout(() => {
             const contentDiv = document.getElementById('card-content');
             const headerDiv = document.getElementById('card-header');
             const textDiv = document.getElementById('card-text');
             
-            // Find Palo Alto node (it's the first writing node, index 6)
             const paloAltoContent = renderer.nodeContent[6];
             if (paloAltoContent) {
                 headerDiv.textContent = paloAltoContent.title;

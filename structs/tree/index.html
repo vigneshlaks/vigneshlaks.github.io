@@ -82,7 +82,7 @@
                 this.nodes.forEach((node, index) => {
                     const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
 
-                    if (distance <= 8) {
+                    if (distance <= 8 && index !== 0) {
                         this.onNodeClick(node, index);
                     }
                 });
@@ -99,7 +99,7 @@
                 this.nodes.forEach((node, index) => {
                     const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
 
-                    if (distance <= 8) {
+                    if (distance <= 8 && index !== 0) {
                         overClickableNode = true;
                     }
                 });
@@ -547,9 +547,7 @@
 
         <p>Everyday is a series of steps stacked upon one another. Atomic habits or some other book speaks to this notion of "habit stacking". Taken to the extreme then, the entire day a complete series of steps. We do each protocol with greater ease and refinement.</p>
 
-        <p>There is an extreme rigidity imposed and should only be done over short time frames of great exploitation.</p>
-
-        <p>Each day a perturbed reimagining.</p>`
+        <p>There is an extreme rigidity imposed and should only be done over short time frames of great exploitation.</p>`
             }, 'writing');
 
             const more_is_more = renderer.addNode(positions.more_is_more[0], positions.more_is_more[1], {
@@ -569,7 +567,7 @@
 
         <p>Everyone vies for our attention; those adept at grabbing it are those who most readily take it. Suddenly, energies shift focus. Attention shifts to attention itself instead of value proposition.</p>
 
-        <p>There's another path. In one moment, attention is piqued. Accommodating one sentence, maybe two. From their, a paragraph. With careful construction, we're able to hold on long enough to convey a story.</p>
+        <p>There's another avenue: In one moment, attention is piqued, accomodating a sentence, from their, a paragraph. With careful construction, we're able to hold on long enough to convey a story.</p>
 
         <p>It remains to actualize in full a compelling one.</p>`
             }, 'writing');
@@ -602,13 +600,9 @@
             
             const evolution = renderer.addNode(positions.evolution[0], positions.evolution[1], {
                 title: "Evolution",
-                content: `<p>Consider a looser definition of evolution as the ability to derive positive change in one's own life over a relatively short period of time. Arbitrarily instituting external change into our lives leads to acclimatization — imposing internal change as a natural extension.</p>
+                content: `<p>Consider a looser definition of evolution as the ability to derive positive change in one's own life over a relatively short period of time. Instituting external change into our lives leads to acclimatization — imposing internal change as a natural extension.</p>
 
-        <p>Sharpening things, it's more appropriate to step into increasingly macro changes in our external lives to progressively overload and stimulate continued evolution.</p>
-
-        <p>Changing a property deemed important and making the property increasingly fundamental as one evolves can work.</p>
-
-        <p>Don't overstep, and iterate off signal; a delicate interplay.</p>`
+        <p>A change in environment or fundamental characteristics can allow for this acclimization.</p>`
             }, 'writing');
             
             const unopinionation = renderer.addNode(positions.unopinionation[0], positions.unopinionation[1], {
@@ -641,7 +635,7 @@
 
         <p>Implementation can be stepped into, but faith must be direly venerated and guarded.</p>
 
-        <p>Implementation takes purpose and faith to fulfill in totality.</p>`
+        <p>Implementation takes purpose and faith to fulfill.</p>`
             }, 'writing');
             
             const axes = renderer.addNode(positions.axes[0], positions.axes[1], {

@@ -57,6 +57,7 @@
                 this.nodes = [];
                 this.edges = [];
                 this.nodeContent = {};
+                this.nodeNames = {};
                 
                 this.canvas.addEventListener('click', (e) => this.handleClick(e));
                 this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
@@ -81,7 +82,7 @@
                 this.nodes.forEach((node, index) => {
                     const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
 
-                    if (distance <= 8 && node.state === 'writing') {
+                    if (distance <= 8) {
                         this.onNodeClick(node, index);
                     }
                 });
@@ -93,11 +94,12 @@
                 const mouseY = e.clientY - rect.top;
 
                 let overClickableNode = false;
+                
 
                 this.nodes.forEach((node, index) => {
                     const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
 
-                    if (distance <= 8 && node.state === 'writing') {
+                    if (distance <= 8) {
                         overClickableNode = true;
                     }
                 });
@@ -109,24 +111,28 @@
                 const contentDiv = document.getElementById('card-content');
                 const headerDiv = document.getElementById('card-header');
                 const textDiv = document.getElementById('card-text');
-                
+
                 // Set card content based on node
                 const content = this.nodeContent[index];
                 if (content) {
                     headerDiv.textContent = content.title;
-                    textDiv.innerHTML = content.content;
+                    if (node.state === 'writing') {
+                        textDiv.innerHTML = content.content;
+                    } else {
+                        textDiv.innerHTML = '';
+                    }
                     contentDiv.style.display = 'block';
                 }
-                
+
                 this.draw();
             }
 
             drawNode(node, index) {
                 const radius = 4;
-                
+
                 this.ctx.beginPath();
                 this.ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
-                
+
                 if (node.state === 'writing') {
                     this.ctx.fillStyle = '#555';
                 } else {
@@ -190,7 +196,7 @@
                     potemkin_village: [110, 130], automaton: [160, 130],
                     self_inflicted_boxes: [200, 130], individualized_shortest_paths: [200, 170], affinity_for_technicality: [240, 130],
                     stones_birds_dominoes: [265, 130], judgement: [290, 130],
-                    consumption: [320, 130], hatch: [345, 130], diet: [370, 130], ghost_races: [320, 170], evolution: [370, 170],
+                    consumption: [320, 130], hatch: [345, 130], ghost_races: [320, 170], evolution: [370, 170],
                     more_is_more: [410, 130], unopinionation: [435, 130], occams_razor: [435, 170], lulls: [460, 130],
                     matryoshka: [410, 170], forward: [460, 170], axes: [410, 210], whimsy: [460, 210],
                     caves_and_lights: [370, 250], mach_horses: [450, 250]
@@ -202,7 +208,7 @@
                     potemkin_village: [125, 110], automaton: [175, 120],
                     self_inflicted_boxes: [205, 105], individualized_shortest_paths: [185, 145], affinity_for_technicality: [240, 105],
                     stones_birds_dominoes: [265, 110], judgement: [290, 105],
-                    consumption: [310, 110], hatch: [350, 115], diet: [330, 150], ghost_races: [370, 150], evolution: [350, 185],
+                    consumption: [310, 110], hatch: [350, 115], ghost_races: [370, 150], evolution: [350, 185],
                     more_is_more: [385, 115], unopinionation: [405, 140], occams_razor: [425, 170], lulls: [425, 115],
                     matryoshka: [445, 140], forward: [465, 115], axes: [445, 170], whimsy: [465, 145],
                     caves_and_lights: [425, 180], mach_horses: [475, 175]
@@ -214,7 +220,7 @@
                     potemkin_village: [140, 100], automaton: [180, 100],
                     self_inflicted_boxes: [205, 100], individualized_shortest_paths: [205, 140], affinity_for_technicality: [240, 100],
                     stones_birds_dominoes: [260, 100], judgement: [285, 100],
-                    consumption: [305, 100], hatch: [335, 100], diet: [365, 100], ghost_races: [305, 140], evolution: [335, 140],
+                    consumption: [305, 100], hatch: [335, 100], ghost_races: [305, 140], evolution: [335, 140],
                     more_is_more: [385, 100], unopinionation: [385, 140], occams_razor: [385, 180], lulls: [410, 100],
                     matryoshka: [410, 140], forward: [435, 140], axes: [460, 140], whimsy: [435, 180],
                     caves_and_lights: [385, 220], mach_horses: [465, 200]
@@ -226,7 +232,7 @@
                     potemkin_village: [155, 95], automaton: [170, 125],
                     self_inflicted_boxes: [310, 95], individualized_shortest_paths: [330, 80], affinity_for_technicality: [325, 115],
                     stones_birds_dominoes: [305, 135], judgement: [275, 95],
-                    consumption: [155, 180], hatch: [170, 155], diet: [170, 195], ghost_races: [205, 185], evolution: [190, 210],
+                    consumption: [155, 180], hatch: [170, 155], ghost_races: [205, 185], evolution: [190, 210],
                     more_is_more: [325, 185], unopinionation: [310, 205], occams_razor: [290, 220], lulls: [355, 170],
                     matryoshka: [370, 195], forward: [335, 150], axes: [365, 225], whimsy: [355, 205],
                     caves_and_lights: [315, 235], mach_horses: [395, 235]
@@ -238,7 +244,7 @@
                     potemkin_village: [140, 80], automaton: [160, 120],
                     self_inflicted_boxes: [320, 80], individualized_shortest_paths: [360, 100], affinity_for_technicality: [340, 120],
                     stones_birds_dominoes: [320, 160], judgement: [300, 60],
-                    consumption: [160, 200], hatch: [180, 220], diet: [140, 240], ghost_races: [240, 220], evolution: [220, 240],
+                    consumption: [160, 200], hatch: [180, 220], ghost_races: [240, 220], evolution: [220, 240],
                     more_is_more: [300, 200], unopinionation: [280, 220], occams_razor: [260, 240], lulls: [380, 160],
                     matryoshka: [360, 180], forward: [340, 200], axes: [320, 220], whimsy: [380, 200],
                     caves_and_lights: [340, 240], mach_horses: [420, 240]
@@ -250,7 +256,7 @@
                     potemkin_village: [120, 60], automaton: [140, 120],
                     self_inflicted_boxes: [340, 60], individualized_shortest_paths: [380, 90], affinity_for_technicality: [360, 120],
                     stones_birds_dominoes: [340, 180], judgement: [320, 40],
-                    consumption: [120, 220], hatch: [140, 260], diet: [100, 180], ghost_races: [200, 250], evolution: [180, 270],
+                    consumption: [120, 220], hatch: [140, 260], ghost_races: [200, 250], evolution: [180, 270],
                     more_is_more: [340, 220], unopinionation: [320, 260], occams_razor: [280, 270], lulls: [380, 180],
                     matryoshka: [360, 220], forward: [380, 260], axes: [340, 280], whimsy: [400, 220],
                     caves_and_lights: [360, 260], mach_horses: [440, 260]
@@ -262,7 +268,7 @@
                     potemkin_village: [130, 85], automaton: [150, 135],
                     self_inflicted_boxes: [330, 85], individualized_shortest_paths: [370, 110], affinity_for_technicality: [350, 135],
                     stones_birds_dominoes: [330, 195], judgement: [310, 65],
-                    consumption: [130, 195], hatch: [150, 225], diet: [110, 170], ghost_races: [210, 240], evolution: [190, 255],
+                    consumption: [130, 195], hatch: [150, 225], ghost_races: [210, 240], evolution: [190, 255],
                     more_is_more: [330, 225], unopinionation: [310, 255], occams_razor: [270, 270], lulls: [370, 170],
                     matryoshka: [350, 225], forward: [370, 255], axes: [330, 270], whimsy: [390, 195],
                     caves_and_lights: [350, 235], mach_horses: [430, 235]
@@ -274,7 +280,7 @@
                     potemkin_village: [80, 50], automaton: [100, 130],
                     self_inflicted_boxes: [380, 50], individualized_shortest_paths: [420, 90], affinity_for_technicality: [400, 130],
                     stones_birds_dominoes: [380, 230], judgement: [340, 20],
-                    consumption: [80, 230], hatch: [100, 280], diet: [60, 190], ghost_races: [180, 270], evolution: [160, 290],
+                    consumption: [80, 230], hatch: [100, 280], ghost_races: [180, 270], evolution: [160, 290],
                     more_is_more: [380, 280], unopinionation: [340, 320], occams_razor: [280, 330], lulls: [420, 190],
                     matryoshka: [400, 280], forward: [420, 320], axes: [380, 340], whimsy: [440, 230],
                     caves_and_lights: [400, 270], mach_horses: [480, 270]
@@ -286,7 +292,7 @@
                     potemkin_village: [164, 87], automaton: [173, 129],
                     self_inflicted_boxes: [307, 87], individualized_shortest_paths: [336, 95], affinity_for_technicality: [316, 129],
                     stones_birds_dominoes: [307, 193], judgement: [285, 76],
-                    consumption: [164, 193], hatch: [173, 151], diet: [144, 172], ghost_races: [218, 209], evolution: [195, 225],
+                    consumption: [164, 193], hatch: [173, 151], ghost_races: [218, 209], evolution: [195, 225],
                     more_is_more: [307, 151], unopinionation: [285, 204], occams_razor: [262, 209], lulls: [336, 172],
                     matryoshka: [316, 151], forward: [336, 185], axes: [307, 225], whimsy: [349, 193],
                     caves_and_lights: [309, 225], mach_horses: [389, 225]
@@ -298,7 +304,7 @@
                     potemkin_village: [135, 75], automaton: [155, 135],
                     self_inflicted_boxes: [325, 75], individualized_shortest_paths: [365, 95], affinity_for_technicality: [345, 135],
                     stones_birds_dominoes: [325, 205], judgement: [295, 65],
-                    consumption: [135, 205], hatch: [155, 145], diet: [115, 175], ghost_races: [210, 225], evolution: [175, 245],
+                    consumption: [135, 205], hatch: [155, 145], ghost_races: [210, 225], evolution: [175, 245],
                     more_is_more: [325, 145], unopinionation: [295, 215], occams_razor: [270, 225], lulls: [365, 175],
                     matryoshka: [345, 145], forward: [365, 185], axes: [325, 245], whimsy: [385, 205],
                     caves_and_lights: [345, 240], mach_horses: [425, 240]
@@ -310,7 +316,7 @@
                     potemkin_village: [115, 70], automaton: [140, 130],
                     self_inflicted_boxes: [340, 70], individualized_shortest_paths: [390, 100], affinity_for_technicality: [365, 130],
                     stones_birds_dominoes: [340, 210], judgement: [305, 50],
-                    consumption: [115, 210], hatch: [140, 150], diet: [90, 180], ghost_races: [205, 235], evolution: [165, 260],
+                    consumption: [115, 210], hatch: [140, 150], ghost_races: [205, 235], evolution: [165, 260],
                     more_is_more: [340, 150], unopinionation: [305, 230], occams_razor: [275, 235], lulls: [390, 180],
                     matryoshka: [365, 150], forward: [390, 190], axes: [340, 260], whimsy: [415, 210],
                     caves_and_lights: [375, 245], mach_horses: [455, 245]
@@ -322,7 +328,7 @@
                     potemkin_village: [95, 65], automaton: [125, 125],
                     self_inflicted_boxes: [355, 65], individualized_shortest_paths: [415, 95], affinity_for_technicality: [385, 125],
                     stones_birds_dominoes: [355, 215], judgement: [315, 45],
-                    consumption: [95, 215], hatch: [125, 155], diet: [65, 185], ghost_races: [200, 240], evolution: [155, 270],
+                    consumption: [95, 215], hatch: [125, 155], ghost_races: [200, 240], evolution: [155, 270],
                     more_is_more: [355, 155], unopinionation: [315, 235], occams_razor: [280, 240], lulls: [415, 185],
                     matryoshka: [385, 155], forward: [415, 195], axes: [355, 270], whimsy: [445, 215],
                     caves_and_lights: [405, 250], mach_horses: [485, 250]
@@ -334,7 +340,7 @@
                     potemkin_village: [150, 115], automaton: [200, 115],
                     self_inflicted_boxes: [240, 115], individualized_shortest_paths: [330, 155], affinity_for_technicality: [50, 155],
                     stones_birds_dominoes: [100, 155], judgement: [150, 155],
-                    consumption: [200, 155], hatch: [240, 155], diet: [50, 195], ghost_races: [100, 195], evolution: [150, 195],
+                    consumption: [200, 155], hatch: [240, 155], ghost_races: [100, 195], evolution: [150, 195],
                     more_is_more: [200, 195], unopinionation: [240, 195], occams_razor: [330, 235], lulls: [50, 235],
                     matryoshka: [100, 235], forward: [150, 235], axes: [200, 235], whimsy: [240, 235],
                     caves_and_lights: [280, 235], mach_horses: [320, 235]
@@ -524,11 +530,13 @@
                 title: "Hatch",
                 content: `<p>Future growth is aided by a reduced regard for the temporary. Tasks done for maintenance or habit expends energy unnecessarily.</p>
 
-        <p>Instead: allow each moment to promote upstream growth; move towards minimizing energy on tasks associated with temporary growth.</p>
+                        <p>Instead:</p>
+                                <p style="text-indent: 2em;">Allow each moment to promote upstream growth.</p>
+                                <p style="text-indent: 2em;">Move towards minimizing energy on tasks associated with little or no growth.</p>
 
-        <p>Push the envelope for what this means and how it affects life. Streamlining processes as a core habit; removing what's not promoting growth and allowing greater cocooning.</p>
+                        <p>Push the envelope for what this means and how it affects life. Streamlining processes as a core habit; removing what's not promoting growth and allowing greater cocooning.</p>
 
-        <p>Don't be afraid to unravel though that's the entire point.</p>`
+                        <p>Don't be afraid to unravel though that's the entire point.</p>`
             }, 'writing');
 
             const ghost_races = renderer.addNode(positions.ghost_races[0], positions.ghost_races[1], {
@@ -591,18 +599,6 @@
         <p>If we can practice removing judgement, we can step into individualized paths.</p>`
             }, 'writing');
             
-            const diet = renderer.addNode(positions.diet[0], positions.diet[1], {
-                title: "Diet Stack",
-                content: `<p>base — bread – milk – olive oil</p>
-
-                <p>breakfast — eggs – cold brew – avocado</p>
-
-                <p>lunch — chicken breast or salmon</p>
-
-                <p>supplementals</p>
-                <p style="margin-left: 2em;">fruit — blackberries – bananas – naval oranges – strawberries</p>
-                <p style="margin-left: 2em;">vegetables — kale – arugula</p>`
-            }, 'writing');
             
             const evolution = renderer.addNode(positions.evolution[0], positions.evolution[1], {
                 title: "Evolution",
@@ -672,19 +668,16 @@
 
             const caves_and_lights = renderer.addNode(positions.caves_and_lights[0], positions.caves_and_lights[1], {
                 title: "Caves and Lights",
-                content: `<p>A fixation on end results muddles learning but learning remains potential if it's never actualized. Ideal creation is readily represented by delicate balances.</p>
-
-        <p>Learning and creating are not mutually exclusive and should be pursued concurrently.</p>
-
-        <p>We are in a sense illuminating a cave by learning concepts</p>
+                content: `<p>A fixation on end results muddles learning but learning remains potential if it's never actualized.</p>
+                <p> Ideal creation is readily represented by delicate balances.</p>
+        <p>Learning concepts loosely maps to illuminating a cave: </p>
             <p style="text-indent: 2em;">On the onset, context defines orientation allowing for rudimentary sight of the cave.</p>
-            <p style="text-indent: 2em;">We then increase the "brightness" of concepts deemed to be pertinent.</p>
-            <p style="text-indent: 2em;">We constantly reevaluate orientation w.r.t learning and end results.</p>
-                <p style="text-indent: 4em;">We do this by reconsidering our value proposition and our work's relation.</p>
+            <p style="text-indent: 2em;">The "brightness" of concepts deemed to be pertinent is increased.</p>
+            <p style="text-indent: 2em;">Orientation is iteratively found through reevaluating the value proposition and the work's relation.</p>
             <p style="text-indent: 2em;">Learning a lot of information quickly is difficult.</p>
                 <p style="text-indent: 4em;">Organized documentation becomes important.</p>
 
-        <p>Serialize as much as possible.</p>
+        <p>Serialize appropriately: </p>
             <p style="text-indent: 2em;">When walking across multiple topics getting a bearing on each provides legitimate value.</p>
             <p style="text-indent: 2em;">Not delving into a sub-topic deeply enough is a beginner mistake but delving too far is another.</p>
 
@@ -704,11 +697,7 @@
 
                 <p>Leading to unideal circumstances and the obscuring of a vision.</p>
 
-                <p>Instead, we can refine our judgements and execute upon them.</p>
-
-                <p>We're rewarded for being correct even more so if we're solely correct.</p>
-
-                <p>Think and then iterate. Iterate with signal. Iterate on iteration itself.</p>`
+                <p>Refining judgements and  acting upon them provide a viable alternative avenue.</p>`
             }, 'writing');
 
             renderer.addEdge(root, irl);
@@ -731,7 +720,6 @@
             
             renderer.addEdge(systems, consumption);
             renderer.addEdge(systems, hatch);
-            renderer.addEdge(systems, diet);
             renderer.addEdge(systems, ghost_races);
             renderer.addEdge(systems, evolution);
             

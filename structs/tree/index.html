@@ -77,11 +77,11 @@
                 const rect = this.canvas.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
-                
+
                 this.nodes.forEach((node, index) => {
                     const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
-                    
-                    if (distance <= 8 && (node.state === 'writing' || node.state === 'structure')) {
+
+                    if (distance <= 8 && node.state === 'writing') {
                         this.onNodeClick(node, index);
                     }
                 });
@@ -91,17 +91,17 @@
                 const rect = this.canvas.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
-                
+
                 let overClickableNode = false;
-                
+
                 this.nodes.forEach((node, index) => {
                     const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
-                    
-                    if (distance <= 8 && (node.state === 'writing' || node.state === 'structure')) {
+
+                    if (distance <= 8 && node.state === 'writing') {
                         overClickableNode = true;
                     }
                 });
-                
+
                 this.canvas.style.cursor = overClickableNode ? 'pointer' : 'default';
             }
 
@@ -456,11 +456,7 @@
 
         <p>With that being said, investing into presentation is worthwhile. Any application of presentation helps build upstream presentation skills aiding in creation. It's interesting to see at least in this sector the trivialization of implementation with even somewhat refined taste.</p>
 
-        <p>I wonder where else this will permeate to in the future.</p>
-
-        —
-
-        <p>Speak through actions not words.</p>`
+        <p>I wonder where else this will permeate to in the future.</p>`
             }, 'writing');
 
             const automaton = renderer.addNode(positions.automaton[0], positions.automaton[1], {

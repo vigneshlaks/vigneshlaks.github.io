@@ -30,7 +30,7 @@
         <nav style="position: relative; text-align: center;">
             <a href="/" style="position: absolute; left: 0;">←</a>
             <a href="/structs/">Kernel</a>
-            <a href="/structs/tree/" class="current">Radial Tree</a>
+            <a href="/structs/tree/" class="current">Tree</a>
             <a href="/structs/dict/">Dict</a>
         </nav>
     </header>
@@ -170,188 +170,24 @@
 
         const renderer = new TreeRenderer('tree');
 
-        let currentLayout = 3;
-        const layoutNames = [
-            'Symmetric Balanced',
-            'Organic Flow', 
-            'Hierarchical Pyramid',
-            'Radial Sunburst',
-            'Radial Spiral',
-            'Radial Petals',
-            'Radial Rings',
-            'Radial Galaxy',
-            'Radial Fibonacci',
-            'Radial Mandala',
-            'Radial Constellation',
-            'Radial Vortex',
-            'Modern Grid'
-        ];
-
-        function getLayoutPositions(layoutIndex) {
-            const layouts = [
-                {
-                    root: [240, 30],
-                    irl: [45, 80], knowledge_acquisition: [135, 80], orientation: [240, 80], systems: [345, 80], implementation: [435, 80],
-                    palo_alto: [20, 130], utilitarian_meditation: [70, 130],
-                    potemkin_village: [110, 130], automaton: [160, 130],
-                    self_inflicted_boxes: [200, 130], individualized_shortest_paths: [200, 170], affinity_for_technicality: [240, 130],
-                    stones_birds_dominoes: [265, 130], judgement: [290, 130],
-                    consumption: [320, 130], hatch: [345, 130], ghost_races: [320, 170], evolution: [370, 170],
-                    more_is_more: [410, 130], unopinionation: [435, 130], occams_razor: [435, 170], lulls: [460, 130],
-                    matryoshka: [410, 170], forward: [460, 170], axes: [410, 210], whimsy: [460, 210],
-                    caves_and_lights: [370, 250], mach_horses: [450, 250]
-                },
-                {
-                    root: [240, 25],
-                    irl: [75, 70], knowledge_acquisition: [150, 65], orientation: [240, 60], systems: [330, 65], implementation: [405, 70],
-                    palo_alto: [45, 115], utilitarian_meditation: [105, 115],
-                    potemkin_village: [125, 110], automaton: [175, 120],
-                    self_inflicted_boxes: [205, 105], individualized_shortest_paths: [185, 145], affinity_for_technicality: [240, 105],
-                    stones_birds_dominoes: [265, 110], judgement: [290, 105],
-                    consumption: [310, 110], hatch: [350, 115], ghost_races: [370, 150], evolution: [350, 185],
-                    more_is_more: [385, 115], unopinionation: [405, 140], occams_razor: [425, 170], lulls: [425, 115],
-                    matryoshka: [445, 140], forward: [465, 115], axes: [445, 170], whimsy: [465, 145],
-                    caves_and_lights: [425, 180], mach_horses: [475, 175]
-                },
-                {
-                    root: [240, 20],
-                    irl: [90, 60], knowledge_acquisition: [160, 60], orientation: [240, 60], systems: [320, 60], implementation: [390, 60],
-                    palo_alto: [70, 100], utilitarian_meditation: [110, 100],
-                    potemkin_village: [140, 100], automaton: [180, 100],
-                    self_inflicted_boxes: [205, 100], individualized_shortest_paths: [205, 140], affinity_for_technicality: [240, 100],
-                    stones_birds_dominoes: [260, 100], judgement: [285, 100],
-                    consumption: [305, 100], hatch: [335, 100], ghost_races: [305, 140], evolution: [335, 140],
-                    more_is_more: [385, 100], unopinionation: [385, 140], occams_razor: [385, 180], lulls: [410, 100],
-                    matryoshka: [410, 140], forward: [435, 140], axes: [460, 140], whimsy: [435, 180],
-                    caves_and_lights: [385, 220], mach_horses: [465, 200]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 90], knowledge_acquisition: [190, 115], orientation: [290, 115], systems: [190, 165], implementation: [290, 165],
-                    palo_alto: [220, 70], utilitarian_meditation: [260, 70],
-                    potemkin_village: [155, 95], automaton: [170, 125],
-                    self_inflicted_boxes: [310, 95], individualized_shortest_paths: [330, 80], affinity_for_technicality: [325, 115],
-                    stones_birds_dominoes: [305, 135], judgement: [275, 95],
-                    consumption: [155, 180], hatch: [170, 155], ghost_races: [205, 185], evolution: [190, 210],
-                    more_is_more: [325, 185], unopinionation: [310, 205], occams_razor: [290, 220], lulls: [355, 170],
-                    matryoshka: [370, 195], forward: [335, 150], axes: [365, 225], whimsy: [355, 205],
-                    caves_and_lights: [315, 235], mach_horses: [395, 235]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 80], knowledge_acquisition: [180, 100], orientation: [300, 100], systems: [200, 180], implementation: [280, 180],
-                    palo_alto: [210, 50], utilitarian_meditation: [270, 50],
-                    potemkin_village: [140, 80], automaton: [160, 120],
-                    self_inflicted_boxes: [320, 80], individualized_shortest_paths: [360, 100], affinity_for_technicality: [340, 120],
-                    stones_birds_dominoes: [320, 160], judgement: [300, 60],
-                    consumption: [160, 200], hatch: [180, 220], ghost_races: [240, 220], evolution: [220, 240],
-                    more_is_more: [300, 200], unopinionation: [280, 220], occams_razor: [260, 240], lulls: [380, 160],
-                    matryoshka: [360, 180], forward: [340, 200], axes: [320, 220], whimsy: [380, 200],
-                    caves_and_lights: [340, 240], mach_horses: [420, 240]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 60], knowledge_acquisition: [160, 90], orientation: [320, 90], systems: [160, 190], implementation: [320, 190],
-                    palo_alto: [200, 30], utilitarian_meditation: [280, 30],
-                    potemkin_village: [120, 60], automaton: [140, 120],
-                    self_inflicted_boxes: [340, 60], individualized_shortest_paths: [380, 90], affinity_for_technicality: [360, 120],
-                    stones_birds_dominoes: [340, 180], judgement: [320, 40],
-                    consumption: [120, 220], hatch: [140, 260], ghost_races: [200, 250], evolution: [180, 270],
-                    more_is_more: [340, 220], unopinionation: [320, 260], occams_razor: [280, 270], lulls: [380, 180],
-                    matryoshka: [360, 220], forward: [380, 260], axes: [340, 280], whimsy: [400, 220],
-                    caves_and_lights: [360, 260], mach_horses: [440, 260]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 80], knowledge_acquisition: [170, 110], orientation: [310, 110], systems: [170, 170], implementation: [310, 170],
-                    palo_alto: [215, 50], utilitarian_meditation: [265, 50],
-                    potemkin_village: [130, 85], automaton: [150, 135],
-                    self_inflicted_boxes: [330, 85], individualized_shortest_paths: [370, 110], affinity_for_technicality: [350, 135],
-                    stones_birds_dominoes: [330, 195], judgement: [310, 65],
-                    consumption: [130, 195], hatch: [150, 225], ghost_races: [210, 240], evolution: [190, 255],
-                    more_is_more: [330, 225], unopinionation: [310, 255], occams_razor: [270, 270], lulls: [370, 170],
-                    matryoshka: [350, 225], forward: [370, 255], axes: [330, 270], whimsy: [390, 195],
-                    caves_and_lights: [350, 235], mach_horses: [430, 235]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 70], knowledge_acquisition: [140, 90], orientation: [340, 90], systems: [140, 190], implementation: [340, 190],
-                    palo_alto: [190, 30], utilitarian_meditation: [290, 30],
-                    potemkin_village: [80, 50], automaton: [100, 130],
-                    self_inflicted_boxes: [380, 50], individualized_shortest_paths: [420, 90], affinity_for_technicality: [400, 130],
-                    stones_birds_dominoes: [380, 230], judgement: [340, 20],
-                    consumption: [80, 230], hatch: [100, 280], ghost_races: [180, 270], evolution: [160, 290],
-                    more_is_more: [380, 280], unopinionation: [340, 320], occams_razor: [280, 330], lulls: [420, 190],
-                    matryoshka: [400, 280], forward: [420, 320], axes: [380, 340], whimsy: [440, 230],
-                    caves_and_lights: [400, 270], mach_horses: [480, 270]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 95], knowledge_acquisition: [195, 108], orientation: [285, 108], systems: [195, 172], implementation: [285, 172],
-                    palo_alto: [218, 71], utilitarian_meditation: [262, 71],
-                    potemkin_village: [164, 87], automaton: [173, 129],
-                    self_inflicted_boxes: [307, 87], individualized_shortest_paths: [336, 95], affinity_for_technicality: [316, 129],
-                    stones_birds_dominoes: [307, 193], judgement: [285, 76],
-                    consumption: [164, 193], hatch: [173, 151], ghost_races: [218, 209], evolution: [195, 225],
-                    more_is_more: [307, 151], unopinionation: [285, 204], occams_razor: [262, 209], lulls: [336, 172],
-                    matryoshka: [316, 151], forward: [336, 185], axes: [307, 225], whimsy: [349, 193],
-                    caves_and_lights: [309, 225], mach_horses: [389, 225]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 85], knowledge_acquisition: [175, 105], orientation: [305, 105], systems: [175, 175], implementation: [305, 175],
-                    palo_alto: [210, 55], utilitarian_meditation: [270, 55],
-                    potemkin_village: [135, 75], automaton: [155, 135],
-                    self_inflicted_boxes: [325, 75], individualized_shortest_paths: [365, 95], affinity_for_technicality: [345, 135],
-                    stones_birds_dominoes: [325, 205], judgement: [295, 65],
-                    consumption: [135, 205], hatch: [155, 145], ghost_races: [210, 225], evolution: [175, 245],
-                    more_is_more: [325, 145], unopinionation: [295, 215], occams_razor: [270, 225], lulls: [365, 175],
-                    matryoshka: [345, 145], forward: [365, 185], axes: [325, 245], whimsy: [385, 205],
-                    caves_and_lights: [345, 240], mach_horses: [425, 240]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 80], knowledge_acquisition: [165, 100], orientation: [315, 100], systems: [165, 180], implementation: [315, 180],
-                    palo_alto: [205, 45], utilitarian_meditation: [275, 45],
-                    potemkin_village: [115, 70], automaton: [140, 130],
-                    self_inflicted_boxes: [340, 70], individualized_shortest_paths: [390, 100], affinity_for_technicality: [365, 130],
-                    stones_birds_dominoes: [340, 210], judgement: [305, 50],
-                    consumption: [115, 210], hatch: [140, 150], ghost_races: [205, 235], evolution: [165, 260],
-                    more_is_more: [340, 150], unopinionation: [305, 230], occams_razor: [275, 235], lulls: [390, 180],
-                    matryoshka: [365, 150], forward: [390, 190], axes: [340, 260], whimsy: [415, 210],
-                    caves_and_lights: [375, 245], mach_horses: [455, 245]
-                },
-                {
-                    root: [240, 140],
-                    irl: [240, 75], knowledge_acquisition: [155, 95], orientation: [325, 95], systems: [155, 185], implementation: [325, 185],
-                    palo_alto: [200, 40], utilitarian_meditation: [280, 40],
-                    potemkin_village: [95, 65], automaton: [125, 125],
-                    self_inflicted_boxes: [355, 65], individualized_shortest_paths: [415, 95], affinity_for_technicality: [385, 125],
-                    stones_birds_dominoes: [355, 215], judgement: [315, 45],
-                    consumption: [95, 215], hatch: [125, 155], ghost_races: [200, 240], evolution: [155, 270],
-                    more_is_more: [355, 155], unopinionation: [315, 235], occams_razor: [280, 240], lulls: [415, 185],
-                    matryoshka: [385, 155], forward: [415, 195], axes: [355, 270], whimsy: [445, 215],
-                    caves_and_lights: [405, 250], mach_horses: [485, 250]
-                },
-                {
-                    root: [240, 25],
-                    irl: [75, 70], knowledge_acquisition: [150, 70], orientation: [240, 70], systems: [330, 70], implementation: [405, 70],
-                    palo_alto: [50, 115], utilitarian_meditation: [100, 115],
-                    potemkin_village: [150, 115], automaton: [200, 115],
-                    self_inflicted_boxes: [240, 115], individualized_shortest_paths: [330, 155], affinity_for_technicality: [50, 155],
-                    stones_birds_dominoes: [100, 155], judgement: [150, 155],
-                    consumption: [200, 155], hatch: [240, 155], ghost_races: [100, 195], evolution: [150, 195],
-                    more_is_more: [200, 195], unopinionation: [240, 195], occams_razor: [330, 235], lulls: [50, 235],
-                    matryoshka: [100, 235], forward: [150, 235], axes: [200, 235], whimsy: [240, 235],
-                    caves_and_lights: [280, 235], mach_horses: [320, 235]
-                }
-            ];
-            return layouts[layoutIndex];
+        function getLayoutPositions() {
+            return {
+                root: [240, 140],
+                irl: [240, 90], knowledge_acquisition: [190, 115], orientation: [290, 115], systems: [190, 165], implementation: [290, 165],
+                palo_alto: [220, 70], utilitarian_meditation: [260, 70],
+                potemkin_village: [155, 95], automaton: [170, 125],
+                self_inflicted_boxes: [310, 95], individualized_shortest_paths: [330, 80], affinity_for_technicality: [325, 115],
+                stones_birds_dominoes: [305, 135], judgement: [275, 95],
+                consumption: [155, 195], hatch: [170, 215], ghost_races: [205, 200],
+                more_is_more: [325, 185], unopinionation: [310, 205], lulls: [355, 170],
+                matryoshka: [370, 195], forward: [335, 150], axes: [365, 225], whimsy: [355, 205],
+                caves_and_lights: [315, 235], mach_horses: [395, 235]
+            };
         }
 
         function Tree() {
             renderer.clear();
-            const positions = getLayoutPositions(currentLayout);
+            const positions = getLayoutPositions();
     
             const root = renderer.addNode(positions.root[0], positions.root[1], {
                 title: "Creation",
@@ -418,18 +254,6 @@
         <p>If I moved too far in one direction then I could just recorrect by moving over one street. During my trip, the arbitrary paths converged when I reached an underpass. As long as I hit the underpass, the road selection was more open ended than I would have perceived if I wasn't willing to experiment.</p>
 
         <p>After a few trips, I was completing the entire sequence quickly with greater freedom.</p>
-
-        –
-
-        <p>We can make a lot of meals with a few ingredients.</p>
-
-        <p>There's a more verbose argument with conditioning, combinations, orthogonality, steps as to why cooking with only a few ingredients is reasonable.</p>
-
-        <p>But it's pretty unnecessary. Essentially, if we carefully choose base ingredients and get a really good feel for these base ingredients we can combine them in different ways and make varying meals. We can also do this quite quickly because of our understanding of each ingredient.</p>
-
-        <p>The process of incorporating new ingredients is done organically. If our decision for the base set of ingredients is unopinionated, there will be a lot of interplay with the new ingredient. Incorporating new ingredients in this way have implied utility as it's only been incorporated because it has something to offer.</p>
-
-        <p>Half way through the summer, I got bored of my meals and incorporated a new ingredient to see what would happen. The food had renewed vitality.</p>
                 `
             }, 'writing');
             
@@ -505,7 +329,7 @@
 
         <p>Coding can be used as an aid to knowledge acquisition. Coding a thing out and doing so precisely correctly is not an easy thing to do and implies a meaningful depth of understanding.</p>
 
-        <p>It's not just about the act of typing out code. If the code today can be automated tomorrow or today or the day after, shouldn't dictate whether to write the code.</p>
+        <p>It's not just about the act of typing out code. If the code today can be automated tomorrow or today or the day after, shouldn't dictate whether to write the code assuming the information is important.</p>
 
         <p>This can take a moment to capitulate to. It's very enticing to get rewards especially if those rewards are usually hard fought, misinterpreting it as value. However, if those fights are not actually difficult then the implied value disappears as well. The difficulty of attainment is what prescribes value in the context of knowledge acquisition.</p>
 
@@ -516,11 +340,9 @@
 
             const consumption = renderer.addNode(positions.consumption[0], positions.consumption[1], {
                 title: "Consumption",
-                content: `<p>Our brains are constantly fed a lot information. Forgetting information becomes easier as our brain becomes conditioned into forgetting and glossing over information.</p>
+                content: `<p>Forgetting information becomes easier as our brain becomes conditioned into forgetting and glossing over information.</p>
 
-        <p>We can mitigate the effects by reducing the amount of information we consume and make small efforts to remember the information we're interested in learning.</p>
-
-        <p>Rewinding the dilution.</p>`
+        <p>We can mitigate the effects by reducing the amount of information we consume and make small efforts to remember the information we're interested in learning.</p>`
             }, 'writing');
 
             const hatch = renderer.addNode(positions.hatch[0], positions.hatch[1], {
@@ -542,7 +364,7 @@
 
         <p>See what was done when at a certain time yesterday and see if the timings can be match or improved.</p>
 
-        <p>Everyday is a series of steps stacked upon one another. Atomic habits or some other book speaks to this notion of "habit stacking". Taken to the extreme then, the entire day a complete series of steps. We do each protocol with greater ease and refinement.</p>
+        <p>Everyday is a series of steps stacked upon one another. Atomic habits or some other book speaks to this notion of "habit stacking". Taken to the extreme then, the entire day a complete series of steps.</p>
 
         <p>There is an extreme rigidity imposed and should only be done over short time frames of great exploitation.</p>`
             }, 'writing');
@@ -580,7 +402,7 @@
                 title: "Stones, Birds, Dominoes",
                 content: `<p>I disagree with the eggs in basket paradigm for decision making.</p>
 
-        <p>This implies disjointedness when goals can and should be intertwined. Planned out over horizons: short term goals are more focused and fitted while long term goals remain nebulous and an ideal to step towards. Stones are minimized and birds are maximized.</p>`
+        <p>This implies disjointedness when goals can and should be intertwined. Short term goals are more focused and fitted while long term goals remain nebulous and an ideal to step towards. Stones are minimized and birds are maximized.</p>`
             }, 'writing');
             
             const judgement = renderer.addNode(positions.judgement[0], positions.judgement[1], {
@@ -595,12 +417,6 @@
             }, 'writing');
             
             
-            const evolution = renderer.addNode(positions.evolution[0], positions.evolution[1], {
-                title: "Evolution",
-                content: `<p>Consider a looser definition of evolution as the ability to derive positive change in one's own life over a relatively short period of time. Instituting external change into our lives leads to acclimatization — imposing internal change as a natural extension.</p>
-
-        <p>A change in environment or fundamental characteristics can allow for this acclimatization.</p>`
-            }, 'writing');
             
             const unopinionation = renderer.addNode(positions.unopinionation[0], positions.unopinionation[1], {
                 title: "Unopinionation",
@@ -615,14 +431,6 @@
         <p>As such, during the interim, tasteful unopionation allows for one's works to derive its sheen from the inherent value proposition.</p>`
             }, 'writing');
             
-            const occams_razor = renderer.addNode(positions.occams_razor[0], positions.occams_razor[1], {
-                title: "Occam's Razor",
-                content: `<p>Solutions are often simple.</p>
-
-        <p>There are many external and internal mechanisms pushing us away from this fundamental truth.</p>
-
-        <p>Establishing this premise and defaulting to simple behavior allows us to avoid premature optimization.</p>`
-            }, 'writing');
             
             const forward = renderer.addNode(positions.forward[0], positions.forward[1], {
                 title: "Forward",
@@ -712,11 +520,9 @@
             renderer.addEdge(systems, consumption);
             renderer.addEdge(systems, hatch);
             renderer.addEdge(systems, ghost_races);
-            renderer.addEdge(systems, evolution);
             
             renderer.addEdge(implementation, more_is_more);
             renderer.addEdge(more_is_more, unopinionation);
-            renderer.addEdge(unopinionation, occams_razor);
             renderer.addEdge(implementation, lulls);
             renderer.addEdge(implementation, matryoshka);
             renderer.addEdge(implementation, unopinionation);

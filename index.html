@@ -12,8 +12,8 @@
     <p>UPenn CS + Robotics</p>
     <p> <a href="https://x.com/va_laksh" target="_blank">X</a> – <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a> – <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
     <nav>
-      <a href="#" onclick="showSection('bio')">Bio</a>
-      <a href="#" onclick="showSection('experiences')">Experiences</a>
+      <a href="#" onclick="showSection('bio')" id="bio-link" class="active">Bio</a>
+      <a href="#" onclick="showSection('experiences')" id="experiences-link">Experiences</a>
       <a href="/structs/">Structures</a>
     </nav>
   </header>
@@ -49,6 +49,11 @@
       document.getElementById('bio-content').style.display = 'none';
       document.getElementById('experiences-content').style.display = 'none';
       document.getElementById(section + '-content').style.display = 'block';
+
+      // Update active state
+      document.getElementById('bio-link').classList.remove('active');
+      document.getElementById('experiences-link').classList.remove('active');
+      document.getElementById(section + '-link').classList.add('active');
     }
   </script>
 </body>

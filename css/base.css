@@ -105,6 +105,10 @@ nav a:hover {
     color: #666;
 }
 
+nav a.active {
+    text-decoration: underline;
+}
+
 /* Main content */
 main {
     max-width: 600px;

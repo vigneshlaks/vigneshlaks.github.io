@@ -8,16 +8,33 @@
         .tree-container {
             text-align: center;
             margin: 40px 0;
+            overflow-x: auto;
         }
 
         .writing-item {
             text-align: left;
         }
 
+        .canvas-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
         @media (max-width: 768px) {
-            .tree-canvas {
-                transform: scale(0.8);
-                transform-origin: center;
+            .tree-container {
+                margin: 20px 0;
+            }
+
+            .canvas-wrapper {
+                transform: scale(0.7);
+                transform-origin: center top;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .canvas-wrapper {
+                transform: scale(0.5);
+                transform-origin: center top;
             }
         }
     </style>
@@ -37,8 +54,8 @@
     </header>
 
     <div class="tree-container">
-        <div class="container">
-            <canvas id="tree" class="tree-canvas" width="480" height="280"></canvas>
+        <div class="canvas-wrapper">
+            <canvas id="tree" width="480" height="280"></canvas>
         </div>
         <section id="card-content" style="display: none; margin-top: 30px;">
             <div class="writing-item">
@@ -59,9 +76,26 @@
                 this.edges = [];
                 this.nodeContent = {};
                 this.nodeNames = {};
-                
+
                 this.canvas.addEventListener('click', (e) => this.handleClick(e));
+                this.canvas.addEventListener('touchend', (e) => this.handleTouch(e));
                 this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+            }
+
+            getCanvasCoordinates(clientX, clientY) {
+                const rect = this.canvas.getBoundingClientRect();
+                const wrapper = this.canvas.parentElement;
+                const wrapperRect = wrapper.getBoundingClientRect();
+
+                // Calculate scale factor from transform
+                const scaleX = rect.width / this.canvas.width;
+                const scaleY = rect.height / this.canvas.height;
+
+                // Adjust for the offset and scale
+                const x = (clientX - rect.left) / scaleX;
+                const y = (clientY - rect.top) / scaleY;
+
+                return { x, y };
             }
 
             addNode(x, y, content = null, state = 'structure') {
@@ -76,12 +110,20 @@
             }
 
             handleClick(e) {
-                const rect = this.canvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
+                const coords = this.getCanvasCoordinates(e.clientX, e.clientY);
+                this.checkNodeClick(coords.x, coords.y);
+            }
 
+            handleTouch(e) {
+                e.preventDefault();
+                const touch = e.changedTouches[0];
+                const coords = this.getCanvasCoordinates(touch.clientX, touch.clientY);
+                this.checkNodeClick(coords.x, coords.y);
+            }
+
+            checkNodeClick(x, y) {
                 this.nodes.forEach((node, index) => {
-                    const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
+                    const distance = Math.sqrt((x - node.x) ** 2 + (y - node.y) ** 2);
 
                     if (distance <= 8 && index !== 0) {
                         this.onNodeClick(node, index);
@@ -90,15 +132,11 @@
             }
 
             handleMouseMove(e) {
-                const rect = this.canvas.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
+                const coords = this.getCanvasCoordinates(e.clientX, e.clientY);
                 let overClickableNode = false;
-                
 
                 this.nodes.forEach((node, index) => {
-                    const distance = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
+                    const distance = Math.sqrt((coords.x - node.x) ** 2 + (coords.y - node.y) ** 2);
 
                     if (distance <= 8 && index !== 0) {
                         overClickableNode = true;

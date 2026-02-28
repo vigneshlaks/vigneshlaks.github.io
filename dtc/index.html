@@ -10,24 +10,40 @@
 
 </head>
 <body class="landing">
+    <audio id="bg-music" src="./Sunken_Cathedral.ogg" loop></audio>
+    <script>
+      document.addEventListener('click', () => {
+        const music = document.getElementById('bg-music');
+        music.volume = 0.5;
+        music.play();
+      }, { once: true });
+    </script>
     <header class="landing-header">
         <h1>Didactic Tensor Compiler</h1>
-        <p>Minimum viable writings with slight opinionation</p>
     </header>
 
     <main class="landing-main">
         <div class="post-list">
-            <article class="post-item available" onclick="window.location.href='gpu-context/gpu-context.html'">
+            <article class="post-item available" onclick="window.location.href='gpu-context.html'">
                 <h3 class="post-title">Contextualizing and Concreting</h3>
-                <p class="post-meta">history then code</p>
+                <p class="post-meta">06-11-2025</p>
             </article>
-            <article class="post-item available" onclick="window.location.href='parallel-reduction/parallel-reduction.html'">
+            <article class="post-item available" onclick="window.location.href='parallel-reduction.html'">
                 <h3 class="post-title">Optimizing Parallel Reduction</h3>
-                <p class="post-meta">iteratively more complex reduction algorithms</p>
+                <p class="post-meta">06-07-2025</p>
             </article>
-            
-            
+
+            <div class="post-divider"></div>
+
+            <article class="post-item locked">
+                <h3 class="post-title">Didactic Tensor IR, M1 Chip Lowering, GPU Autotuning</h3>
+                <p class="post-meta"></p>
             </article>
+            <article class="post-item locked">
+                <h3 class="post-title">Systems Programming Topics</h3>
+                <p class="post-meta"></p>
+            </article>
+        </div>
     </main>
     
 

@@ -242,6 +242,12 @@ pre {
     .post-item { padding: 18px 20px; }
 }
 
+.post-divider {
+    width: 100%;
+    border-top: 1px solid #eee;
+    margin: 8px 0;
+}
+
 .landing-footer a {
     color: #999;
     text-decoration: none;

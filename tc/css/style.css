@@ -1,6 +1,6 @@
 /* Base styles */
 body {
-    font-family: 'Alliance No. 1', serif;
+    font-family: 'Palatino', serif;
     background: #fff;
     color: #000;
     line-height: 1.4;
@@ -204,7 +204,7 @@ pre {
     margin: 15px 0;
     overflow-x: auto;
     font-size: 0.9rem;
-    font-family: 'Alliance No. 2', monospace;
+    font-family: 'Palatino', monospace;
     line-height: 1.4;
 }
 
@@ -226,10 +226,12 @@ pre {
 .breadcrumb a {
     color: #000;
     text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease;
 }
 
 .breadcrumb a:hover {
-    text-decoration: underline;
+    transform: translateY(-2px);
 }
 
 /* Responsive design */

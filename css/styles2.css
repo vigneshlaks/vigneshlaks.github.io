@@ -1,6 +1,6 @@
 /* Base styles */
 body {
-    font-family: 'Alliance No. 1', serif;
+    font-family: 'Palatino', serif;
     background: #fff;
     color: #000;
     line-height: 1.4;
@@ -123,7 +123,7 @@ pre {
     margin: 15px 0;
     overflow-x: auto;
     font-size: 0.9rem;
-    font-family: 'Alliance No. 2', monospace;
+    font-family: 'Palatino', monospace;
     line-height: 1.4;
 }
 
@@ -137,7 +137,7 @@ pre {
 .variable { color: #222; }
 
 code {
-    font-family: 'Alliance No. 2', monospace;
+    font-family: 'Palatino', monospace;
     background: #f5f5f5;
     padding: 2px 4px;
     font-size: 0.85em;
@@ -175,7 +175,7 @@ footer {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px 0;
-    font-family: 'Alliance No. 2', monospace;
+    font-family: 'Palatino', monospace;
     font-size: 0.85rem;
     text-align: center;
 }

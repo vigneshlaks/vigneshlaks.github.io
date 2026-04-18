@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books</title>
     <style>
+        html {
+            font-size: 14px;
+        }
+
         body {
-            font-family: 'Alliance No. 1', serif;
+            font-family: 'Palatino', serif;
             background: #fff;
             color: #000;
             line-height: 1.4;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            overflow: hidden;
         }
 
         header {
@@ -31,10 +33,42 @@
         main {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: calc(100vh - 220px);
+            min-height: calc(100vh - 220px);
+            justify-content: center;
             padding: 0 20px;
+        }
+
+        #breadcrumb {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 12px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 450px;
+            display: none;
+        }
+
+        #breadcrumb:hover { color: #555; }
+
+        #view {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        #view .post-list {
+            max-width: 100%;
+        }
+
+        #view .section-label {
+            max-width: 100%;
+        }
+
+        #view .post-divider {
+            max-width: 100%;
         }
 
         .section-label {
@@ -59,30 +93,30 @@
             border: 1px solid #ddd;
             background: #fff;
             padding: 20px 25px;
-        }
-
-        .post-item.reading {
-            opacity: 0.5;
-        }
-
-        .post-item.folder {
-            cursor: default;
-        }
-
-        .post-item.child {
-            border: 1px solid #ddd;
-            background: #fff;
-            padding: 12px 25px 12px 40px;
             cursor: pointer;
             transition: transform 0.2s ease;
         }
 
-        .post-item.child:hover {
+        .post-item:hover {
             transform: translateY(-4px);
         }
 
-        .post-item.child:hover .post-title {
+        .post-item:hover .post-title {
             text-decoration: underline;
+        }
+
+        .post-item.reading {
+            opacity: 0.5;
+            cursor: default;
+            transform: none;
+        }
+
+        .post-item.reading:hover {
+            transform: none;
+        }
+
+        .post-item.reading:hover .post-title {
+            text-decoration: none;
         }
 
         .post-title {
@@ -90,11 +124,6 @@
             font-weight: normal;
             margin: 0;
             color: #000;
-        }
-
-        .post-title.child-title::before {
-            content: '→ ';
-            color: #999;
         }
 
         .post-divider {
@@ -134,30 +163,71 @@
     </header>
 
     <main>
-        <p class="section-label">Currently Reading</p>
-        <div class="post-list">
-            <article class="post-item reading">
-                <h3 class="post-title">Sophie's World</h3>
-            </article>
-            <article class="post-item reading">
-                <h3 class="post-title">The Martian</h3>
-            </article>
-            <article class="post-item reading">
-                <h3 class="post-title">Breadth, Mind, Consciousness</h3>
-            </article>
-        </div>
-
-        <div class="post-divider"></div>
-
-        <p class="section-label">Read</p>
-        <div class="post-list">
-            <article class="post-item folder">
-                <h3 class="post-title">Startup</h3>
-            </article>
-            <article class="post-item child" onclick="window.location.href='zero-to-one.html'">
-                <h3 class="post-title child-title">Zero to One</h3>
-            </article>
-        </div>
+        <div id="breadcrumb">←</div>
+        <div id="view"></div>
     </main>
+
+    <script>
+        const categories = {
+            'Spiritual / Philosophy': [
+                { title: "Sophie's World", href: 'sophies-world.html' },
+                { title: "Man's Search for Meaning", href: 'mans-search-for-meaning.html' }
+            ],
+            'Fantasy': [
+                { title: 'Stormlight Archive Series', href: 'stormlight-archive.html' },
+                { title: 'Game of Thrones Series', href: 'game-of-thrones.html' }
+            ],
+            'Fiction': [
+                { title: 'The Martian', href: 'the-martian.html' }
+            ],
+            'Nonfiction': [
+                { title: 'Zero to One', href: 'zero-to-one.html' },
+                { title: "Can't Hurt Me", href: 'cant-hurt-me.html' }
+            ],
+            'Biography': [
+                { title: 'Steve Jobs', href: 'steve-jobs.html' }
+            ]
+        };
+
+        const view = document.getElementById('view');
+        const breadcrumb = document.getElementById('breadcrumb');
+
+        function showTopLevel() {
+            breadcrumb.style.display = 'none';
+
+            let html = `
+                <p class="section-label">Read</p>
+                <div class="post-list">
+                    ${Object.keys(categories).map(cat => `
+                        <article class="post-item" onclick="showCategory('${cat.replace(/'/g, "\\'")}')">
+                            <h3 class="post-title">${cat}</h3>
+                        </article>
+                    `).join('')}
+                </div>
+            `;
+            view.innerHTML = html;
+        }
+
+        function showCategory(name) {
+            const books = categories[name];
+
+            breadcrumb.style.display = 'block';
+            breadcrumb.onclick = showTopLevel;
+
+            let html = `
+                <p class="section-label">${name}</p>
+                <div class="post-list">
+                    ${books.map(book => `
+                        <article class="post-item${book.href ? '' : ''}" ${book.href ? `onclick="window.location.href='${book.href}'"` : ''}>
+                            <h3 class="post-title">${book.title}</h3>
+                        </article>
+                    `).join('')}
+                </div>
+            `;
+            view.innerHTML = html;
+        }
+
+        showTopLevel();
+    </script>
 </body>
 </html>

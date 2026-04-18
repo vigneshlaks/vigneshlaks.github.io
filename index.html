@@ -5,54 +5,377 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vignesh Lakshmanan</title>
   <link rel="stylesheet" href="css/base.css">
+  <style>
+    .tree-container { text-align: center; margin: 40px 0; }
+    @media (max-width: 600px) {
+      #steppedgraph-link { display: none; }
+      #kernel-link { display: inline !important; }
+    }
+    .writing-item { text-align: left; }
+    #breadcrumb {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 8px;
+      cursor: pointer;
+      display: none;
+    }
+    #breadcrumb:hover { color: #555; }
+  </style>
 </head>
 <body>
   <header>
     <h1>Vignesh Lakshmanan</h1>
     <p>UPenn CS + Robotics</p>
-    <p> <a href="https://x.com/va_laksh" target="_blank">X</a> – <a href="https://www.linkedin.com/in/vigneshlaksh/" target="_blank">LinkedIn</a> – <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
+    <p><a href="https://x.com/va_laksh" target="_blank">X</a> – <a href="https://github.com/vigneshlaks" target="_blank">GitHub</a></p>
     <nav>
       <a href="#" onclick="showSection('bio')" id="bio-link" class="active">Bio</a>
-      <a href="#" onclick="showSection('experiences')" id="experiences-link">Experiences</a>
-      <a href="/structs/">Structures</a>
+      <a href="#" onclick="showSection('steppedgraph')" id="steppedgraph-link">Graph</a>
+      <a href="#" onclick="showSection('kernel')" id="kernel-link" style="display:none;">Kernel</a>
+      <a href="#" onclick="showSection('longform')" id="longform-link">Long Form</a>
     </nav>
   </header>
 
   <section id="bio-content" class="section">
-    <p>I am finishing a <a href="/tc/">tensor compiler</a> project then applied algorithms after spring break.</p>
-    <p>—</p>
-    <p>I suspect there is a leverageable set of fundamentals worth delving into</p>
-    <p>—</p>
-    <p><a href="/books/">Books</a></p>
+    <p>And I have come to realize there are ears around me though I will not be puppeteered. I study at the University of Pennsylvania. Previous summer I have worked at Suki AI, Hometown Ticketing, and Sycamore Growth Group. I also like to <a href="/books/">read</a>.</p>
   </section>
 
-  <section id="experiences-content" class="section" style="display: none;">
-    <p>Steganography Research at UPenn — August 2024 – Present</p>
-    <p style="margin-left: 2em;">Learning about algorithms, encodings, and tokenization</p>
-    <p>—</p>
-    <p>Algorithms TA — December 2024 – Present</p>
-    <p style="margin-left: 2em;">Create minimal drawings to help depict algorithms</p>
-    <p>—</p>
-    <p>Machine Learning at <a href="https://www.suki.ai/news/suki-expands-executive-leadership-team-to-accelerate-the-future-of-ambient-ai-in-healthcare/" target="_blank">Suki</a> — May 2025 – August 2025</p>
-    <p style="margin-left: 2em;">Pragmatic support for doctors</p>
-    <p style="margin-left: 2em;">Wrote a dialogue discretization algorithm, filed for a patent</p>
-    <p>—</p>
-    <p>Software at <a href="https://www.prnewswire.com/news-releases/hometown-ticketing-and-schoolfundr-join-forces-to-empower-schools-and-drive-student-success-beyond-the-classroom-302328261.html" target="_blank">Hometown</a> — May 2024 – August 2024</p>
-    <p style="margin-left: 2em;">Wrote a recursive algorithm to automate documentation</p>
-    <p style="margin-left: 2em;">Built Docker tooling to support developer environment</p>
-    <p style="margin-left: 2em;">Contributed to PHP production code</p>
+  <section id="steppedgraph-content" class="section" style="display:none;">
+    <div class="tree-container">
+<div id="breadcrumb">←</div>
+      <canvas id="tree" class="tree-canvas" width="480" height="280"></canvas>
+      <div id="card-content" style="display:none; margin-top:30px;">
+        <div class="writing-item">
+          <div class="writing-header" id="card-header"></div>
+          <div class="writing-thoughts">
+            <div id="card-text"></div>
+          </div>
+        </div>
+      </div>
+      <div id="prev-structures" style="margin-top:24px; font-size:12px; color:#999; text-align:left;">
+        Previous Structures — <a href="/structs/">Kernel</a> · <a href="/structs/tree/">Tree</a> · <a href="/structs/dict/">Dict</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kernel-content" class="section" style="display:none;">
+    <div class="writing-item">
+      <div class="writing-header">Creative Pursuits - 2024-08-14</div>
+      <div class="writing-thoughts">
+        <p>Personal distinction can be progressively overloaded.</p>
+      </div>
+    </div>
+    <div class="writing-item">
+      <div class="writing-header">Scaling Seemingly Disjoint Skill Sets - 2024-10-19</div>
+      <div class="writing-thoughts">
+        <p>Learn different but related skills. Helpful in the short and long term with an eye for leverage.</p>
+      </div>
+    </div>
+    <div class="writing-item">
+      <div class="writing-header">The necessity for a unique written footprint - 2025-02-08</div>
+      <div class="writing-thoughts">
+        <p>Human-human connection → Human-robot connection → Robot-robot connection.</p>
+        <p>Robots infiltrating our online channels, running rampant pushing government agendas.</p>
+        <p>The transformer architecture and internet scale data has placed us a few steps away from this future. It does not (readily) appear that there are overarching figures creating large scale tomfoolery, but rather individuals creating local misuse.</p>
+        <p>Reduce quantity, improve quality, and attain a willingness for distinction. As the gap closes and models become increasingly cogent, we can keep our communication authentically human by allowing ourselves to stray a bit out of distribution.</p>
+        <p>LLMs are good at conventional text. This is combatted by allowing writings to deviate from the norm.</p>
+        <p>The idea can be generalized past LLMs and text.</p>
+      </div>
+    </div>
+    <div class="writing-item">
+      <div class="writing-header">Orientations - 2025-06-01</div>
+      <div class="writing-thoughts">
+        <p>Orientations are likely one of the most important things to get right in life.</p>
+        <p>It appears however, as if everyone is oriented in fairly close alignment with each other. Often, this stems from an unwillingness to trek into an unknown. Sticking to the conventional path can provide a feedback loop. A loop admittedly yielding a generally positive outcome in expectation.</p>
+        <p>Walking along the conventional path or pursuing an entirely different one is not a binary decision. Sometimes it just takes a willingness to orient in a direction that is uniquely one's own and take a small step.</p>
+      </div>
+    </div>
+    <div class="writing-item">
+      <div class="writing-header">Audience and Interpretability - 2025-07-19</div>
+      <div class="writing-thoughts">
+        <p>Creative works where the audience is challenged to pay attention to what is going on are enjoyable on either side of the coin.</p>
+        <p>It's enticing to be rewarded for attention and working through a puzzle. This embeds the ideas deeper.</p>
+        <p>It's easy to get lost in creating a puzzle though. It's a balancing act between challenging an audience to pay closer attention without core ideas being lost in translation. Embedding information for the sake of doing so without providing any more insight just leads to an unpleasant experience.</p>
+        <p>In other words, stylistic choice derived from increased utility instead of stylistic choice for the sake of quirkiness. The challenge then becomes non-contrived information embedding, between being on-the-nose and esoteric.</p>
+        <p>Ideal orientation is not told but derived.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="longform-content" class="section" style="display:none;">
+    <div id="longform-list"></div>
+    <div id="longform-detail" style="display:none;">
+      <div id="longform-breadcrumb" style="font-size:11px; color:#999; margin-bottom:16px; cursor:pointer;">←</div>
+      <div id="longform-detail-inner"></div>
+    </div>
   </section>
 
   <script>
     function showSection(section) {
-      document.getElementById('bio-content').style.display = 'none';
-      document.getElementById('experiences-content').style.display = 'none';
+      ['bio', 'steppedgraph', 'kernel', 'longform'].forEach(s => {
+        document.getElementById(s + '-content').style.display = 'none';
+        const link = document.getElementById(s + '-link');
+        if (link) link.classList.remove('active');
+      });
       document.getElementById(section + '-content').style.display = 'block';
-
-      // Update active state
-      document.getElementById('bio-link').classList.remove('active');
-      document.getElementById('experiences-link').classList.remove('active');
-      document.getElementById(section + '-link').classList.add('active');
+      const activeLink = document.getElementById(section + '-link');
+      if (activeLink) activeLink.classList.add('active');
     }
+
+    const canvas = document.getElementById('tree');
+    const ctx    = canvas.getContext('2d');
+
+    let nodes = [], edges = [], nodeData = [];
+
+    function clearTree() { nodes = []; edges = []; nodeData = []; }
+
+    function addNode(x, y, data, state = 'structure') {
+      nodes.push({ x, y, state });
+      nodeData.push(data);
+      return nodes.length - 1;
+    }
+
+    function addEdge(f, t) { edges.push({ from: f, to: t }); }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      edges.forEach(({ from, to }) => {
+        ctx.strokeStyle = '#ccc'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(nodes[from].x, nodes[from].y);
+        ctx.lineTo(nodes[to].x,   nodes[to].y);
+        ctx.stroke();
+      });
+      nodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = (n.state === 'writing' || n.state === 'step' || n.state === 'link') ? '#000' : '#ccc';
+        ctx.fill();
+      });
+    }
+
+    function showCard(title, content) {
+      document.getElementById('card-header').textContent = title;
+      document.getElementById('card-text').innerHTML = content || '';
+      document.getElementById('card-content').style.display = 'block';
+    }
+    function hideCard() { document.getElementById('card-content').style.display = 'none'; }
+
+    function showBreadcrumb(fn) {
+      const bc = document.getElementById('breadcrumb');
+      bc.style.display = 'block';
+      bc.onclick = fn;
+    }
+    function hideBreadcrumb() { document.getElementById('breadcrumb').style.display = 'none'; }
+
+    function ep(cx, cy, rx, ry, deg) {
+      const r = deg * Math.PI / 180;
+      return [Math.round(cx + rx * Math.cos(r)), Math.round(cy - ry * Math.sin(r))];
+    }
+
+    canvas.addEventListener('click', e => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const my = (e.clientY - rect.top)  * (canvas.height / rect.height);
+      nodes.forEach((n, i) => {
+        if (n.state === 'anchor') return;
+        if (Math.sqrt((mx - n.x) ** 2 + (my - n.y) ** 2) > 8) return;
+        if (n.state === 'link') {
+          window.location.href = nodeData[i].href;
+        } else if (n.state === 'step' && nodeData[i].step) {
+          nodeData[i].step();
+        } else {
+          showCard(nodeData[i].title, nodeData[i].content || '');
+        }
+      });
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const my = (e.clientY - rect.top)  * (canvas.height / rect.height);
+      canvas.style.cursor = nodes.some(n =>
+        n.state !== 'anchor' && Math.sqrt((mx - n.x) ** 2 + (my - n.y) ** 2) <= 8
+      ) ? 'pointer' : 'default';
+    });
+
+    // ── Content ───────────────────────────────────────────────────────────────
+    const CREATION_C = `
+      <p>The root of the tree is creation</p>
+    `;
+
+    const PV_C = `<p>Presentation leads to increased serendipity and is widely applicable but exists as a mechanism for implying an internal one or enfolding into an ecosystem. If a shiny exterior becomes the goal or fit onto very hard as a metric for either parties, issues arise. Reminiscent of "when a measure becomes a target, it ceases to be a good measure". It's interesting to see at least in this sector the trivialization of implementation with good taste.</p>`;
+    const AU_C = `<p>Pursuing many directions creates a false sense of productivity. Not only is learning diminished but so is the ability to look at the world through one's own eyes instead of an aggregation of surrounding ones. Individually orienting and moving implies confidence. Even if mustered, the inertia of movement is difficult to overtake and only trivial ideas surface. Past this impasse, a differentiated, leveraged position is found.</p>`;
+
+    const SP_C  = `<p>It's easy to be fixated on the output of a thing instead of learning to enjoy the journey. Along the path, there are an abundance of pragmatic, leveraged skills for the reasoned individual. Shifting the focus away from impact output has on the individual but instead on others reduces the strain associated with  It's easy to be fixated on the output of a thing instead of learning to enjoy the journey. Along the path, there are an abundance of pragmatic, leveraged skills for the reasoned individual. Shifting the focus away from impact output has on the individual but instead on others reduces the (burden/strain placed/associated on/with) output naturally.</p>`;
+    const BX_C  = `<p>A moment is one yearning to be used towards ambition. The meditative state and visualization. Stilled upon a stream, the sound of trickling water and rush of wind my only ambience. To be held in a sustained place of discomfort recalling a tiredness in a loved one's eyes. Healthy competition – to vie for trust as much as recognition, to support as much as challenge.</p>`;
+    const AX_C  = `<p>Request help but have intention with how help is asked and to whom. A single request may be the straw teeter tottering success and failure but the path only becomes windier when made flippantly. Spurious actions come from indecisiveness.</p>`;
+    const AUD_C = `<p>Creating a puzzle is a balancing act between challenging an audience to pay closer attention without core ideas being lost in translation. Embedding information for the sake of doing so without providing any more insight just leads to an unpleasant experience. Leaving something to be implied allows for a uniquely tuned answer. Ideal orientation is not told but derived.</p>`;
+    const OR_C  = `<p>Orientations are likely one of the most important things to get right in life. It appears however, as if everyone is oriented in fairly close alignment with each other. Often, this stems from an unwillingness to trek into an unknown. Sticking to the conventional path can provide a feedback loop. A loop admittedly yielding a generally positive outcome in expectation.</p><p>Walking along the conventional path or pursuing an entirely different one is not a binary decision. Sometimes it just takes a willingness to orient in a direction that is uniquely one's own and take a small step.</p>`;
+    const SC_C  = `<p>Learn different but related skills. Helpful in the short and long term with an eye for leverage.</p>`;
+    const JDG_C = `<p>Worn as a cloak to assuage feelings, judgment is a crippling trait. Look to others, practice empathy, and instead find inspiration. A courage is associated with putting oneself out there. A lack of refinement is natural. Stated clearly, if we judge others we expect others will treat us similarly. The reality is people don't have the attention span to inspect what we're doing to any meaningful depth and are consumed by fears of judgement themselves. If we can practice removing judgement, we can step into individualized paths.</p>`;
+    const IND_C = `<p>Implementation can be delicate. Vitriol in a gaze or a lack of belief felt through those we confide our ideas to can deplete our sense of self. Unique thoughts develop slowly, actions taken as a consequence are laborious, returns take time. Despite this, individuality remains a leverageable and important trait.</p>`;
+    const WH_C  = `<p>As we get older, whimsy is depleted from us.</p><p>It's so important and a tragedy it occurs.</p><p>It's something to be cherished.</p>`;
+    const UWF_C = `<p>Reduce quantity, improve quality, and attain a willingness for distinction. As the gap closes and models become increasingly cogent, we can keep our communication authentically human by allowing ourselves to stray a bit out of distribution.</p>`;
+    const AFT_C = `<p>Coding can be used to aid learning and doing so correctly implies a meaningful depth of understanding. This can take a moment to capitulate to. It's enticing to get rewards especially if those rewards are usually hard fought. However, if those fights become insubstantial then the implied value disappears as well. The difficulty of attainment is what prescribes value in the context of learning. Increasingly commoditized, programming as a language remains a useful one to speak.</p>`;
+
+    const MS_C = `<p>Meditation can be difficult to turn into a habit. More readily lending itself to be spoken about than consistently practiced. It can be hard to slow down enough to reap the benefits and introducing tactile, short term benefits can help accommodate this shortcoming. Taking a loose definition of meditation as building the capacity to be in the present moment then it doesn't need to be associated with a specific seating position or breathing technique.</p><p>We are both practicing mindfulness while completing a task. Most tasks can be done more efficiently and with higher quality when simply paid attention to.</p>`;
+    const PG_C = `<p>There is an aversion to drinking coffee among undergraduates. As long as it is standardized and the intake is tracked, the risks are minimized. During periods of strain is when we feel most vulnerable to gravitate towards it. This is the worst time. As a heuristic, substances become increasingly harmful as they move the body further from its baseline. Reaffirming the idea to either track intake or not drink coffee at all.</p><p>Drinking caffeine is advised against during this period though this may seem ironic. Outside of caffeine, there are other ways of inducing cortisol on our body. The other ways are generally more difficult. So they are well suited for a shorter period of time designed to exercise or strengthen willpower. Our body will become sensitive to caffeine as well.</p><p>Habits can begin relatively relaxed. Whatever motivated us to enter into a state of purgatory can be used as motivation to establish the original habits, which can become increasingly difficult as we gain momentum during the period in the hopes of reaching a sense of catharsis at the end. Simple activities such as walking a town plaza, eating at a restaurant, or watching a movie alone can feel nearly euphoric.</p><p>Early game, solitude allows for the organic growth of ideas. Though there should be some discretion as they can spiral into disarray. Past this, making full use out of a given day can be quite difficult.</p><p>Optimizing for the number of hours we are able to think clearly while feeling some sense of urgency can be hard to self inflict. Sustaining a positive mindset is important otherwise actions can stem from a poor self image.</p><p>A purgatory state would be characterized by:</p><p style="padding-left:20px;">Being stripped of unhealthy attachments.<br>A period of both joy and suffering.<br>An internal or external fire.<br>A changed perception of time.<br>Silence or reduced speech.</p><p>The soul goes there by its own accord. Purgatory is ultimately a joyous state and entered voluntarily ideally during a short bout of time. An overfixation on doing what is perceived as most beneficial for ourselves at all times can ultimately produce self serving traits. Human connection is important for its own sake.</p>`;
+    const HT_C = `<p>Move towards minimizing energy on tasks associated with little or no growth. Streamlining processes as a habit and allow for some cocooning. Don't be afraid to hatch though.</p>`;
+    const LG_C = `<p>See what was done when at a certain time.</p>`;
+    const BD_C = `<p>olive oil – cold brew + milk – eggs</p><p>chicken breast – salmon</p><p>rice – sweet potatoes – bread</p><p>avocados – kiwis – blueberries<p>kale – arugula – spinach</p>`;
+    const CN_C = `<p>Forgetting information becomes easier as our brain becomes conditioned into glossing over information. We can mitigate the effects by reducing the amount of information consumed and making small efforts to remember the information we're interested in learning.</p>`;
+    const GR_C = `<p>See what was done when at a certain time yesterday and see if the timings can be matched or improved. The entire day a complete series of steps. There is a natural rigidity imposed and should be done over short periods.</p>`;
+
+    const MT_C  = `<p>Works and ideas can be seamlessly nestled on one another. One figure combines multiple and builds further. Loosely Recursive. There's an artisan beauty in the attention to the granular. The number of hands the work falls into, the extent of impact are not entirely out of mind but during implementation attention is on sowing and threading.</p>`;
+    const MM_C  = `<p>Consume, build, and speak more; consume, build, and speak louder. Ironically, doing less may work as well. Using fewer words to convey complicated ideas. Letting what is said carry weight instead of how it's said. More than presentation, simplifications situates concepts more sturdily and help understand the motivation between them.</p>`;
+    const UN_C  = `<p>A lack of opinionation itself allows for a seamless congruency. Correct claims deviating from dogma are hard to come by; not sprung upon but iterated towards. Once found, tasteful unopionation allows for one's works to derive its sheen from the value proposition.</p>`;
+    const LL_C  = `<p>Attention spans have shortened. Everyone vies for our attention; those adept at grabbing it are those who most readily take it. Alternatively, attention can be piqued accommodating a sentence and then a paragraph. With careful construction, a story can be conveyed.</p>`;
+    const A10_C = `<p>If the project sounds interesting feel free to reach out. I would love to hear other people's ideas on the topic.</p><p>Recommendation algorithms.</p>`;
+    const FW_C  = `<p>It's difficult to know what comes first: a belief in oneself to succeed or the complete set of skills to do so.</p><p>It's easy to see, explore, "learn"; instead move – implement.</p><p>Implementation can be stepped into, but faith must be venerated.</p><p>Implementation takes purpose and faith to fulfill.</p>`;
+    const MH_C  = `<p>When something's different, it's hard for people to understand.</p><p>At best, world views are imposed as an attempted pattern match.</p><p>At worst, notions are irreconcilable and rejected as incredulous.</p><p>Leading to unideal circumstances and the obscuring of a vision.</p><p>Instead of subsuming back, we can refine our judgements and act on them.</p>`;
+    const CS_C  = `<p>Make implied intention clear, show growth. Sprawl audiences, perturb opinionated works, reverse engineer success. Once implementation is complete, construct nodes and point edges.</p>`;
+
+    function buildTopLevel() {
+      clearTree(); hideCard(); hideBreadcrumb();
+      const cx=240,cy=140,rx=90,ry=75;
+      addNode(cx,cy,{title:'Creation',content:CREATION_C},'writing');
+      addNode(...ep(cx,cy,rx,ry, 90),{title:'Learning',step:buildLearning},'step');
+      addNode(...ep(cx,cy,rx,ry,  0),{title:'Decision Making',step:buildDecisionMaking},'step');
+      addNode(...ep(cx,cy,rx,ry,270),{title:'Systems',step:buildSystems},'step');
+      addNode(...ep(cx,cy,rx,ry,180),{title:'Implementation',step:buildImplementation},'step');
+      addEdge(0,1);addEdge(0,2);addEdge(0,3);addEdge(0,4);
+      draw();
+    }
+
+    function buildLearning() {
+      clearTree(); hideCard(); showBreadcrumb(buildTopLevel);
+      const cx=240,cy=140,r=85,r2=148;
+      addNode(cx,cy,{title:'Learning'});
+      const pv =addNode(...ep(cx,cy,r,r, 90),{title:'Potemkin Village',content:PV_C},'writing');
+      const au =addNode(...ep(cx,cy,r,r,210),{title:'Automaton',content:AU_C},'writing');
+      const sc =addNode(...ep(cx,cy,r,r,330),{title:'Scaling Skillsets',content:SC_C},'writing');
+      const aft=addNode(...ep(cx,cy,r2,r2,330),{title:'Affinity For Technicality',content:AFT_C},'writing');
+      addEdge(0,pv);addEdge(0,au);addEdge(0,sc);addEdge(sc,aft);
+      draw();
+    }
+
+    function buildDecisionMaking() {
+      clearTree(); hideCard(); showBreadcrumb(buildTopLevel);
+      const cx=240,cy=140,r=68,r2=112;
+      addNode(cx,cy,{title:'Decision Making'});
+      const sp =addNode(...ep(cx,cy,r,r,  90),{title:'Shortest Path',content:SP_C},'writing');
+      const bx =addNode(...ep(cx,cy,r,r,  18),{title:'Boxes',content:BX_C},'writing');
+      const ax =addNode(...ep(cx,cy,r,r, 306),{title:'Axes',content:AX_C},'writing');
+      const aud=addNode(...ep(cx,cy,r,r, 234),{title:'Audience and Interpretability',content:AUD_C},'writing');
+      const or =addNode(...ep(cx,cy,r,r, 162),{title:'Orientations',content:OR_C},'writing');
+      const jdg=addNode(...ep(cx,cy,r2,r2,  75),{title:'Judgement',content:JDG_C},'writing');
+      const ind=addNode(...ep(cx,cy,r2,r2, 105),{title:'Individuality',content:IND_C},'writing');
+      const wh =addNode(...ep(cx,cy,r2,r2,  18),{title:'Whimsy',content:WH_C},'writing');
+      const uwf=addNode(...ep(cx,cy,r2,r2, 162),{title:'Unique Written Footprint',content:UWF_C},'writing');
+      addEdge(0,sp);addEdge(0,bx);addEdge(0,ax);addEdge(0,aud);addEdge(0,or);
+      addEdge(sp,jdg);addEdge(sp,ind);addEdge(bx,wh);addEdge(or,uwf);
+      draw();
+    }
+
+    function buildSystems() {
+      clearTree(); hideCard(); showBreadcrumb(buildTopLevel);
+      const cx=240,cy=140;
+      addNode(cx,cy,{title:'Systems'});
+      const ms=addNode(...ep(cx,cy, 85, 70,  90),{title:'Meditative State',content:MS_C},'writing');
+      const ht=addNode(...ep(cx,cy, 85, 70, 180),{title:'Hatch',content:HT_C},'writing');
+      const pg=addNode(...ep(cx,cy, 85, 70, 270),{title:'Purgatory',content:PG_C},'writing');
+      const lg=addNode(...ep(cx,cy, 85, 70,   0),{title:'Logs',content:LG_C},'writing');
+      const bd=addNode(...ep(cx,cy,148,100, 190),{title:'Base Diet',content:BD_C},'writing');
+      const cn=addNode(...ep(cx,cy,148,100, 170),{title:'Consumption',content:CN_C},'writing');
+      const gr=addNode(...ep(cx,cy,148,100, 350),{title:'Ghost Races',content:GR_C},'writing');
+      addEdge(0,ms);addEdge(0,ht);addEdge(0,pg);addEdge(0,lg);
+      addEdge(ht,bd);addEdge(ht,cn);addEdge(lg,gr);
+      draw();
+    }
+
+    function buildImplementation() {
+      clearTree(); hideCard(); showBreadcrumb(buildTopLevel);
+      const cx=240,cy=130;
+      addNode(cx,cy,{title:'Implementation'});
+      const mt =addNode(...ep(cx,cy,100,80,150),{title:'Matryoshka',content:MT_C},'writing');
+      const mm =addNode(...ep(cx,cy,100,80,110),{title:'More is more',content:MM_C},'writing');
+      const un =addNode(...ep(cx,cy,100,80, 70),{title:'Unopinionation',content:UN_C},'writing');
+      const ll =addNode(...ep(cx,cy,100,80, 30),{title:'Lulls',content:LL_C},'writing');
+      const fw =addNode(...ep(cx,cy,140,95,220),{title:'Forward',content:FW_C},'writing');
+      const mh =addNode(...ep(cx,cy,130,100,270),{title:'Mach Horses',content:MH_C},'writing');
+      const cs =addNode(...ep(cx,cy,140,95,320),{title:'Cold Start',content:CS_C},'writing');
+      addEdge(0,mt);addEdge(0,mm);addEdge(0,un);addEdge(0,ll);
+      addEdge(mm,un);
+      addEdge(0,fw);addEdge(0,mh);addEdge(0,cs);
+      addEdge(fw,mh);addEdge(mh,cs);
+      draw();
+    }
+
+    buildTopLevel();
+
+    // ── Long Form ─────────────────────────────────────────────────────────────
+    const longformPieces = [
+      {
+        title: 'Bruno',
+        date: '2026-03-08',
+        draft: true,
+        outline: [
+          'Talk about loyalty and wonderment.',
+          'If correct, how would the ideas of these philosophers have changed communication.',
+          'Communication e.g. silk roads changed how India and China communicated.',
+          'Changing building design due to Highstorms in Shadesmar in Stormlight Archive.',
+          'Magic Systems.',
+          'Background Topics — Free Will.',
+          'Notes or LLM generations for the crux of the information similar to Sophie\'s World.',
+          'Indian Philosophy — Tapas.',
+          'German Philosophy — Leibniz (Monad theory), Immanuel Kant, Georg Wilhelm Friedrich Hegel.'
+        ],
+        paragraphs: [
+          'This morning I woke and yawned widely. The recognizable gait I\'ve become accustomed to hearing approaches. An initial series of steps and a right bend followed by another harsh turn. I thud onto the cement block before the grass. As I have gotten a bit older, my joints have begun to fatigue. Walking carefully around the sweetgum balls barely perceptible as the sun comes out, I make my rounds.',
+          'Later in the day, I hear the clink of a metal collar and the atmosphere in the house changes. A shared giddiness and half-hearted attempts at maintaining composure as the collar is clasped on. The garage door scrolls open or the front door swings and a second rush of adrenaline overwhelms me. Even as the chiding grows louder it feels further as my attention is brought to my surroundings.',
+          'The carpeted texture of home instead asphalt, concrete, and gravel. The scent of turmeric and masala powder now a neutral one. A siren approaches and the ground tilts. Maybe another dog or even a wolf but more likely an ambulance. I echo the tune before continuing. The street is crossed to safety, the ditch leaped over. The grass is more malleable than it is at home. My attention flares as the fenced dogs a distance away bark in my direction. I hold back retorts to avoid being sent back home.',
+        ]
+      }
+    ];
+
+    function buildLongformList() {
+      const list = document.getElementById('longform-list');
+      const detail = document.getElementById('longform-detail');
+      detail.style.display = 'none';
+      list.style.display = '';
+      list.innerHTML = longformPieces.map((p, i) => `
+        <div class="writing-item" style="cursor:pointer; transition:transform 0.2s ease;"
+             onmouseover="this.style.transform='translateY(-3px)'"
+             onmouseout="this.style.transform=''"
+             onclick="openLongform(${i})">
+          <div class="writing-header" style="margin-bottom:0;">
+            ${p.title} – ${p.date}${p.draft ? ' <span style="font-size:0.75rem; color:#999; font-style:italic;">draft</span>' : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openLongform(i) {
+      const p = longformPieces[i];
+      document.getElementById('longform-list').style.display = 'none';
+      const detail = document.getElementById('longform-detail');
+      detail.style.display = '';
+      document.getElementById('longform-breadcrumb').onclick = buildLongformList;
+      document.getElementById('longform-detail-inner').innerHTML = `
+        <div style="font-size:1rem; font-weight:normal; margin-bottom:20px; border-bottom:1px solid #ddd; padding-bottom:8px;">
+          ${p.title} – ${p.date}${p.draft ? ' <span style="font-size:0.75rem; color:#999; font-style:italic;">draft</span>' : ''}
+        </div>
+        ${p.outline ? p.outline.map(t => `<p style="font-size:0.9rem; margin-bottom:10px;">${t}</p>`).join('') + '<br>' : ''}
+        ${p.paragraphs.map(t => `<p style="font-size:0.9rem; margin-bottom:10px;">${t}</p>`).join('')}
+      `;
+    }
+
+    // init when section becomes visible
+    const origShowSection = showSection;
+    showSection = function(s) {
+      origShowSection(s);
+      if (s === 'longform') buildLongformList();
+    };
   </script>
 </body>
+</html>

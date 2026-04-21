@@ -95,7 +95,7 @@ body.landing {
 .post-item {
     border: 1px solid #ddd;
     background: #fff;
-    padding: 20px 25px;
+    padding: 40px 35px;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -241,7 +241,7 @@ pre {
     
     /* Landing page responsive */
     .post-list { max-width: 90%; }
-    .post-item { padding: 18px 20px; }
+    .post-item { padding: 32px 25px; }
 }
 
 .post-divider {

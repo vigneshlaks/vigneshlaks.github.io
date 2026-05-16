@@ -316,6 +316,10 @@
         title: 'Bruno',
         date: '2026-04-25',
         href: 'longform/bruno.html'
+      },
+      {
+        title: 'Wonderment',
+        href: 'longform/wonderment.html'
       }
     ];
 
@@ -330,7 +334,7 @@
              onmouseout="this.style.transform=''"
              onclick="openLongform(${i})">
           <div class="writing-header" style="margin-bottom:0;">
-            ${p.title} – ${p.date}${p.draft ? ' <span style="font-size:0.75rem; color:#999; font-style:italic;">draft</span>' : ''}
+            ${p.title}${p.date ? ' – ' + p.date : ''}${p.draft ? ' <span style="font-size:0.75rem; color:#999; font-style:italic;">draft</span>' : ''}
           </div>
         </div>
       `).join('');

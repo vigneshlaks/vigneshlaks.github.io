@@ -198,7 +198,6 @@
             breadcrumb.style.display = 'none';
 
             let html = `
-                <p class="section-label">Read</p>
                 <div class="post-list">
                     ${Object.keys(categories).map(cat => `
                         <article class="post-item" onclick="showCategory('${cat.replace(/'/g, "\\'")}')">
